@@ -1,35 +1,48 @@
 version: "3"
 services:
-  node:
-    build: .
+  frontend:
+    build: ./front-end
+    ports:
+      - 3000:3000
+    platform: linux/x86_64
+    working_dir: /app-frontend
+    container_name: delivery_frontend
+
+
+  backend:
+    build: ./back-end
     user: node
     working_dir: /app
     volumes:
-      - ./:/app
+      - ./back-end:/app
     container_name: delivery_api
     tty: true
     stdin_open: true
-    command: bash
-    restart: always
+    # restart: always
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     ports:
       - 3001:3001
     environment:
       MYSQL_USER: root
       MYSQL_PASSWORD: password
       HOSTNAME: db
-      # JWT_SECRET: jwtVeryDelicious
+
   db:
     container_name: delivery_db
     image: mysql:8.0.21
     platform: linux/x86_64
-    restart: always
+    # restart: always
     ports:
       - 3306:3306
       - 33060:33060
     environment:
       MYSQL_ROOT_PASSWORD: password
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
+      timeout: 10s
+      retries: 5
 
 networks:
   default:
