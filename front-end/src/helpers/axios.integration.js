@@ -1,4 +1,4 @@
-const axios = require('axios').default;
+import axios from 'axios';
 
 const makeRequest = async (url, method, data = null, token = null) => {
   const config = {
@@ -13,4 +13,4 @@ const makeRequest = async (url, method, data = null, token = null) => {
   return resultAxios.data;
 };
 
-module.exports = makeRequest;
+export default makeRequest;
