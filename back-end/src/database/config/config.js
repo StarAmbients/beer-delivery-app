@@ -24,6 +24,20 @@ const options = {
   logging: false,
 };
 
+const railway = {
+  host: process.env.MYSQLHOST || process.env.MYSQL_HOST || 'localhost',
+  port: process.env.MYSQLPORT || '3306',
+  database: 
+    `${process.env.MYSQLDATABASE || 'delivery-app'}${suffix[environment] || suffix.test}`,
+  username: process.env.MYSQLUSER || 'root',
+  password: process.env.MYSQLPASSWORD || 'password',
+  dialect: 'mysql',
+  dialectOptions: {
+    timezone: 'Z',
+  },
+  logging: false,
+};
+
 module.exports = {
   development: {
     ...options,
@@ -32,6 +46,6 @@ module.exports = {
     ...options,
   },
   production: {
-    ...options,
+    ...railway,
   },
 };
