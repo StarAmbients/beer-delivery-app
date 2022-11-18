@@ -1,6 +1,6 @@
-import 'dotenv/config'
+require('dotenv').config();
 
-const environment = process.env.NODE_ENV || "test";
+const environment = process.env.NODE_ENV || "production" || "test";
 
 const suffix = {
   prod: "",
@@ -24,7 +24,7 @@ const options = {
   logging: false,
 };
 
-const railway = {
+const config = {
   host: process.env.MYSQLHOST || process.env.MYSQL_HOST || 'localhost',
   port: process.env.MYSQLPORT || '3306',
   database: 
@@ -45,5 +45,5 @@ export const test = {
   ...options,
 };
 export const production = {
-  ...railway,
+  ...config,
 };
