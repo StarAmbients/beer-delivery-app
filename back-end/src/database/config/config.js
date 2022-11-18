@@ -1,4 +1,4 @@
-require('dotenv').config();
+import 'dotenv/config'
 
 const environment = process.env.NODE_ENV || "test";
 
@@ -38,14 +38,12 @@ const railway = {
   logging: false,
 };
 
-module.exports = {
-  development: {
-    ...options,
-  },
-  test: {
-    ...options,
-  },
-  production: {
-    ...railway,
-  },
+export const development = {
+  ...options,
+};
+export const test = {
+  ...options,
+};
+export const production = {
+  ...railway,
 };
