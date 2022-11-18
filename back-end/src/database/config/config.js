@@ -38,12 +38,18 @@ const config = {
   logging: false,
 };
 
-export const development = {
-  ...options,
-};
-export const test = {
-  ...options,
-};
-export const production = {
-  ...config,
+// export const development = {
+//   ...options,
+// };
+// export const test = {
+//   ...options,
+// };
+// export const production = {
+//   ...config,
+// };
+
+module.exports = {
+  development: options,
+  test: options,
+  production: config,
 };
