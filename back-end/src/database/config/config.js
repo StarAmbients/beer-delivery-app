@@ -1,6 +1,6 @@
 require('dotenv').config();
 
-const environment = process.env.NODE_ENV || "production" || "test";
+const environment = process.env.NODE_ENV || "production";
 
 const suffix = {
   prod: "",
@@ -28,7 +28,7 @@ const config = {
   host: process.env.MYSQLHOST || process.env.MYSQL_HOST || 'localhost',
   port: process.env.MYSQLPORT || '3306',
   database: 
-    `${process.env.MYSQLDATABASE || 'delivery-app'}${suffix[environment] || suffix.test}`,
+    `${process.env.MYSQLDATABASE || 'delivery-app'}`,
   username: process.env.MYSQLUSER || 'root',
   password: process.env.MYSQLPASSWORD || 'password',
   dialect: 'mysql',
@@ -49,7 +49,7 @@ const config = {
 // };
 
 module.exports = {
-  development: options,
-  test: options,
+  development: config,
+  test: config,
   production: config,
 };
