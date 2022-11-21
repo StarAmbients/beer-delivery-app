@@ -7,7 +7,7 @@ const makeRequest = async (url, method, data = null, token = null) => {
     data,
     headers: { Authorization: token },
     // baseURL: 'http://localhost:3001/',
-    baseURL: 'https://delivery-backend.up.railway.app/',
+    baseURL: 'https://delivery-backend.up.railway.app',
   };
   const resultAxios = await axios(config);
   if (!resultAxios) return false;
