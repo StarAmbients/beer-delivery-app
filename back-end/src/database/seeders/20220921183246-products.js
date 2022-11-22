@@ -6,7 +6,7 @@ module.exports = {
       {
         name: 'Skol Lata 250ml',
         price: 2.20,
-        url_image: 'http://localhost:3001/images/skol_lata_350ml.jpg'
+        url_image: 'http://localhost:3001/skol_lata_350ml.jpg'
       },
       {
         name: 'Heineken 600ml',
