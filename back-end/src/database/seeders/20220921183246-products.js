@@ -8,7 +8,7 @@ module.exports = {
       {
         name: 'Skol Lata 250ml',
         price: 2.20,
-        url_image: `${process.env.IMAGES_URL}/skol_lata_350ml.jpg`
+        url_image: `${process.env.IMAGES_URL}/images/skol_lata_350ml.jpg`
       },
       {
         name: 'Heineken 600ml',
@@ -18,7 +18,7 @@ module.exports = {
       {
         name: 'Antarctica Pilsen 300ml',
         price: 2.49,
-        url_image: `${process.env.IMAGES_URL}/antarctica_pilsen_300ml.jpg`
+        url_image: `${process.env.IMAGES_URL}/images/antarctica_pilsen_300ml.jpg`
       },
       {
         name: 'Brahma 600ml',
