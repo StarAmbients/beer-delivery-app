@@ -18,21 +18,29 @@ function NavBar({ page }) {
     <NavBarSComponent>
       <nav>
         <div className="nav-left">
-          { page === 'customer' && (
-            <Link
-              data-testid="customer_products__element-navbar-link-products"
-              to="/customer/products"
-            >
-              PRODUTOS
-            </Link>
-          )}
+          <div className="page-name">
+            { page === 'customer' && (
+              <Link
+                style={ { textDecoration: 'none' } }
+                data-testid="customer_products__element-navbar-link-products"
+                to="/customer/products"
+              >
+                <h1>
+                  PRODUTOS
+                </h1>
+              </Link>
+            )}
+          </div>
           <Link
+            style={ { textDecoration: 'none' } }
             data-testid="customer_products__element-navbar-link-orders"
             to={ page !== 'admin' ? `/${page}/orders` : '/admin/manage' }
           >
-            {page === 'customer' && 'MEUS PEDIDOS'}
-            {page === 'seller' && 'PEDIDOS'}
-            {page === 'admin' && 'GERENCIAR USUÁRIOS'}
+            <h2>
+              {page === 'customer' && 'MEUS PEDIDOS'}
+              {page === 'seller' && 'PEDIDOS'}
+              {page === 'admin' && 'GERENCIAR USUÁRIOS'}
+            </h2>
           </Link>
         </div>
         <div className="nav-right">
@@ -42,11 +50,14 @@ function NavBar({ page }) {
             {`${name}`}
           </h3>
           <Link
+            style={ { textDecoration: 'none' } }
             to="/"
             onClick={ handleLogout }
             data-testid="customer_products__element-navbar-link-logout"
           >
-            Sair
+            <h1>
+              Sair
+            </h1>
           </Link>
         </div>
 
