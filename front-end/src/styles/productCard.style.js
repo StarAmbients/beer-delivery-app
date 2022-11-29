@@ -46,10 +46,12 @@ const ProductCardSComponent = styled.div`
     Card Produto */
 
     position: absolute;
-    width: 378px;
+    /* width: 378px; */
+    width: 30%;
     height: 486px;
     left: 80px;
     top: 0px;
+    border: 3px solid red;
 
     .titulo {
       /* Título */
@@ -72,10 +74,11 @@ const ProductCardSComponent = styled.div`
       color: #001813;
     }
     
-    .image-card {
+    img {
       /* Image */
-      position: absolute;
-      height: 357px;
+      /* position: absolute; */
+      height: 70px;
+      width: 100%;
       left: 0.28%;
       right: 0.28%;
       top: 2px;
