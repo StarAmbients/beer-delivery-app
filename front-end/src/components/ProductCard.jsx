@@ -28,24 +28,23 @@ function ProductCard({ product }) {
   return (
     <ProductCardSComponent>
       <div className="product-card">
-        <div className="titulo">
+        <div className="price">
           <p data-testid={ `customer_products__element-card-price-${id}` }>
             {`R$ ${price.replace(/\./, ',')}`}
           </p>
         </div>
-        <img
-          className="image-card"
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ urlImage }
-          alt={ name }
-        />
-        <div
-          className="base"
-        >
+        <div className="image-card">
+          <img
+            className="image"
+            data-testid={ `customer_products__img-card-bg-image-${id}` }
+            src={ urlImage }
+            alt={ name }
+          />
           <div
-            className="label"
+            className="base"
           >
             <p data-testid={ `customer_products__element-card-title-${id}` }>{name}</p>
+
           </div>
           <button
             data-testid={ `customer_products__button-card-rm-item-${id}` }
