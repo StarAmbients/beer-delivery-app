@@ -5,6 +5,9 @@ import NavBar from '../components/NavBar';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ProductCard from '../components/ProductCard';
 import productsStore from '../store/products.store';
+import {
+  ContainerSchoppingCard, CustomerProductsSComponent, ContainerCards,
+} from '../styles/customerProductsCard.style';
 
 function CustomerProducts() {
   const navigate = useNavigate();
@@ -24,27 +27,36 @@ function CustomerProducts() {
     .toFixed(2).replace(/\./g, ',');
 
   return (
-    <div>
+    <ContainerSchoppingCard>
       <NavBar page="customer" />
-      { products.length > 0
-          && products.map((product) => (
-            <div key={ product.id }>
-              <ProductCard product={ product } />
-            </div>
-          ))}
-      <button
-        data-testid="customer_products__button-cart"
-        type="button"
-        onClick={ () => navigate('/customer/checkout') }
-        disabled={ totalPrice === '0,00' }
+      <ContainerCards>
+        <CustomerProductsSComponent>
+          { products.length > 0
+            && products.map((product) => (
+              <div key={ product.id }>
+                <ProductCard product={ product } />
+              </div>
+            ))}
+        </CustomerProductsSComponent>
+
+      </ContainerCards>
+      <div
+        className="button-checkout"
       >
-        <p
-          data-testid="customer_products__checkout-bottom-value"
+        <button
+          data-testid="customer_products__button-cart"
+          type="button"
+          onClick={ () => navigate('/customer/checkout') }
+          disabled={ totalPrice === '0,00' }
         >
-          {`${totalPrice}`}
-        </p>
-      </button>
-    </div>
+          <p
+            data-testid="customer_products__checkout-bottom-value"
+          >
+            {`Ver Carrinho: R$ ${totalPrice}`}
+          </p>
+        </button>
+      </div>
+    </ContainerSchoppingCard>
   );
 }
 

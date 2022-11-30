@@ -27,57 +27,55 @@ function ProductCard({ product }) {
 
   return (
     <ProductCardSComponent>
-      <div className="card">
+      <p
+        className="price"
+        data-testid={ `customer_products__element-card-price-${id}` }
+      >
+        {`R$ ${price.replace(/\./, ',')}`}
+      </p>
+      <img
+        className="image"
+        data-testid={ `customer_products__img-card-bg-image-${id}` }
+        src={ urlImage }
+        alt={ name }
+      />
+      <div
+        className="base"
+      >
         <p
-          className="price"
-          data-testid={ `customer_products__element-card-price-${id}` }
+          className="product-name"
+          data-testid={ `customer_products__element-card-title-${id}` }
         >
-          {`R$ ${price.replace(/\./, ',')}`}
+          {name}
         </p>
-        <img
-          className="image"
-          data-testid={ `customer_products__img-card-bg-image-${id}` }
-          src={ urlImage }
-          alt={ name }
-        />
-        <div
-          className="base"
-        >
-          <p
-            className="product-name"
-            data-testid={ `customer_products__element-card-title-${id}` }
+        <div className="quantity">
+          <button
+            className="minus"
+            data-testid={ `customer_products__button-card-rm-item-${id}` }
+            type="button"
+            onClick={
+              () => (quantity === 0 ? setQuantity(0) : setQuantity(quantity - 1))
+            }
           >
-            {name}
-          </p>
-          <div className="quantity">
-            <button
-              className="minus"
-              data-testid={ `customer_products__button-card-rm-item-${id}` }
-              type="button"
-              onClick={
-                () => (quantity === 0 ? setQuantity(0) : setQuantity(quantity - 1))
-              }
-            >
-              -
-            </button>
-            <input
-              data-testid={ `customer_products__input-card-quantity-${id}` }
-              type="number"
-              name="quantity"
-              value={ itemQuantity.quantity || 0 }
-              onChange={ ({ target: { value } }) => (Number(value) <= 0
-                ? setQuantity(0)
-                : setQuantity(Number(value))) }
-            />
-            <button
-              className="plus"
-              data-testid={ `customer_products__button-card-add-item-${id}` }
-              type="button"
-              onClick={ () => setQuantity(quantity + 1) }
-            >
-              +
-            </button>
-          </div>
+            -
+          </button>
+          <input
+            data-testid={ `customer_products__input-card-quantity-${id}` }
+            type="number"
+            name="quantity"
+            value={ itemQuantity.quantity || 0 }
+            onChange={ ({ target: { value } }) => (Number(value) <= 0
+              ? setQuantity(0)
+              : setQuantity(Number(value))) }
+          />
+          <button
+            className="plus"
+            data-testid={ `customer_products__button-card-add-item-${id}` }
+            type="button"
+            onClick={ () => setQuantity(quantity + 1) }
+          >
+            +
+          </button>
         </div>
       </div>
     </ProductCardSComponent>
