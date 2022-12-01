@@ -5,7 +5,6 @@ const ProductCardSComponent = styled.div`
   
   align-items: center;
   display: flex;
-  border: 3px solid green;
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   flex-direction: column;
@@ -56,7 +55,7 @@ const ProductCardSComponent = styled.div`
       border-radius: 4px;
       color: black;
       display: flex;
-      height: 38%;
+      height: 27px;
       justify-content: space-between;
       overflow: hidden;
 
@@ -64,9 +63,15 @@ const ProductCardSComponent = styled.div`
         background: #036B52;
         border: none;
         color: white;
-        font-weight: 800;
+        font-weight: 400;
         height: 32px;
         width: 32px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 5px;
+        padding-right: 3px;
+        border-radius: 0;
       }
 
       input {

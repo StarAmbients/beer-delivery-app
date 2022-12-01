@@ -58,8 +58,6 @@ const CustomerProductsSComponent = styled.div`
     border: 8px solid blue;
     width: 100%;
     height: 100%;  }
-
-
 `;
 
 export { ContainerSchoppingCard, CustomerProductsSComponent, ContainerCards };

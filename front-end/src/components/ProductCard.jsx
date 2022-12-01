@@ -38,6 +38,11 @@ function ProductCard({ product }) {
         data-testid={ `customer_products__img-card-bg-image-${id}` }
         src={ urlImage }
         alt={ name }
+        // eslint-disable-next-line no-return-assign
+        onError={ ({ currentTarget }) => {
+          currentTarget.onerror = null; // prevents looping
+          currentTarget.src = 'https://media0.giphy.com/media/26xBIygOcC3bAWg3S/giphy.gif';
+        } }
       />
       <div
         className="base"
