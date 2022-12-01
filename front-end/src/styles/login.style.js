@@ -81,7 +81,7 @@ const LoginSComponent = styled.section`
     /* padding: 0.8rem; */
     border: 2px solid #F89E2C;
     border-radius: 3px;
-    color: gray;
+    color: black;
     width: 21.8rem;
     transition: 0.2s;
 

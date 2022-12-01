@@ -7,18 +7,25 @@ const ContainerSchoppingCard = styled.div`
     display: flex;
     justify-content: end;
     margin-right: 10%;
-    margin-top: 4%
+    margin-top: 4%;
+    padding-left:10px;
+    padding-right:10px;
+    min-width:100px;
+
+    p {
+      margin: 30px
+    }
   }
 
   button {
     background: #036B52;
     font-weight: 500;
-    font-size: 2.25rem;
+    font-size: 2.25em;
     line-height: 2.63rem;
     color: white;
     
     height: 4.9375rem;
-    width: 27.8125rem;
+    width: auto;
     border: none;
     border-radius: 0.625rem;
   
@@ -45,14 +52,7 @@ const CustomerProductsSComponent = styled.div`
   height: 70%;
   align-items: center;
   margin-top:90px;
-  /* padding: 6.25rem 3.75rem; */
   flex-wrap: wrap;
-  /* gap: 16px; */
-  border: 1px solid violet;
-
-    /* margin-top:70px;
-    box-sizing: border-box; */
-
 
   .products-container {
     border: 8px solid blue;
