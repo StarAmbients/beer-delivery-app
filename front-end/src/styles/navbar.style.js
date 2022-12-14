@@ -9,6 +9,7 @@ const NavBarSComponent = styled.div`
     flex-direction: row;
     background: #036B52;
     width:100%;
+    height:5.31rem;
     margin: 0;
     padding: 0;
     top: 0;
@@ -17,22 +18,26 @@ const NavBarSComponent = styled.div`
 
 
     .nav-left {
+      height:100%;
+      max-height: 100%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       background: #036B52;
       flex-direction: row;
-
+      
       h1 {
         margin: 0;
         // transform px to rem
         padding: 1.87rem;
         width: 10.43rem;
+        height:100%;
         background-color: #2FC18C;
         color: #001813;
         display: flex;
         justify-content: center;
       }
+
       h2 {
         margin: 0;
         padding: 1.87rem;
@@ -45,6 +50,8 @@ const NavBarSComponent = styled.div`
     }
 
     .nav-right{
+      height:100%;
+      max-height: 10vh;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -59,6 +66,7 @@ const NavBarSComponent = styled.div`
         color: #F2FFFC;
         display: flex;
         justify-content: center;
+        font-size: 24px;
       }
 
       h1 {

@@ -18,19 +18,17 @@ function NavBar({ page }) {
     <NavBarSComponent>
       <nav>
         <div className="nav-left">
-          <div className="page-name">
-            { page === 'customer' && (
-              <Link
-                style={ { textDecoration: 'none' } }
-                data-testid="customer_products__element-navbar-link-products"
-                to="/customer/products"
-              >
-                <h1>
-                  PRODUTOS
-                </h1>
-              </Link>
-            )}
-          </div>
+          { page === 'customer' && (
+            <Link
+              style={ { textDecoration: 'none' } }
+              data-testid="customer_products__element-navbar-link-products"
+              to="/customer/products"
+            >
+              <h1>
+                PRODUTOS
+              </h1>
+            </Link>
+          )}
           <Link
             style={ { textDecoration: 'none' } }
             data-testid="customer_products__element-navbar-link-orders"
