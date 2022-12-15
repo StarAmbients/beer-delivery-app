@@ -9,8 +9,9 @@ const LoginSComponent = styled.section`
   /* border: 1px solid red; */
   /* margin: 0;
   padding: 0; */
-  /* font-family: "Roboto"; */
-  background-color: #350B4B;
+  /* font-family: "Roboto";
+  background-color: #350B4B; */
+  background-image: linear-gradient(0deg, #350B4B 0%, #FFB703 74%);
 
   form {
   /* border: 1px solid gray; */

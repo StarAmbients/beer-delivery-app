@@ -6,6 +6,7 @@ import checkoutStore from '../store/checkout.store';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import makeRequest from '../helpers/axios.integration';
 import Table from './Table';
+import CheckoutSComponent from '../styles/checkout.style';
 
 function Checkout() {
   const { id, token } = getUserLocalStorage();
@@ -41,7 +42,7 @@ function Checkout() {
   }, []);
 
   return (
-    <div>
+    <CheckoutSComponent>
       {
         display && (
           <div>
@@ -49,14 +50,29 @@ function Checkout() {
           </div>
         )
       }
-      <Table page="checkout" />
-      <h2
-        data-testid="customer_checkout__element-order-total-price"
+      <div
+        className="title_finalizar_pedido"
       >
-        {`Total: ${totalPrice.replace(/\./g, ',')}`}
-      </h2>
-      <div>
+        <h3>Finalizar Pedido</h3>
+      </div>
+      <Table page="checkout" />
+      <div
+        className="total_finalizado"
+      >
+        <h2
+          data-testid="customer_checkout__element-order-total-price"
+        >
+          {`Total: ${totalPrice.replace(/\./g, ',')}`}
+        </h2>
+      </div>
+      <div
+        className="title_finalizar_pedido"
+      >
         <h3>Detalhes e Endereço para Entrega</h3>
+      </div>
+      <div
+        className="seller_details"
+      >
         <label htmlFor="seller">
           P. Vendedora Responsável
           <select
@@ -91,15 +107,15 @@ function Checkout() {
             onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
         </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ () => handleCheckout() }
-        >
-          Finalizar pedido
-        </button>
       </div>
-    </div>
+      <button
+        type="button"
+        data-testid="customer_checkout__button-submit-order"
+        onClick={ () => handleCheckout() }
+      >
+        Finalizar pedido
+      </button>
+    </CheckoutSComponent>
   );
 }
 

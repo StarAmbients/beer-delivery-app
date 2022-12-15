@@ -7,77 +7,85 @@ const NavBarSComponent = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    background: #036B52;
-    width:100%;
-    height:5.31rem;
-    margin: 0;
-    padding: 0;
-    top: 0;
-    position: fixed;
-    z-index: 999;
+    height: 10vh;
+    width: 100%;
 
+    flex-grow: 1;
 
-    .nav-left {
-      height:100%;
-      max-height: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: #036B52;
-      flex-direction: row;
-      
-      h1 {
-        margin: 0;
-        // transform px to rem
-        padding: 1.87rem;
-        width: 10.43rem;
-        height:100%;
-        background-color: #2FC18C;
-        color: #001813;
-        display: flex;
-        justify-content: center;
-      }
+    .nav-1 {
+      flex-grow: 1;
+      width: 15%;
+    }  
 
-      h2 {
-        margin: 0;
-        padding: 1.87rem;
-        width: 23.31rem;
-        color: #F2FFFC;
-        background-color: #036B52;
-        display: flex;
-        justify-content: start;
-      }
+    .nav-2 {
+      flex-grow: 1;
+      width: 45%;
+    }   
+    
+    .nav-3 {
+      flex-grow: 1;
+      width: 30%;
+    }  
+
+    .nav-4 {
+      flex-grow: 1;
+      width: 10%;
     }
 
-    .nav-right{
-      height:100%;
-      max-height: 10vh;
+    .products {
+      margin: 0;
+      box-sizing: border-box;
+      height: 6.17rem;
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      background: #421981;
-      flex-direction: row;
+      color: #001813;
+      justify-content: center;
+      background-color: #2FC18C;
 
-      h3 {
-        margin: 0;
-        padding: 1.87rem;
-        width: 22.31rem;
-        background-color: #421981;
-        color: #F2FFFC;
-        display: flex;
-        justify-content: center;
-        font-size: 24px;
-      }
+      font-size: clamp(1rem,1.5vw,2.5rem);
+    }
+        
+    .page-orders {
+      margin: 0;
+      box-sizing: border-box;
+      height: 6.17rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      justify-content: left;
+      color: #F2FFFC;
+      background-color: #036B52;
+      padding-left: 30px;
 
-      h1 {
-        margin: 0;
-        padding: 1.87rem;
-        width: 7.5rem;
-        color: #F2FFFC;
-        background-color: #056CF9;
-        display: flex;
-        justify-content: center;
-      }
+      font-size: clamp(1rem,1.5vw,2.5rem);
+    }
+
+    .user-name{
+      margin: 0;
+      box-sizing: border-box;
+      height: 6.17rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      justify-content: center;
+      color: #F2FFFC;
+      background-color: #421981;
+
+      font-size: clamp(1rem,1.5vw,2.5rem);
+    }
+
+    .button-exit{
+      margin: 0;
+      box-sizing: border-box;
+      height: 6.17rem;
+      display: flex;
+      align-items: center;
+      color: white;
+      justify-content: center;
+      color: #F2FFFC;
+      background-color: #056CF9;
+
+      font-size: clamp(1rem,1.5vw,2.5rem);
     }
  }
 

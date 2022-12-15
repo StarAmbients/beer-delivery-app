@@ -17,48 +17,58 @@ function NavBar({ page }) {
   return (
     <NavBarSComponent>
       <nav>
-        <div className="nav-left">
-          { page === 'customer' && (
-            <Link
-              style={ { textDecoration: 'none' } }
-              data-testid="customer_products__element-navbar-link-products"
-              to="/customer/products"
-            >
-              <h1>
-                PRODUTOS
-              </h1>
-            </Link>
-          )}
+        { page === 'customer' && (
           <Link
+            className="nav-1"
             style={ { textDecoration: 'none' } }
-            data-testid="customer_products__element-navbar-link-orders"
-            to={ page !== 'admin' ? `/${page}/orders` : '/admin/manage' }
+            data-testid="customer_products__element-navbar-link-products"
+            to="/customer/products"
           >
-            <h2>
-              {page === 'customer' && 'MEUS PEDIDOS'}
-              {page === 'seller' && 'PEDIDOS'}
-              {page === 'admin' && 'GERENCIAR USUÁRIOS'}
-            </h2>
+            <h1
+              className="products"
+            >
+              PRODUTOS
+            </h1>
           </Link>
-        </div>
-        <div className="nav-right">
-          <h3
+        )}
+        <Link
+          className="nav-2"
+          style={ { textDecoration: 'none' } }
+          data-testid="customer_products__element-navbar-link-orders"
+          to={ page !== 'admin' ? `/${page}/orders` : '/admin/manage' }
+        >
+          <h2
+            className="page-orders"
+          >
+            {page === 'customer' && 'MEUS PEDIDOS'}
+            {page === 'seller' && 'PEDIDOS'}
+            {page === 'admin' && 'GERENCIAR USUÁRIOS'}
+          </h2>
+        </Link
+        >
+        <div
+          className="nav-3"
+        >
+          <h1
+            className="user-name"
             data-testid="customer_products__element-navbar-user-full-name"
           >
             {`${name}`}
-          </h3>
-          <Link
-            style={ { textDecoration: 'none' } }
-            to="/"
-            onClick={ handleLogout }
-            data-testid="customer_products__element-navbar-link-logout"
-          >
-            <h1>
-              Sair
-            </h1>
-          </Link>
+          </h1>
         </div>
-
+        <Link
+          className="nav-4"
+          style={ { textDecoration: 'none' } }
+          to="/"
+          onClick={ handleLogout }
+          data-testid="customer_products__element-navbar-link-logout"
+        >
+          <h1
+            className="button-exit"
+          >
+            Sair
+          </h1>
+        </Link>
       </nav>
     </NavBarSComponent>
   );

@@ -33,6 +33,17 @@ const ContainerSchoppingCard = styled.div`
     align-items: center;
     text-align: center;
   }
+  
+  button:hover:enabled {
+    transform: rotate(360deg);
+    transform: scale(1.01);
+  }
+
+  button:disabled,
+  button[disabled] {
+    opacity: 0.4;
+  }
+
 `;
 
 const ContainerCards = styled.div`
