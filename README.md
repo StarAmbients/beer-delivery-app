@@ -8,3 +8,5 @@ Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua cr
 - quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
 - quais arquivos/pastas foram desenvolvidos pela Trybe.
 -->
+We are following diligently Figma instructions for styling the output
+https://www.figma.com/file/cNKu41RhnPIgNqrbMTzmUI/Project%3A-Delivery-App?node-id=0%3A1&t=yPP4zekNmPobc39S-3
