@@ -59,11 +59,21 @@ function Checkout() {
       <div
         className="total_finalizado"
       >
-        <h2
-          data-testid="customer_checkout__element-order-total-price"
+        <div
+          className="pai-do-hdois"
         >
-          {`Total: ${totalPrice.replace(/\./g, ',')}`}
-        </h2>
+          <h2>
+            Total:
+          </h2>
+          <p>
+            R$
+          </p>
+          <h2
+            data-testid="customer_checkout__element-order-total-price"
+          >
+            {`${totalPrice.replace(/\./g, ',')}`}
+          </h2>
+        </div>
       </div>
       <div
         className="title_finalizar_pedido"

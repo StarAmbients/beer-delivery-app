@@ -8,82 +8,93 @@ const TableSComponent = styled.section`
   /* overflow-y: scroll; */
 
   table {
-    width: 100%;
     background-color: whitesmoke;
-    justify-content: center;
     flex-direction: row;
+    justify-content: center;
+    width: 100%;
   }
 
   th {
-    /* position: sticky; */
+    position: sticky;
     top: 0;
+    /*  */
   }
 
   td {
     background-color: violet;
-    text-align: center;
     height: 55px;
+    text-align: center;
   }
 
   .product-item {
     background-color: #036B52;
-    color: white;
-    border-top-left-radius: 15px;
     border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    color: white;
+    width: 60px;
   }
 
   .product-description {
-    /* important */
-    text-align: left;
-    padding-left: 30px;
-    max-width: 170px;
     background-color: #EAF1EF;
+    width: 680px;
+    padding-left: 30px;
+    text-align: left;
+    /* important */
   }
 
   .product-quantity {
     background-color: #036B52;
     color: white;
+    width: 120px;
   }
 
   .product-value {
     background-color: #421981;
     color: white;
+    width: 210px;
   }
 
   .product-subtotal {
-    color: #F2FFFC;
     background-color: #056CF9;
-
+    color: #F2FFFC;
+    width: 210px;
+    margin-bottom: 30px;
   }
   
-  .product-line{
-      /* background-color: #2FC18C; */
-      border-radius: 15px;
-    }
+  .product-line {
+    background-color: transparent;
+    border-radius: 15px;
+  }
 
   .product-remove {
+    align-items: center;
     background-color: #2FC18C;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
     display: flex;
     justify-content: center;
-    align-items: center;
     margin-top: 0px;
-    /* width: 65px; */
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
   }
 
   .button-remove {
-    display: flex;
-    background-color: red;
-    justify-content: center;
     align-items: center;
-    font-size: 20px;
-    color: white;
-    width: 7vw;
+    background-color: #2FC18C;
     border: none;
+    color: white;
+    display: flex;
+    font-size: 20px;
+    justify-content: center;
+    width: 90%;
   }
   .button-remove:hover {
     cursor: pointer;
+  }
+
+  .delete-product {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 55px;
   }
 
   .scroll {
@@ -93,8 +104,8 @@ const TableSComponent = styled.section`
 
   .title-table tr {
     display: flex;
-    justify-content: flex-start;
     font-size: 18px;
+    justify-content: flex-start;
   }
   .item {
     margin-left: 10px;
@@ -103,20 +114,27 @@ const TableSComponent = styled.section`
     margin-left: 350px;
   }
   .quantity {
-    margin-left: 290px;
+    margin-left: 300px;
   }
   .unit-value {
-    margin-left: 40px;
+    margin-left: 50px;
   }
   .sub-total {
     margin-left: 115px;
-    margin-right: 148px;
+    margin-right: 135px;
   }
 
 `;
 
 const TrashSComponent = styled.section`
-      color: red;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 10px;
 `;
 
-export { TableSComponent, TrashSComponent };
+export {
+
+  TableSComponent, TrashSComponent,
+};

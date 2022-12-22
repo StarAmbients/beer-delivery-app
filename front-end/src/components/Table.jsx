@@ -9,7 +9,6 @@ function Table({ page }) {
   return (
     <TableSComponent>
       <table>
-
         <table className="title-table">
           <tr>
             <th className="item">Item</th>
@@ -88,20 +87,24 @@ function Table({ page }) {
                     <td
                       className="product-remove"
                     >
-                      <button
-                        className="button-remove"
-                        type="button"
-                        value={ c.name }
-                        data-testid={
-                          `customer_checkout__element-order-table-remove-${index}`
-                        }
-                        onClick={ () => removeFromCart(c.id) }
+                      <div
+                        className="delete-product"
                       >
-                        Remover
-                        <TrashSComponent>
-                          <Trash />
-                        </TrashSComponent>
-                      </button>
+                        <button
+                          className="button-remove"
+                          type="button"
+                          value={ c.name }
+                          data-testid={
+                            `customer_checkout__element-order-table-remove-${index}`
+                          }
+                          onClick={ () => removeFromCart(c.id) }
+                        >
+                          Remover
+                          <TrashSComponent>
+                            <Trash />
+                          </TrashSComponent>
+                        </button>
+                      </div>
                     </td>
                   )
                 }
