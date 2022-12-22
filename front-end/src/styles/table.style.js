@@ -2,28 +2,63 @@ import styled from 'styled-components';
 
 const TableSComponent = styled.section`
   border-radius: 4px;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   width: 100%;
   max-height: 1200px;
-  /* overflow-y: scroll; */
-
+  margin: 20px;
+  
   table {
     background-color: whitesmoke;
     flex-direction: row;
     justify-content: center;
-    width: 100%;
+    width: calc(100% - 20px);
+  }
+  
+  .title-table tr {
+    display: flex;
+    font-size: 18px;
+    justify-content: flex-start;
   }
 
   th {
     position: sticky;
     top: 0;
-    /*  */
   }
-
+  
   td {
     background-color: violet;
     height: 55px;
     text-align: center;
+  }
+  
+  .scroll {
+    max-height: 240px;
+    overflow: auto;
+  }
+  
+  .item {
+    margin-left: 10px;
+  }
+
+  .description {
+    margin-left: 350px;
+  }
+
+  .quantity {
+    margin-left: 300px;
+  }
+
+  .unit-value {
+    margin-left: 50px;
+  }
+
+  .sub-total {
+    margin-left: 115px;
+    margin-right: 115px;
+  }
+  
+  .product-line {
+    background-color: transparent;
+    border-radius: 15px;
   }
 
   .product-item {
@@ -36,10 +71,9 @@ const TableSComponent = styled.section`
 
   .product-description {
     background-color: #EAF1EF;
-    width: 680px;
     padding-left: 30px;
     text-align: left;
-    /* important */
+    width: 680px;
   }
 
   .product-quantity {
@@ -57,15 +91,10 @@ const TableSComponent = styled.section`
   .product-subtotal {
     background-color: #056CF9;
     color: #F2FFFC;
-    width: 210px;
     margin-bottom: 30px;
+    width: 210px;
   }
   
-  .product-line {
-    background-color: transparent;
-    border-radius: 15px;
-  }
-
   .product-remove {
     align-items: center;
     background-color: #2FC18C;
@@ -86,44 +115,17 @@ const TableSComponent = styled.section`
     justify-content: center;
     width: 90%;
   }
+
   .button-remove:hover {
     cursor: pointer;
   }
 
   .delete-product {
-    display: flex;
-    justify-content: center;
     align-items: center;
-    height: 55px;
-  }
-
-  .scroll {
-    max-height: 200px;
-    overflow: auto;
-  }
-
-  .title-table tr {
     display: flex;
-    font-size: 18px;
-    justify-content: flex-start;
+    height: 55px;
+    justify-content: center;
   }
-  .item {
-    margin-left: 10px;
-  }
-  .description {
-    margin-left: 350px;
-  }
-  .quantity {
-    margin-left: 300px;
-  }
-  .unit-value {
-    margin-left: 50px;
-  }
-  .sub-total {
-    margin-left: 115px;
-    margin-right: 135px;
-  }
-
 `;
 
 const TrashSComponent = styled.section`
@@ -135,6 +137,5 @@ const TrashSComponent = styled.section`
 `;
 
 export {
-
   TableSComponent, TrashSComponent,
 };
