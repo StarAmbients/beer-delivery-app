@@ -57,6 +57,11 @@ const CheckoutSComponent = styled.section`
         font-size: 20px;
       }
 
+      .cents {
+        margin-left: 0;
+        vertical-align: super;
+      }
+
       line-height: 75px;
       border-radius: 0.625rem;
     }

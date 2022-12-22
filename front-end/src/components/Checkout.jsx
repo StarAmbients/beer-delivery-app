@@ -71,8 +71,13 @@ function Checkout() {
           <h2
             data-testid="customer_checkout__element-order-total-price"
           >
-            {`${totalPrice.replace(/\./g, ',')}`}
+            {`${Math.trunc(totalPrice)}`}
           </h2>
+          <p
+            className="cents"
+          >
+            {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+          </p>
         </div>
       </div>
       <div

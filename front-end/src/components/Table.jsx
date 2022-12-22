@@ -66,7 +66,7 @@ function Table({ page }) {
                       : `customer_order_details__element-order-table-unit-price-${index}`
                   }
                 >
-                  { c.price.replace(/\./g, ',') }
+                  { `R$ ${c.price.replace(/\./g, ',')}` }
                 </td>
                 <td
                   className="product-subtotal"
@@ -77,10 +77,10 @@ function Table({ page }) {
                   }
                 >
                   { page === 'checkout'
-                    ? Number(c.price * c.quantity).toFixed(2)
-                      .replace(/\./g, ',')
-                    : Number(c.price * c.SalesProducts.quantity).toFixed(2)
-                      .replace(/\./g, ',')}
+                    ? `R$ ${Number(c.price * c.quantity).toFixed(2)
+                      .replace(/\./g, ',')}`
+                    : `R$ ${Number(c.price * c.SalesProducts.quantity).toFixed(2)
+                      .replace(/\./g, ',')}`}
                 </td>
                 {
                   page === 'checkout' && (
