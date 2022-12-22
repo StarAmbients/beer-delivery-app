@@ -55,31 +55,34 @@ function Checkout() {
       >
         <h3>Finalizar Pedido</h3>
       </div>
-      <Table page="checkout" />
-      <div
-        className="total_finalizado"
-      >
+      <container>
+        <Table page="checkout" />
         <div
-          className="pai-do-hdois"
+          className="container-total-a-pagar"
         >
-          <h2>
-            Total:
-          </h2>
-          <p>
-            R$
-          </p>
-          <h2
-            data-testid="customer_checkout__element-order-total-price"
+          <div
+            className="total-finalizado"
           >
-            {`${Math.trunc(totalPrice)}`}
-          </h2>
-          <p
-            className="cents"
-          >
-            {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
-          </p>
+            <h2>
+              Total:
+            </h2>
+            <p>
+              R$
+            </p>
+            <h2
+              data-testid="customer_checkout__element-order-total-price"
+            >
+              {`${Math.trunc(totalPrice)}`}
+            </h2>
+            <p
+              className="cents"
+            >
+              {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+            </p>
+          </div>
         </div>
-      </div>
+
+      </container>
       <div
         className="title_finalizar_pedido"
       >
@@ -122,14 +125,15 @@ function Checkout() {
             onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
         </label>
+        <button
+          type="button"
+          className="btn-finalizar"
+          data-testid="customer_checkout__button-submit-order"
+          onClick={ () => handleCheckout() }
+        >
+          FINALIZAR PEDIDO
+        </button>
       </div>
-      <button
-        type="button"
-        data-testid="customer_checkout__button-submit-order"
-        onClick={ () => handleCheckout() }
-      >
-        Finalizar pedido
-      </button>
     </CheckoutSComponent>
   );
 }
