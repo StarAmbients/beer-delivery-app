@@ -2,9 +2,9 @@
 import React, { useState, useEffect } from 'react';
 import PropType from 'prop-types';
 import productsStore from '../store/products.store';
-import ProductCardSComponent from '../styles/productCard.style';
+import OrderCardSComponent from '../styles/orderCard.style';
 
-function ProductCard({ product }) {
+function OrderCard({ product }) {
   const { id, name, price, urlImage } = product;
   const [quantity, setQuantity] = useState(0);
   const {
@@ -26,7 +26,7 @@ function ProductCard({ product }) {
   }, [quantity]);
 
   return (
-    <ProductCardSComponent>
+    <OrderCardSComponent>
       <p
         className="price"
         data-testid={ `customer_products__element-card-price-${id}` }
@@ -83,12 +83,12 @@ function ProductCard({ product }) {
           </button>
         </div>
       </div>
-    </ProductCardSComponent>
+    </OrderCardSComponent>
   );
 }
 
-ProductCard.propTypes = {
+OrderCard.propTypes = {
   product: PropType.instanceOf(Object).isRequired,
 };
 
-export default ProductCard;
+export default OrderCard;

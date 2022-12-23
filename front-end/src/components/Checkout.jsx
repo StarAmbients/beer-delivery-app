@@ -6,11 +6,14 @@ import checkoutStore from '../store/checkout.store';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import makeRequest from '../helpers/axios.integration';
 import Table from './Table';
+import CheckoutSComponent from '../styles/checkout.style';
+import SubmitButton from './SubmitButton';
 
 function Checkout() {
   const { id, token } = getUserLocalStorage();
   const { cart } = productsStore((state) => state);
   const { sellers, fetchSellers } = checkoutStore((state) => state);
+  const [selectedOption, setSelectedOption] = useState('seller');
   const [sellerId, setSellerId] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
@@ -36,12 +39,22 @@ function Checkout() {
     }, tresMil);
   };
 
+  const handleChange = (event) => {
+    console.log(selectedOption);
+    setSelectedOption(event.target.value);
+    setSellerId(Number(event.target.value));
+  };
+
   useEffect(async () => {
     fetchSellers(token);
   }, []);
 
+  useEffect(() => {
+    console.log('The component was rendered or updated');
+  }, [selectedOption]);
+
   return (
-    <div>
+    <CheckoutSComponent>
       {
         display && (
           <div>
@@ -49,21 +62,55 @@ function Checkout() {
           </div>
         )
       }
-      <Table page="checkout" />
-      <h2
-        data-testid="customer_checkout__element-order-total-price"
+      <div
+        className="title_finalizar_pedido"
       >
-        {`Total: ${totalPrice.replace(/\./g, ',')}`}
-      </h2>
-      <div>
+        <h3>Finalizar Pedido</h3>
+      </div>
+      <container>
+        <Table page="checkout" />
+        <div
+          className="container-total-a-pagar"
+        >
+          <div
+            className="total-finalizado"
+          >
+            <h2>
+              Total:
+            </h2>
+            <p>
+              R$
+            </p>
+            <h2
+              data-testid="customer_checkout__element-order-total-price"
+            >
+              {`${Math.trunc(totalPrice)}`}
+            </h2>
+            <p
+              className="cents"
+            >
+              {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+            </p>
+          </div>
+        </div>
+
+      </container>
+      <div
+        className="title_finalizar_pedido"
+      >
         <h3>Detalhes e Endereço para Entrega</h3>
+      </div>
+      <div
+        className="seller_details"
+      >
         <label htmlFor="seller">
           P. Vendedora Responsável
           <select
             data-testid="customer_checkout__select-seller"
             name="seller"
             id="seller"
-            onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
+            onChange={ handleChange }
+            // onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
           >
             <option value="seller">Escolha seu vendedor</option>
             {
@@ -91,15 +138,9 @@ function Checkout() {
             onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
         </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ () => handleCheckout() }
-        >
-          Finalizar pedido
-        </button>
       </div>
-    </div>
+      <SubmitButton handleCheckout={ handleCheckout } selectedOption={ selectedOption } />
+    </CheckoutSComponent>
   );
 }
 

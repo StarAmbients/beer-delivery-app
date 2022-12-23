@@ -27,19 +27,19 @@ services:
       MYSQL_HOST: localhost
       MYSQL_PORT: 3306
       MYSQL_USER: root
-      MYSQL_PASSWORD: password
+      MYSQL_PASSWORD: passmybdindocker
       MYSQL_DB_NAME: delivery-app
     command: npm start    
 
   db:
     container_name: delivery_db
-    image: mysql:5
+    image: mysql
     platform: linux/x86_64
     restart: always
     ports:
       - 3306:3306
     environment:
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: passmybdindocker
     healthcheck:
       test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"] # Deve aguardar o banco ficar operacional
       timeout: 30s
