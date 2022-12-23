@@ -118,6 +118,10 @@ const CheckoutSComponent = styled.section`
     width: 25vw;
   }
 
+  .btn-finalizar:disabled {
+    color: red;
+  }
+
   button:hover {
     cursor: pointer;
   }

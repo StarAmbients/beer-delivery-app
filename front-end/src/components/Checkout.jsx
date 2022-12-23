@@ -7,11 +7,13 @@ import { getUserLocalStorage } from '../helpers/localStorage';
 import makeRequest from '../helpers/axios.integration';
 import Table from './Table';
 import CheckoutSComponent from '../styles/checkout.style';
+import SubmitButton from './SubmitButton';
 
 function Checkout() {
   const { id, token } = getUserLocalStorage();
   const { cart } = productsStore((state) => state);
   const { sellers, fetchSellers } = checkoutStore((state) => state);
+  const [selectedOption, setSelectedOption] = useState('seller');
   const [sellerId, setSellerId] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
@@ -37,9 +39,19 @@ function Checkout() {
     }, tresMil);
   };
 
+  const handleChange = (event) => {
+    console.log(selectedOption);
+    setSelectedOption(event.target.value);
+    setSellerId(Number(event.target.value));
+  };
+
   useEffect(async () => {
     fetchSellers(token);
   }, []);
+
+  useEffect(() => {
+    console.log('The component was rendered or updated');
+  }, [selectedOption]);
 
   return (
     <CheckoutSComponent>
@@ -97,7 +109,8 @@ function Checkout() {
             data-testid="customer_checkout__select-seller"
             name="seller"
             id="seller"
-            onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
+            onChange={ handleChange }
+            // onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
           >
             <option value="seller">Escolha seu vendedor</option>
             {
@@ -126,14 +139,7 @@ function Checkout() {
           />
         </label>
       </div>
-      <button
-        type="button"
-        className="btn-finalizar"
-        data-testid="customer_checkout__button-submit-order"
-        onClick={ () => handleCheckout() }
-      >
-        FINALIZAR PEDIDO
-      </button>
+      <SubmitButton handleCheckout={ handleCheckout } selectedOption={ selectedOption } />
     </CheckoutSComponent>
   );
 }
