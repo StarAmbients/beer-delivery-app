@@ -125,15 +125,15 @@ function Checkout() {
             onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
         </label>
-        <button
-          type="button"
-          className="btn-finalizar"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ () => handleCheckout() }
-        >
-          FINALIZAR PEDIDO
-        </button>
       </div>
+      <button
+        type="button"
+        className="btn-finalizar"
+        data-testid="customer_checkout__button-submit-order"
+        onClick={ () => handleCheckout() }
+      >
+        FINALIZAR PEDIDO
+      </button>
     </CheckoutSComponent>
   );
 }
