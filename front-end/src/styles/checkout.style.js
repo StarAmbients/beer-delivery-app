@@ -85,6 +85,11 @@ const CheckoutSComponent = styled.section`
     justify-content: flex-start;
   }
 
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+
   input, select {
     background: #FFFFFF;
     border-radius: 5px;
@@ -112,6 +117,7 @@ const CheckoutSComponent = styled.section`
   }
   
   .btn-finalizar {
+    margin-top: 15px;
     font-weight: 700;
     height: 10vh;
     padding-inline: 60px;
@@ -119,12 +125,20 @@ const CheckoutSComponent = styled.section`
   }
 
   .btn-finalizar:disabled {
-    color: red;
+    color: whitesmoke;
+    background-color: lightgray;
+    opacity: 0.7;
+  }
+
+  .btn-finalizar:enabled {
+    cursor: pointer;
   }
 
   button:hover {
-    cursor: pointer;
+    transform: rotate(360deg);
+    transform: scale(1.01);
   }
+
 `;
 
 export default CheckoutSComponent;

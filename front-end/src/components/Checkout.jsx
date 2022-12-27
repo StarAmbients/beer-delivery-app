@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -103,43 +104,51 @@ function Checkout() {
       <div
         className="seller_details"
       >
-        <label htmlFor="seller">
-          P. Vendedora Responsável
+        <form>
+          <label htmlFor="seller">P. Vendedora Responsável</label>
           <select
             data-testid="customer_checkout__select-seller"
             name="seller"
             id="seller"
             onChange={ handleChange }
-            // onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
           >
             <option value="seller">Escolha seu vendedor</option>
-            {
-              sellers.map((seller) => (
-                <option key={ seller.id } value={ seller.id }>{seller.name}</option>
-              ))
-            }
+            {sellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>
+                {seller.name}
+              </option>
+            ))}
           </select>
-        </label>
-        <label htmlFor="address">
-          Endereço
+        </form>
+        <form>
+          <label htmlFor="address">
+            Endereço
+          </label>
           <input
             type="text"
+            id="address"
             data-testid="customer_checkout__input-address"
             placeholder="Digite seu endereço"
             onChange={ ({ target: { value } }) => setDeliveryAddress(value) }
           />
-        </label>
-        <label htmlFor="number">
-          Número
+        </form>
+        <form>
+          <label htmlFor="number">
+            Número
+          </label>
           <input
             type="text"
+            id="number"
             data-testid="customer_checkout__input-address-number"
             placeholder="Digite seu número"
             onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
-        </label>
+        </form>
       </div>
-      <SubmitButton handleCheckout={ handleCheckout } selectedOption={ selectedOption } />
+      <SubmitButton
+        handleCheckout={ handleCheckout }
+        selectedOption={ selectedOption }
+      />
     </CheckoutSComponent>
   );
 }

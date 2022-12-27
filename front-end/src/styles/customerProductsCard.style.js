@@ -37,13 +37,13 @@ const ContainerSchoppingCard = styled.div`
   button:hover:enabled {
     transform: rotate(360deg);
     transform: scale(1.01);
+    cursor: pointer;
   }
 
   button:disabled,
   button[disabled] {
-    opacity: 0.4;
-  }
-
+    color: whitesmoke;
+    background-color: lightgray;  }
 `;
 
 const ContainerCards = styled.div`
