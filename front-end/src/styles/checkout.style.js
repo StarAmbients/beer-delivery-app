@@ -44,9 +44,8 @@ const CheckoutSComponent = styled.section`
       height: 80px;
       justify-content: end;
       line-height: 75px;
-      margin-bottom: 20px;
+      margin-bottom: 10px;
       margin-right: 20px;
-      margin-top: 10px;
       padding: 5px 30px;
       width: auto;
       
@@ -69,14 +68,15 @@ const CheckoutSComponent = styled.section`
     }
   }
 
-  .seller_details {
+  .seller-details {
     display: flex;
+    flex-direction: column;
     background-color: whitesmoke;
     border-radius: 4px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    height: 18%;
+    height: 22%;
     width: 100%;
-    align-items: space-around;
+    justify-content: space-between;
   }
 
   label {
@@ -85,9 +85,33 @@ const CheckoutSComponent = styled.section`
     justify-content: flex-start;
   }
 
-  form {
+  .label-input-text {
+    margin-left: 20px;
+  }
+
+  .details-shipment {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    margin: 0 20px;
+    flex-grow: 1;
+  }
+  .form-seller {
+    flex-grow: 5;
+    margin-right: 20px;
+    height: 0;
+  }
+  .form-address {
+    flex-grow: 10;
+    margin-right: 20px;
+    height: 0;
+
+
+  }
+  .form-number {
+    flex-grow: 1;
+    height: 0;
+
+
   }
 
   input, select {
@@ -100,8 +124,9 @@ const CheckoutSComponent = styled.section`
     /* position: absolute; */
     right: 0%;
     top: 37.5%;
-    height: 70px;
+    height: 50px;
     font-size: 18px;
+    width: 100%;
   }
 
   button {
@@ -114,6 +139,7 @@ const CheckoutSComponent = styled.section`
     font-size: clamp(1rem,1.5vw,2.5rem);
     justify-content: center;
     width: 20%;
+    align-self: center;
   }
   
   .btn-finalizar {
@@ -122,6 +148,7 @@ const CheckoutSComponent = styled.section`
     height: 10vh;
     padding-inline: 60px;
     width: 25vw;
+    margin-bottom: 20px;
   }
 
   .btn-finalizar:disabled {

@@ -9,6 +9,7 @@ import makeRequest from '../helpers/axios.integration';
 import Table from './Table';
 import CheckoutSComponent from '../styles/checkout.style';
 import SubmitButton from './SubmitButton';
+import Form from './Form';
 
 function Checkout() {
   const { id, token } = getUserLocalStorage();
@@ -101,16 +102,18 @@ function Checkout() {
       >
         <h3>Detalhes e Endereço para Entrega</h3>
       </div>
-      <div
-        className="seller_details"
-      >
-        <form>
-          <label htmlFor="seller">P. Vendedora Responsável</label>
-          <select
-            data-testid="customer_checkout__select-seller"
-            name="seller"
-            id="seller"
-            onChange={ handleChange }
+      <div className="seller-details">
+        <div
+          className="details-shipment"
+        >
+          <Form
+            formClass="form-seller"
+            label="Pessoa Vendedora Responsável:"
+            inputType="select"
+            inputId="seller"
+            inputName="seller"
+            inputPlaceholder="Escolha seu vendedor"
+            inputOnChange={ handleChange }
           >
             <option value="seller">Escolha seu vendedor</option>
             {sellers.map((seller) => (
@@ -118,37 +121,34 @@ function Checkout() {
                 {seller.name}
               </option>
             ))}
-          </select>
-        </form>
-        <form>
-          <label htmlFor="address">
-            Endereço
-          </label>
-          <input
-            type="text"
-            id="address"
-            data-testid="customer_checkout__input-address"
-            placeholder="Digite seu endereço"
-            onChange={ ({ target: { value } }) => setDeliveryAddress(value) }
+          </Form>
+          <Form
+            formClass="form-address"
+            label="Endereço"
+            labelClass="label-input-text"
+            inputType="text"
+            inputId="address"
+            inputName="address"
+            inputPlaceholder="Digite seu endereço"
+            inputOnChange={ ({ target: { value } }) => setDeliveryAddress(value) }
           />
-        </form>
-        <form>
-          <label htmlFor="number">
-            Número
-          </label>
-          <input
-            type="text"
-            id="number"
-            data-testid="customer_checkout__input-address-number"
-            placeholder="Digite seu número"
-            onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
+          <Form
+            // className="form-number"
+            formClass="form-number"
+            label="Número"
+            labelClass="label-input-text"
+            inputType="text"
+            inputId="number"
+            inputName="number"
+            inputPlaceholder="Digite seu número"
+            inputOnChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
-        </form>
+        </div>
+        <SubmitButton
+          handleCheckout={ handleCheckout }
+          selectedOption={ selectedOption }
+        />
       </div>
-      <SubmitButton
-        handleCheckout={ handleCheckout }
-        selectedOption={ selectedOption }
-      />
     </CheckoutSComponent>
   );
 }
