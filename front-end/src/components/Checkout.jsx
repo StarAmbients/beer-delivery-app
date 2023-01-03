@@ -16,6 +16,8 @@ function Checkout() {
   const { cart } = productsStore((state) => state);
   const { sellers, fetchSellers } = checkoutStore((state) => state);
   const [selectedOption, setSelectedOption] = useState('seller');
+  const [entryAddressData, setEntryAddressData] = useState(false);
+  const [entryNumberData, setEntryNumberData] = useState(false);
   const [sellerId, setSellerId] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
@@ -47,13 +49,23 @@ function Checkout() {
     setSellerId(Number(event.target.value));
   };
 
+  useEffect(() => {
+    if (deliveryNumber !== '' && deliveryAddress !== '') {
+      setEntryAddressData(true);
+      setEntryNumberData(true);
+    } else {
+      setEntryAddressData(false);
+      setEntryNumberData(false);
+    }
+  }, [deliveryNumber, deliveryAddress]);
+
   useEffect(async () => {
     fetchSellers(token);
   }, []);
 
   useEffect(() => {
     console.log('The component was rendered or updated');
-  }, [selectedOption]);
+  }, [selectedOption, entryNumberData]);
 
   return (
     <CheckoutSComponent>
@@ -135,18 +147,22 @@ function Checkout() {
           <Form
             // className="form-number"
             formClass="form-number"
-            label="Número"
+            label="Número/Complemento"
             labelClass="label-input-text"
             inputType="text"
             inputId="number"
             inputName="number"
-            inputPlaceholder="Digite seu número"
+            inputPlaceholder="Exemplo: 56 bloco B"
             inputOnChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
         </div>
         <SubmitButton
           handleCheckout={ handleCheckout }
+          // eslint-disable-next-line sonarjs/no-redundant-boolean, react/jsx-curly-spacing
           selectedOption={ selectedOption }
+          entryAddressData={ entryAddressData }
+          entryNumberData={ entryNumberData }
+
         />
       </div>
     </CheckoutSComponent>
