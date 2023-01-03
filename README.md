@@ -118,3 +118,21 @@ A tabela a seguir descreve as rotas da API e os métodos HTTP suportados:
 | `/orders/:id` | DELETE | Exclui um pedido específico |
 | `/delivery-status/:id` | GET | Retorna o status de entrega de um pedido específico |
 
+
+### Projeto em aprimoramento contínuo - ChatGPT sugere:
+
+Aqui estão algumas sugestões de melhorias que consideraremos para o repositório de projeto mencionado:
+
+1.  Adicionar testes unitários para garantir a qualidade do código e facilitar futuras alterações.
+
+2.  Adicionar documentação detalhada para os componentes e funções, para que outras pessoas possam entender facilmente como o código funciona.
+
+3.  Considerar a utilização de uma biblioteca de componentes de interface do usuário, como o React Bootstrap, para tornar a aplicação mais fácil de usar e aprimorar a aparência.
+
+4.  Adicionar funcionalidades adicionais, como o pagamento online ou o acompanhamento do pedido em tempo real.
+
+5.  Otimizar o código para melhorar o desempenho da aplicação. Isso pode incluir a minimização de recursos, como imagens e scripts JavaScript, ou a utilização de técnicas de otimização de código, como lazy loading.
+
+6.  Considerar a implementação de uma estratégia de resposta a falhas, para garantir que a aplicação continue funcionando mesmo em caso de falhas ou problemas de rede.
+
+7.  Adicionar suporte para idiomas adicionais, para que a aplicação possa ser utilizada por um público mais amplo.
