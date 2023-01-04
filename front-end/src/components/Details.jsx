@@ -10,7 +10,7 @@ function Details({ page }) {
 
   return (
     <TableSComponent>
-      <table>
+      <table className="table-finished-order">
         <table className="title-table">
           <tr>
             <th className="item">Item</th>

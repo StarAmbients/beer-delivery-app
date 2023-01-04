@@ -4,7 +4,7 @@ const TableSComponent = styled.section`
   border-radius: 4px;
   width: 100%;
   max-height: 1200px;
-  margin: 20px;
+  // margin: 20px;
   
   table {
     background-color: whitesmoke;
@@ -12,8 +12,14 @@ const TableSComponent = styled.section`
     justify-content: center;
     width: calc(100% - 20px);
   }
+
+  .table-finished-order {
+    margin: 0;
+    margin-left: 7%;
+    margin-right: 7%;
+  }
   
-  .title-table tr {
+  .title-table tr {   
     display: flex;
     font-size: 18px;
     justify-content: flex-start;
