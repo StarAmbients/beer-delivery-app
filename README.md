@@ -18,7 +18,9 @@ Para instalar as dependências e executar o projeto, siga os seguintes passos:
 
 1.  Instale as dependências:
 
-`npm install`
+```shell
+npm install
+```
 
 1.  Execute o projeto:
 
