@@ -5,6 +5,7 @@ import PropType from 'prop-types';
 import ordersStore from '../store/orders.store';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
+import OrderDetailsSComponent from '../styles/orderDetails.style';
 
 function OrderDetail({ page }) {
   const { orderDetail } = ordersStore((state) => state);
@@ -18,15 +19,17 @@ function OrderDetail({ page }) {
 
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
   return (
-    <div>
+    <OrderDetailsSComponent>
       <p
+        className="order-id"
         data-testid={ `${page}_order_details__element-order-details-label-order-id` }
       >
-        {`PEDIDO: ${orderDetail.id};`}
+        {`PEDIDO: ${orderDetail.id}`}
 
       </p>
       { page === 'customer' && (
         <p
+          className="name"
           data-testid="customer_order_details__element-order-details-label-seller-name"
         >
           {`P. Vend: ${orderDetail.seller?.name}`}
@@ -34,11 +37,13 @@ function OrderDetail({ page }) {
         </p>
       )}
       <p
+        className="saleDate"
         data-testid={ `${page}_order_details__element-order-details-label-order-date` }
       >
         {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
       </p>
       <p
+        className="status"
         data-testid={ testId }
       >
         {`${orderDetail.status}`}
@@ -47,6 +52,7 @@ function OrderDetail({ page }) {
         <div>
           <button
             type="button"
+            className="btn-set-status"
             data-testid="seller_order_details__button-preparing-check"
             disabled={ orderDetail.status !== 'Pendente' }
             onClick={ () => handleClick('Preparando') }
@@ -55,6 +61,7 @@ function OrderDetail({ page }) {
           </button>
           <button
             type="button"
+            className="btn-set-status"
             data-testid="seller_order_details__button-dispatch-check"
             disabled={ orderDetail.status !== 'Preparando' }
             onClick={ () => handleClick('Em Trânsito') }
@@ -66,6 +73,7 @@ function OrderDetail({ page }) {
       { page === 'customer' && (
         <button
           type="button"
+          className="btn-set-status"
           data-testid="customer_order_details__button-delivery-check"
           disabled={ orderDetail.status !== 'Em Trânsito' }
           onClick={ () => handleClick('Entregue') }
@@ -73,7 +81,7 @@ function OrderDetail({ page }) {
           Marcar como entregue
         </button>
       )}
-    </div>
+    </OrderDetailsSComponent>
   );
 }
 
