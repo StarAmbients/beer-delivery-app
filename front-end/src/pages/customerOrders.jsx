@@ -11,7 +11,15 @@ function CustomerOrders() {
   const { id, token } = getUserLocalStorage();
 
   useEffect(() => {
-    fetchUserOrders(id, token);
+    try {
+      fetchUserOrders(id, token);
+    } catch (error) {
+      console.error(error);
+      // eslint-disable-next-line no-alert
+      alert(`Ocorreu um erro ao carregar os pedidos.
+      Por favor, tente novamente mais tarde.
+      `);
+    }
   }, []);
 
   return (
