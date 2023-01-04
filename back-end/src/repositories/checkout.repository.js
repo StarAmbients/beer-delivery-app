@@ -7,35 +7,31 @@ const findAll = async (role) => {
 
 const createOrder = async (sale) => {
   const { userId, sellerId, totalPrice, deliveryAddress, deliveryNumber, cart } = sale;
-  // const cartPromises = cart.map((item) => (
-    //   SalesProducts.create({
-    //     saleId: saleObj.dataValues.id,
-    //     productId: item.id,
-    //     quantity: item.quantity,
-  // })));
 
-  // await Promise.all(cartPromises);
-  const resultCreateSale = sequelize.transaction(async (trans) => {
+  try {
     const saleObj = await Sales.create({
       userId,
       sellerId,
       totalPrice,
       deliveryAddress,
       deliveryNumber,
-    }, { transaction: trans });
+    });
 
     const idSale = saleObj.dataValues.id;
 
     const editedCart = cart.map((el) => ({
       productId: el.id,
       quantity: el.quantity,
-      saleId: idSale }));
+      saleId: idSale,
+    }));
 
-    await SalesProducts.bulkCreate(editedCart, { transaction: trans });
+    const salesProductPromises = editedCart.map((item) => SalesProducts.create(item));
+    await Promise.all(salesProductPromises);
 
     return saleObj;
-  });
-  return resultCreateSale;
+  } catch (err) {
+    throw new Error(err);
+  }
 };
 
 module.exports = {
