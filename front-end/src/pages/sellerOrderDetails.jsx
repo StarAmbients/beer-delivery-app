@@ -19,7 +19,14 @@ function SellerOrderDetail() {
   return (
     <div>
       <NavBar page="seller" />
-      <h2>Detalhes do Pedido</h2>
+      <h2
+        style={ { 'padding-left': '130px',
+          'margin-top': '40px' } }
+      >
+        Detalhes do Pedido
+
+      </h2>
+      {' '}
       <OrderDetail page="seller" />
       <Details page="seller" />
     </div>

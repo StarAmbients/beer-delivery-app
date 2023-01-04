@@ -10,16 +10,24 @@ import ordersStore from '../store/orders.store';
 function CustomerOrderDetail() {
   const { orderId } = useParams();
   const { token } = getUserLocalStorage();
-  const { orderDetail, fetchOrderDetail } = ordersStore((state) => state);
+  const { fetchOrderDetail } = ordersStore((state) => state);
 
   useEffect(() => {
     fetchOrderDetail(orderId, token);
-  }, [orderDetail]);
+  }, []);
 
   return (
     <div>
       <NavBar page="customer" />
-      <h2>Detalhes do Pedido</h2>
+      <div>
+        <h2
+          style={ { 'padding-left': '130px',
+            'margin-top': '40px' } }
+        >
+          Detalhes do Pedido
+
+        </h2>
+      </div>
       <OrderDetail page="customer" />
       <Details page="customer" />
     </div>

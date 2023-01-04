@@ -11,9 +11,10 @@ const adminRoute = require('../routes/admin.routes');
 const globalError = require('../err/globalError');
 
 const app = express();
+app.use(cors());
+
 
 app.use(express.json());
-app.use(cors());
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
 app.use('/customer/products', producstRoute);
