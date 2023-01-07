@@ -1,16 +1,15 @@
 import styled from 'styled-components';
 
 const PersonOrderDetailsSComponent = styled.section`
-  height: 100vh;
-  // width: 100vw;
+  color: #350b4b;
   font-size: 1.9rem;
   font-weight: 400;
-  color: #350b4b;
+  height: 100vh;
 
   .title_detalhes_pedido {
     display: flex;
     width: 100vw;
-
+    
     h3 {
       margin-bottom: 20px;
       margin-top: 40px;
@@ -19,19 +18,19 @@ const PersonOrderDetailsSComponent = styled.section`
   }
 
   container {
-    display: flex;
-    flex-direction: column;
-    // align-items: center;
-    // justify-content: center;
+    align-items: center;
     background-color: whitesmoke;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    width: 83vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     margin-left: 128px;
+    width: 83vw;
 
     table-container {
+      align-items: center;
       display: flex;
       justify-content: center;
-      align-items: center;
       width: 83vw;
     }
   }
@@ -39,18 +38,17 @@ const PersonOrderDetailsSComponent = styled.section`
   .container-total-a-pagar {
     align-items: center;
     display: flex;
+    float: right;
     height: 10vh;
+    margin-top: 25vh;
     padding-inline: 60px;
     width: 25vw;
-    float: right;
-    margin-top: 25vh;
-
     
     .total-value {
       align-items: center;
-      background: #036B52;
+      background: #036b52;
       border-radius: 0.625rem;
-      color: #F2FFFC;
+      color: #f2fffc;
       display: flex;
       flex-direction: row;
       height: 80px;
@@ -62,9 +60,9 @@ const PersonOrderDetailsSComponent = styled.section`
       width: auto;
       
       h2 {
-      font-size: 44px;
-      font-weight: 700;
-    }
+        font-size: 44px;
+        font-weight: 700;
+      }
 
       p {
         font-size: 20px;

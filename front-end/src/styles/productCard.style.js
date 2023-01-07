@@ -2,11 +2,11 @@ import styled from 'styled-components';
 
 const ProductCardSComponent = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
-  
+
   align-items: center;
-  display: flex;
   border-radius: 4px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  display: flex;
   flex-direction: column;
   height: 240px;
   margin: 1rem;
@@ -15,9 +15,9 @@ const ProductCardSComponent = styled.div`
   width: 175px;
 
   .price {
-    color: var(--colors-dart-text);
     background-color: var(--colors-light-grey);
     border-radius: 8px;
+    color: var(--colors-dart-text);
     font-size: 1rem;
     font-weight: 700;
     left: 8px;
@@ -37,12 +37,12 @@ const ProductCardSComponent = styled.div`
     align-items: center;
     background: #e8f2ef;
     display: flex;
-    flex: 1;
     flex-direction: column;
+    flex: 1;
     justify-content: center;
     padding: 4px;
     width: 100%;
-
+    
     .product-name {
       font-size: 80%;
       padding: 4px 0;
@@ -51,27 +51,27 @@ const ProductCardSComponent = styled.div`
 
     .quantity {
       align-items: center;
-      border: 1px solid #036B52;
       border-radius: 4px;
+      border: 1px solid #036b52;
       color: black;
       display: flex;
       height: 27px;
       justify-content: space-between;
       overflow: hidden;
-
+      
       button {
-        background: #036B52;
+        align-items: center;
+        background: #036b52;
+        border-radius: 0;
         border: none;
         color: white;
+        display: flex;
         font-weight: 400;
         height: 32px;
-        width: 32px;
-        display: flex;
         justify-content: center;
-        align-items: center;
         margin-bottom: 5px;
         padding-right: 3px;
-        border-radius: 0;
+        width: 32px;
       }
 
       input {
@@ -79,6 +79,7 @@ const ProductCardSComponent = styled.div`
         border: none;
         text-align: center;
         width: 40px;
+        
         /* Chrome, Safari, Edge, Opera /
         ::-webkit-outer-spin-button,
         ::-webkit-inner-spin-button {
@@ -86,7 +87,7 @@ const ProductCardSComponent = styled.div`
           margin: 0;
         }
         / Firefox */
-        &[type=number] {
+        &[type="number"] {
           -moz-appearance: textfield;
         }
       }

@@ -2,219 +2,218 @@ import styled from 'styled-components';
 
 const OrderCardSComponent = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
-  
-  position: absolute;
-  width: 797px;
+
   height: 245px;
   left: 151px;
+  position: absolute;
   top: 436px;
-  
+  width: 797px;
+
   .status {
-    position: absolute;
-    width: 295px;
     height: 141px;
     left: 215px;
+    position: absolute;
     top: 13px;
-
+    width: 295px;
+    
     .typography {
-      position: absolute;
+      bottom: 0%;
       left: 0%;
+      position: absolute;
       right: 0%;
       top: 0%;
-      bottom: 0%;
-
+      
       .title {
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 0%;
+        align-items: center;
         bottom: 0%;
-        font-family: 'Roboto';
+        color: #001813;
+        display: flex;
+        font-family: "Roboto";
+        font-size: 36px;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;
+        left: 0%;
         line-height: 42px;
-        display: flex;
-        align-items: center;
+        position: absolute;
+        right: 0%;
         text-align: center;
-        color: #001813;
+        top: 0%;
       }
     }
 
     .bg {
-      position: absolute;
-      left: 0%;
-      right: 0%;
-      top: 0%;
-      bottom: 0%;
       background: rgba(0, 204, 155, 0.75);
       border-radius: 10px;
+      bottom: 0%;
+      left: 0%;
+      position: absolute;
+      right: 0%;
+      top: 0%;
     }
   }
 
   .typography-address {
-    position: absolute;
-    width: 577px;
     height: 68px;
     left: 207px;
+    position: absolute;
     top: 164px;
-
+    width: 577px;
+    
     .label {
-      position: absolute;
-      left: 0%;
-      right: 0%;
-      top: 0%;
+      align-items: center;
       bottom: 0%;
-      font-family: 'Roboto';
+      color: #001813;
+      display: flex;
+      font-family: "Roboto";
+      font-size: 24px;
       font-style: normal;
       font-weight: 400;
-      font-size: 24px;
+      left: 0%;
       line-height: 28px;
-      display: flex;
-      align-items: center;
+      position: absolute;
+      right: 0%;
       text-align: right;
-      color: #001813;
+      top: 0%;
     }
   }
 
   .typography-reference-order {
-    position: absolute;
-    width: 202px;
     height: 231px;
     left: 1px;
+    position: absolute;
     top: 1.47px;
-
-    .titulo { 
-      position: absolute;
-      left: 0%;
-      right: 0%;
-      top: 0%;
+    width: 202px;
+    
+    .titulo {
+      align-items: center;
       bottom: 0%;
-      font-family: 'Roboto';
+      color: #001813;
+      display: flex;
+      font-family: "Roboto";
+      font-size: 24px;
       font-style: normal;
       font-weight: 400;
-      font-size: 24px;
+      left: 0%;
       line-height: 28px;
-      display: flex;
-      align-items: center;
+      position: absolute;
+      right: 0%;
       text-align: center;
-      color: #001813;
+      top: 0%;
     }
   }
 
   .order-price {
-    position: absolute;
+    bottom: 36.87%;
     left: 65.37%;
+    position: absolute;
     right: 1.51%;
     top: 36.73%;
-    bottom: 36.87%;
-
+    
     .typography {
-      position: absolute;
       height: 63.66px;
       left: 65.37%;
+      position: absolute;
       right: 1.51%;
       top: 91.01px;
-
+      
       .title {
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 0%;
+        align-items: center;
         bottom: 0%;
-        font-family: 'Roboto';
+        color: #001813;
+        display: flex;
+        font-family: "Roboto";
+        font-size: 36px;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;
+        left: 0%;
         line-height: 42px;
-        display: flex;
-        align-items: center;
+        position: absolute;
+        right: 0%;
         text-align: center;
-        color: #001813;
+        top: 0%;
       }
     }
 
     .rectangle-35 {
-      position: absolute;
-      height: 63.66px;
-      left: 65.37%;
-      right: 1.51%;
-      top: 90px;
       background: rgba(242, 255, 252, 0.75);
       border-radius: 10px;
+      height: 63.66px;
+      left: 65.37%;
+      position: absolute;
+      right: 1.51%;
+      top: 90px;
     }
   }
 
   .order-status {
-    position: absolute;
+    bottom: 68.71%;
     left: 65.37%;
+    position: absolute;
     right: 1.51%;
     top: 5.31%;
-    bottom: 68.71%;
-
-    .typography  {
-      position: absolute;
+    
+    .typography {
       height: 63.66px;
       left: 65.37%;
+      position: absolute;
       right: 1.51%;
       top: 13px;
-
+      
       .title {
-        position: absolute;
-        left: 0%;
-        right: 0%;
-        top: 0%;
+        align-items: center;
         bottom: 0%;
-        font-family: 'Roboto';
+        color: #001813;
+        display: flex;
+        font-family: "Roboto";
+        font-size: 36px;
         font-style: normal;
         font-weight: 700;
-        font-size: 36px;
+        left: 0%;
         line-height: 42px;
-        display: flex;
-        align-items: center;
+        position: absolute;
+        right: 0%;
         text-align: center;
-        color: #001813;
+        top: 0%;
       }
     }
 
     .rectangle-34 {
-      position: absolute;
-      height: 63.66px;
-      left: 65.37%;
-      right: 1.51%;
-      top: 13px;
       background: rgba(242, 255, 252, 0.75);
       border-radius: 10px;
+      height: 63.66px;
+      left: 65.37%;
+      position: absolute;
+      right: 1.51%;
+      top: 13px;
     }
-
   }
 
   .bg {
-    position: absolute;
+    bottom: 4.08%;
     left: 0%;
+    position: absolute;
     right: 0%;
     top: 0%;
-    bottom: 4.08%;
-
+    
     .bg-id-product {
-      position: absolute;
+      background: #ffffff;
       height: 230.7px;
       left: 0.13%;
+      position: absolute;
       right: 74.53%;
       top: 1.43px;
-      background: #FFFFFF;
     }
 
     .base {
+      background: #eaf1ef;
+      border: 1px solid #b1c2be;
+      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       box-sizing: border-box;
-      position: absolute;
       height: 235px;
       left: 0%;
+      position: absolute;
       right: 0%;
       top: 0px;
-      background: #EAF1EF;
-      border: 1px solid #B1C2BE;
-      box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     }
   }
 `;

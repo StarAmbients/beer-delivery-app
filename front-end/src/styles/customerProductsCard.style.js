@@ -3,47 +3,47 @@ import styled from 'styled-components';
 const ContainerSchoppingCard = styled.div`
   display: flex;
   flex-direction: column;
+  
   .button-checkout {
     display: flex;
     justify-content: end;
     margin-right: 10%;
     margin-top: 4%;
+    min-width:100px;
     padding-left:10px;
     padding-right:10px;
-    min-width:100px;
-
+    
     p {
       margin: 30px
     }
   }
 
   button {
-    background: #036B52;
-    font-weight: 500;
-    font-size: 2.25em;
-    line-height: 2.63rem;
-    color: white;
-    
-    height: 4.9375rem;
-    width: auto;
-    border: none;
-    border-radius: 0.625rem;
-  
-    display: flex;
     align-items: center;
+    background: #036B52;
+    border-radius: 0.625rem;
+    border: none;
+    color: white;
+    display: flex;
+    font-size: 2.25em;
+    font-weight: 500;
+    height: 4.9375rem;
+    line-height: 2.63rem;
     text-align: center;
+    width: auto;
   }
   
   button:hover:enabled {
+    cursor: pointer;
     transform: rotate(360deg);
     transform: scale(1.01);
-    cursor: pointer;
   }
 
   button:disabled,
   button[disabled] {
+    background-color: lightgray;
     color: whitesmoke;
-    background-color: lightgray;  }
+  }
 `;
 
 const ContainerCards = styled.div`
@@ -67,8 +67,11 @@ const CustomerProductsSComponent = styled.div`
 
   .products-container {
     border: 8px solid blue;
+    height: 100%;
     width: 100%;
-    height: 100%;  }
+  }
 `;
 
-export { ContainerSchoppingCard, CustomerProductsSComponent, ContainerCards };
+export {
+  ContainerSchoppingCard, CustomerProductsSComponent, ContainerCards,
+};

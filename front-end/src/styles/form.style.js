@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 
 const FormSComponent = styled.section`
-    display: flex;
-    flex-direction: row;
-    margin: 20px;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  margin: 20px;
 
   .form-seller {
     flex-grow: 5;
@@ -16,21 +16,20 @@ const FormSComponent = styled.section`
     flex-grow: 1;
   }
 
-  input, select {
-    background: #FFFFFF;
+  input,
+  select {
+    background: #ffffff;
     border-radius: 5px;
     border: 1px solid #001813;
     bottom: 0%;
     box-sizing: border-box;
+    font-size: 18px;
+    height: 70px;
     left: 0%;
-    /* position: absolute; */
     right: 0%;
     top: 37.5%;
-    height: 70px;
-    font-size: 18px;
-    width: 100%
+    width: 100%;
   }
-
 `;
 
 export default FormSComponent;

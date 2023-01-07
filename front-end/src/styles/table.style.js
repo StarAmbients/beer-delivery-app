@@ -2,9 +2,9 @@ import styled from 'styled-components';
 
 const TableSComponent = styled.section`
   border-radius: 4px;
-  width: 100%;
   max-height: 1200px;
-  
+  width: 100%;
+
   table {
     background-color: whitesmoke;
     flex-direction: row;
@@ -15,8 +15,8 @@ const TableSComponent = styled.section`
   .table-finished-order {
     margin: 0;
   }
-  
-  .title-table tr {   
+
+  .title-table tr {
     display: flex;
     font-size: 18px;
     justify-content: flex-start;
@@ -26,18 +26,18 @@ const TableSComponent = styled.section`
     position: sticky;
     top: 0;
   }
-  
+
   td {
     background-color: violet;
     height: 55px;
     text-align: center;
   }
-  
+
   .scroll {
     max-height: 240px;
     overflow: auto;
   }
-  
+
   .item {
     margin-left: 10px;
   }
@@ -58,14 +58,14 @@ const TableSComponent = styled.section`
     margin-left: 115px;
     margin-right: 115px;
   }
-  
+
   .product-line {
     background-color: transparent;
     border-radius: 15px;
   }
 
   .product-item {
-    background-color: #036B52;
+    background-color: #036b52;
     border-bottom-left-radius: 15px;
     border-top-left-radius: 15px;
     color: white;
@@ -73,14 +73,14 @@ const TableSComponent = styled.section`
   }
 
   .product-description {
-    background-color: #EAF1EF;
+    background-color: #eaf1ef;
     padding-left: 30px;
     text-align: left;
     width: 680px;
   }
 
   .product-quantity {
-    background-color: #036B52;
+    background-color: #036b52;
     color: white;
     width: 120px;
   }
@@ -92,15 +92,15 @@ const TableSComponent = styled.section`
   }
 
   .product-subtotal {
-    background-color: #056CF9;
-    color: #F2FFFC;
+    background-color: #056cf9;
+    color: #f2fffc;
     margin-bottom: 30px;
     width: 210px;
   }
-  
+
   .product-remove {
     align-items: center;
-    background-color: #2FC18C;
+    background-color: #2fc18c;
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px;
     display: flex;
@@ -110,7 +110,7 @@ const TableSComponent = styled.section`
 
   .button-remove {
     align-items: center;
-    background-color: #2FC18C;
+    background-color: #2fc18c;
     border: none;
     color: white;
     display: flex;
@@ -139,6 +139,4 @@ const TrashSComponent = styled.section`
   margin-left: 10px;
 `;
 
-export {
-  TableSComponent, TrashSComponent,
-};
+export { TableSComponent, TrashSComponent };
