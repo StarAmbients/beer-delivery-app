@@ -5,31 +5,34 @@ const OrderDetailsSComponent = styled.section`
   justify-content: space-between;
   align-items: center;
   flex-direction: row;
-  height: 5vh;
-  margin-left: 7%;
-  margin-right: 7%;
+  height: 6vh;
+  width: 81vw;
   padding: 0 15px;
   font-size: 1.7rem;
   font-weight: 400;
   color: #350B4B;
   background: #EAF1EF;
   border: 1px solid #B1C2BE;
+  margin-left: 2px;
+  margin-top: 4px;
 
   .order-id {
-
+    font-weight: 550;
+    color: #001813;
   }
 
   .name {
-    font-size: 1.4rem;
+    font-size: 28px;
     font-weight: 400;
-    color: #B1C2BE;
-    background: rgba(242, 255, 252, 0.75);
+    line-height: 42px;
+    color: #001813;
+    padding-right: 300 px;
+    width: 25vw;
   }
 
   .saleDate {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
+    font-size: 28px;
+    font-weight: 550;
     line-height: 42px;
     display: flex;
     align-items: center;
@@ -38,20 +41,24 @@ const OrderDetailsSComponent = styled.section`
     
     background: rgba(242, 255, 252, 0.75);
     border-radius: 10px;
+    width: 11vw;
+    justify-content: center;
+
   }
 
   .status {
-    font-style: normal;
-    font-weight: 700;
-    font-size: 36px;
+    font-size: 28px;
+    font-weight: 550;
     line-height: 42px;
     display: flex;
     align-items: center;
     text-align: center;
     color: #001813;
-
+    width: 10vw;
     background: rgba(0, 204, 155, 0.75);
     border-radius: 10px;
+    justify-content: center;
+
   }
 
   button {
@@ -59,28 +66,22 @@ const OrderDetailsSComponent = styled.section`
     background-color: #036B52;
     border-radius: 10px;
     display: flex;
-    font-size: 20px;
-    font-size: clamp(1rem,1.5vw,2.5rem);
+    // font-size: 20px;
+    // font-size: clamp(1rem,1.5vw,2.5rem);
     justify-content: center;
     width: 20%;
-    align-self: center;
+    // align-self: center;
   }
   
   .btn-set-status {
-    margin-top: 15px;
-    font-weight: 700;
-    height: 52px;
-    padding-inline: 60px;
-    width: 25vw;
-    margin-bottom: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 28px;
+    height: 38px;
+    width: 23vw;
+    font-size: 28px;
+    font-weight: 400;
     display: flex;
     align-items: center;
     text-align: center;
     color: #F2FFFC;
-    width: 332px;
   }
 
   .btn-set-status:disabled {
@@ -93,7 +94,7 @@ const OrderDetailsSComponent = styled.section`
     cursor: pointer;
   }
 
-  button:hover {
+  button:hover:enabled {
     transform: rotate(360deg);
     transform: scale(1.01);
   }

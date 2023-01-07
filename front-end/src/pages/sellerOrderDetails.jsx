@@ -6,6 +6,7 @@ import NavBar from '../components/NavBar';
 import OrderDetail from '../components/OrderDetail';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
+import PersonOrderDetailsSComponent from '../styles/personOrderDetails.style';
 
 function SellerOrderDetail() {
   const { orderId } = useParams();
@@ -17,19 +18,21 @@ function SellerOrderDetail() {
   }, [orderDetail]);
 
   return (
-    <div>
+    <PersonOrderDetailsSComponent>
       <NavBar page="seller" />
-      <h2
-        style={ { 'padding-left': '130px',
-          'margin-top': '40px' } }
+      <div
+        className="title_detalhes_pedido"
       >
-        Detalhes do Pedido
-
-      </h2>
+        <h3>Detalhe do Pedido</h3>
+      </div>
       {' '}
-      <OrderDetail page="seller" />
-      <Details page="seller" />
-    </div>
+      <container>
+        <OrderDetail page="seller" />
+        <table-container>
+          <Details page="seller" />
+        </table-container>
+      </container>
+    </PersonOrderDetailsSComponent>
   );
 }
 

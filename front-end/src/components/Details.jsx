@@ -72,11 +72,30 @@ function Details({ page }) {
           </table>
         </div>
       </table>
-      <h2
-        data-testid={ `${page}_order_details__element-order-total-price` }
+      <div
+        className="container-total-a-pagar"
       >
-        {`Total: ${totalPrice?.replace(/\./g, ',')}`}
-      </h2>
+        <div
+          className="total-value"
+        >
+          <h2>
+            Total:
+          </h2>
+          <p>
+            R$
+          </p>
+          <h2
+            data-testid={ `${page}_order_details__element-order-total-price` }
+          >
+            {`${Math.trunc(totalPrice)}`}
+          </h2>
+          <p
+            className="cents"
+          >
+            {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+          </p>
+        </div>
+      </div>
     </TableSComponent>
   );
 }

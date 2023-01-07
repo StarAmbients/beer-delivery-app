@@ -21,6 +21,12 @@ module.exports = {
         password: '1c37466c159755ce1fa181bd247cb925', // -- senha: md5('$#zebirita#$')
         role: 'customer'
       }
+      // {
+      //   name: 'Talis Nas Estantis', 
+      //   email: 'venddoano@deliveryapp.com', 
+      //   password: '5502bbba04e792da22f1904cc3fc7877', -- senha: md5('vendedordoano')
+      //   role: 'seller'
+      // },
   ], {});
 
   },

@@ -4,7 +4,6 @@ const TableSComponent = styled.section`
   border-radius: 4px;
   width: 100%;
   max-height: 1200px;
-  // margin: 20px;
   
   table {
     background-color: whitesmoke;
@@ -15,8 +14,6 @@ const TableSComponent = styled.section`
 
   .table-finished-order {
     margin: 0;
-    margin-left: 7%;
-    margin-right: 7%;
   }
   
   .title-table tr {   

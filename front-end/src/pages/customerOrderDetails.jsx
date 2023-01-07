@@ -25,15 +25,6 @@ function CustomerOrderDetail() {
       >
         <h3>Detalhe do Pedido</h3>
       </div>
-      {/* <div>
-        <h2
-          style={ { 'padding-left': '130px',
-            'margin-top': '40px' } }
-        >
-          Detalhes do Pedido
-
-        </h2>
-      </div> */}
       <container>
         <OrderDetail page="customer" />
         <table-container>

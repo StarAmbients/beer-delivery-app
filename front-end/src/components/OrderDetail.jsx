@@ -78,7 +78,7 @@ function OrderDetail({ page }) {
           disabled={ orderDetail.status !== 'Em Trânsito' }
           onClick={ () => handleClick('Entregue') }
         >
-          Marcar como entregue
+          MARCAR COMO ENTREGUE
         </button>
       )}
     </OrderDetailsSComponent>
