@@ -92,7 +92,10 @@ function Details({ page }) {
           <p
             className="cents"
           >
-            {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+            {`${Math
+              .trunc((totalPrice - (Math.trunc(totalPrice))) * 100)
+              .toString().padStart(2, '0')}`}
+            {' '}
           </p>
         </div>
       </div>

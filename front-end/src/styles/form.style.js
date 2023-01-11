@@ -25,9 +25,7 @@ const FormSComponent = styled.section`
     box-sizing: border-box;
     font-size: 18px;
     height: 70px;
-    left: 0%;
-    right: 0%;
-    top: 37.5%;
+    position: relative;
     width: 100%;
   }
 `;

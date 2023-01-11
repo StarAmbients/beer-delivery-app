@@ -45,7 +45,8 @@ const CheckoutSComponent = styled.section`
       justify-content: end;
       line-height: 75px;
       margin-bottom: 10px;
-      margin-right: 20px;
+      margin-right: 45px;
+      margin-top: 20px;
       padding: 5px 30px;
       width: auto;
 
@@ -115,17 +116,11 @@ const CheckoutSComponent = styled.section`
     background: #ffffff;
     border-radius: 5px;
     border: 1px solid #001813;
-    bottom: 0%;
     box-sizing: border-box;
     font-size: 18px;
     height: 50px;
-    left: 0%;
-    position: absolute;
-    right: 0%;
-    top: 37.5%;
+    position: relative;
     width: 100%;
-
-    /*  */
   }
 
   button {

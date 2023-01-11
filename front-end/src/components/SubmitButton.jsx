@@ -1,4 +1,4 @@
-import React from 'react';
+import { React, useState } from 'react';
 import PropTypes from 'prop-types';
 
 function SubmitButton({
@@ -7,16 +7,19 @@ function SubmitButton({
   entryAddressData,
   entryNumberData,
 }) {
+  const [buttonText, setButtonText] = useState('FINALIZAR PEDIDO');
   return (
     <button
       type="button"
       className="btn-finalizar"
       data-testid="customer_checkout__button-submit-order"
-      onClick={ () => handleCheckout() }
-      // eslint-disable-next-line sonarjs/no-redundant-boolean
+      onClick={ () => {
+        handleCheckout();
+        setButtonText('CONFIRMANDO PEDIDO...');
+      } }
       disabled={ selectedOption === 'seller' || (!entryNumberData || !entryAddressData) }
     >
-      FINALIZAR PEDIDO
+      {buttonText}
     </button>
   );
 }

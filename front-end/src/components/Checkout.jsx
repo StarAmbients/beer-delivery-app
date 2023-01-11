@@ -69,13 +69,6 @@ function Checkout() {
 
   return (
     <CheckoutSComponent>
-      {
-        display && (
-          <div>
-            <h1>Compra realizada com sucesso!</h1>
-          </div>
-        )
-      }
       <div
         className="title_finalizar_pedido"
       >
@@ -103,7 +96,9 @@ function Checkout() {
             <p
               className="cents"
             >
-              {`${Math.trunc((totalPrice - (Math.trunc(totalPrice))) * 100)}`}
+              {`${Math
+                .trunc((totalPrice - (Math.trunc(totalPrice))) * 100)
+                .toString().padStart(2, '0')}`}
             </p>
           </div>
         </div>
@@ -145,7 +140,6 @@ function Checkout() {
             inputOnChange={ ({ target: { value } }) => setDeliveryAddress(value) }
           />
           <Form
-            // className="form-number"
             formClass="form-number"
             label="Número/Complemento"
             labelClass="label-input-text"
