@@ -69,6 +69,12 @@ function Checkout() {
 
   return (
     <CheckoutSComponent>
+      {
+        display && (
+          <>
+          </>
+        )
+      }
       <div
         className="title_finalizar_pedido"
       >
