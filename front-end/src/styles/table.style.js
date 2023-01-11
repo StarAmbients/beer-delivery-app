@@ -50,11 +50,30 @@ const TableSComponent = styled.section`
     margin-left: 300px;
   }
 
+  .quantity-person {
+    margin-left: 400px;
+  }
+
   .unit-value {
     margin-left: 50px;
   }
 
+  .unit-value-person {
+    margin-left: 73px;
+  }
+
   .sub-total {
+    margin-left: 115px;
+    margin-right: 115px;
+  }
+
+  .sub-total-person {
+    margin-left: 135px;
+    margin-right: 0;
+  }
+
+  .sub-total-checkout {
+    color: red;
     margin-left: 115px;
     margin-right: 115px;
   }
@@ -96,6 +115,14 @@ const TableSComponent = styled.section`
     color: #f2fffc;
     margin-bottom: 30px;
     width: 210px;
+  }
+
+  .product-subtotal-person {
+    background-color: #056cf9;
+    color: #f2fffc;
+    margin-bottom: 30px;
+    width: 210px;
+    border-radius: 0 15px 15px 0;
   }
 
   .product-remove {

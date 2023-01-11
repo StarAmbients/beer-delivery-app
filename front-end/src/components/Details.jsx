@@ -15,9 +15,9 @@ function Details({ page }) {
           <tr>
             <th className="item">Item</th>
             <th className="description">Descrição</th>
-            <th className="quantity">Quantidade</th>
-            <th className="unit-value">Valor Unitário</th>
-            <th className="sub-total">Sub-total</th>
+            <th className="quantity-person">Quantidade</th>
+            <th className="unit-value-person">Valor Unitário</th>
+            <th className="sub-total-person">Sub-total</th>
           </tr>
         </table>
         <div
@@ -59,7 +59,7 @@ function Details({ page }) {
                   { p.price.replace(/\./g, ',') }
                 </td>
                 <td
-                  className="product-subtotal"
+                  className="product-subtotal-person"
                   data-testid={
                     `${page}_order_details__element-order-table-sub-total-${index}`
                   }

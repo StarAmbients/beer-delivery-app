@@ -69,7 +69,8 @@ function Table({ page }) {
                   { `R$ ${c.price.replace(/\./g, ',')}` }
                 </td>
                 <td
-                  className="product-subtotal"
+                  className={ `${page === 'checkout'
+                    ? 'product-subtotal' : 'product-subtotal-checkout'}` }
                   data-testid={
                     page === 'checkout'
                       ? `customer_checkout__element-order-table-sub-total-${index}`
