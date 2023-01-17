@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import moment from 'moment';
 import PropType from 'prop-types';
 import ordersStore from '../store/orders.store';
@@ -7,24 +7,13 @@ import { getUserLocalStorage } from '../helpers/localStorage';
 import OrderDetailsSComponent from '../styles/orderDetails.style';
 
 function OrderDetail({ page }) {
-  const [orderDetail, setOrderDetail] = useState(ordersStore.getState().orderDetail);
+  const statusDatabase = ordersStore.getState().orderDetail;
+  const [orderDetail, setOrderDetail] = useState(statusDatabase);
   const { token } = getUserLocalStorage();
-
-  useEffect(() => {
-    const unsubscribe = ordersStore.subscribe(() => {
-      setOrderDetail(ordersStore.getState().orderDetail);
-    });
-    return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    setOrderDetail(orderDetail);
-  }, [orderDetail]);
 
   const handleClick = async (newStatus) => {
     await makeRequest(`sales/${orderDetail.id}`, 'put', { status: newStatus }, token);
-    // eslint-disable-next-line no-restricted-globals
-    // location.reload(true);
+    setOrderDetail({ ...orderDetail, status: newStatus });
   };
 
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
