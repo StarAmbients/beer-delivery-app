@@ -4,29 +4,33 @@ const OrderCardSComponent = styled.div`
   @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
 
   height: 245px;
-  left: 151px;
+  left: 20px;
   position: absolute;
-  top: 436px;
+  //top: 436px;
+  top: 158px;
   width: 797px;
+  display: flex;
+  flex-direction: column;
 
   .status {
     height: 141px;
     left: 215px;
-    position: absolute;
+    //position: absolute;
     top: 13px;
     width: 295px;
     
     .typography {
       bottom: 0%;
       left: 0%;
-      position: absolute;
+      //position: absolute;
       right: 0%;
       top: 0%;
       
       .title {
         align-items: center;
         bottom: 0%;
-        color: #001813;
+        //color: #001813;
+        color: red;
         display: flex;
         font-family: "Roboto";
         font-size: 36px;
@@ -34,7 +38,7 @@ const OrderCardSComponent = styled.div`
         font-weight: 700;
         left: 0%;
         line-height: 42px;
-        position: absolute;
+        // position: absolute;
         right: 0%;
         text-align: center;
         top: 0%;
@@ -46,7 +50,7 @@ const OrderCardSComponent = styled.div`
       border-radius: 10px;
       bottom: 0%;
       left: 0%;
-      position: absolute;
+      //position: absolute;
       right: 0%;
       top: 0%;
     }
@@ -80,7 +84,7 @@ const OrderCardSComponent = styled.div`
   .typography-reference-order {
     height: 231px;
     left: 1px;
-    position: absolute;
+    //position: absolute;
     top: 1.47px;
     width: 202px;
     
@@ -95,7 +99,7 @@ const OrderCardSComponent = styled.div`
       font-weight: 400;
       left: 0%;
       line-height: 28px;
-      position: absolute;
+      //position: absolute;
       right: 0%;
       text-align: center;
       top: 0%;
@@ -105,7 +109,7 @@ const OrderCardSComponent = styled.div`
   .order-price {
     bottom: 36.87%;
     left: 65.37%;
-    position: absolute;
+    //position: absolute;
     right: 1.51%;
     top: 36.73%;
     
@@ -139,7 +143,7 @@ const OrderCardSComponent = styled.div`
       border-radius: 10px;
       height: 63.66px;
       left: 65.37%;
-      position: absolute;
+      //position: absolute;
       right: 1.51%;
       top: 90px;
     }
@@ -182,7 +186,7 @@ const OrderCardSComponent = styled.div`
       border-radius: 10px;
       height: 63.66px;
       left: 65.37%;
-      position: absolute;
+      //position: absolute;
       right: 1.51%;
       top: 13px;
     }
@@ -191,7 +195,7 @@ const OrderCardSComponent = styled.div`
   .bg {
     bottom: 4.08%;
     left: 0%;
-    position: absolute;
+    //position: absolute;
     right: 0%;
     top: 0%;
     
@@ -211,7 +215,7 @@ const OrderCardSComponent = styled.div`
       box-sizing: border-box;
       height: 235px;
       left: 0%;
-      position: absolute;
+      //position: absolute;
       right: 0%;
       top: 0px;
     }
