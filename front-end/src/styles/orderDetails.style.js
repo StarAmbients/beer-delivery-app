@@ -10,11 +10,20 @@ const OrderDetailsSComponent = styled.section`
   font-size: 1.7rem;
   font-weight: 400;
   height: 6vh;
-  justify-content: space-between;
+  // justify-content: space-between;
   margin-left: 2px;
   margin-top: 4px;
   padding: 0 15px;
   width: 81vw;
+
+  .main-title {
+    display: flex;
+    justify-content: space-between;
+    width: 71%;
+    height: 100%;
+    align-items: center;
+    padding-right: 10px;
+  }
 
   .order-id {
     color: #001813;

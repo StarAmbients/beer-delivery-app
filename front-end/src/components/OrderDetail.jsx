@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropType from 'prop-types';
 import ordersStore from '../store/orders.store';
@@ -9,6 +9,7 @@ import OrderDetailsSComponent from '../styles/orderDetails.style';
 function OrderDetail({ page }) {
   const statusDatabase = ordersStore.getState().orderDetail;
   const [orderDetail, setOrderDetail] = useState(statusDatabase);
+  const [inTransit, setInTransit] = useState(true);
   const { token } = getUserLocalStorage();
 
   const handleClick = async (newStatus) => {
@@ -16,35 +17,54 @@ function OrderDetail({ page }) {
     setOrderDetail({ ...orderDetail, status: newStatus });
   };
 
+  useEffect(() => {
+    const unsubscribe = ordersStore.subscribe(() => {
+      setOrderDetail(ordersStore.getState().orderDetail);
+    });
+    return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    setOrderDetail(orderDetail);
+    console.log(inTransit);
+    if (orderDetail.status === 'Entregue') {
+      setInTransit(false);
+    } else setInTransit(true);
+  }, [orderDetail, inTransit]);
+
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
   return (
     <OrderDetailsSComponent>
-      <p
-        className="order-id"
-        data-testid={ `${page}_order_details__element-order-details-label-order-id` }
+      <div
+        className="main-title"
       >
-        {`PEDIDO: ${orderDetail.id}`}
-      </p>
-      { page === 'customer' && (
         <p
-          className="name"
-          data-testid="customer_order_details__element-order-details-label-seller-name"
+          className="order-id"
+          data-testid={ `${page}_order_details__element-order-details-label-order-id` }
         >
-          {`P. Vend: ${orderDetail.seller?.name}`}
+          {`PEDIDO: ${orderDetail.id}`}
         </p>
-      )}
-      <p
-        className="saleDate"
-        data-testid={ `${page}_order_details__element-order-details-label-order-date` }
-      >
-        {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
-      </p>
-      <p
-        className="status"
-        data-testid={ testId }
-      >
-        {`${orderDetail.status}`}
-      </p>
+        { page === 'customer' && (
+          <p
+            className="name"
+            data-testid="customer_order_details__element-order-details-label-seller-name"
+          >
+            {`P. Vend: ${orderDetail.seller?.name}`}
+          </p>
+        )}
+        <p
+          className="saleDate"
+          data-testid={ `${page}_order_details__element-order-details-label-order-date` }
+        >
+          {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
+        </p>
+        <p
+          className="status"
+          data-testid={ testId }
+        >
+          {`${orderDetail.status}`}
+        </p>
+      </div>
       { page === 'seller' && (
         <div>
           <button
@@ -67,7 +87,7 @@ function OrderDetail({ page }) {
           </button>
         </div>
       )}
-      { page === 'customer' && (
+      { page === 'customer' && inTransit && (
         <div>
           <button
             type="button"
