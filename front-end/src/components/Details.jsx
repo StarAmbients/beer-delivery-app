@@ -56,7 +56,7 @@ function Details({ page }) {
                     `${page}_order_details__element-order-table-unit-price-${index}`
                   }
                 >
-                  { p.price.replace(/\./g, ',') }
+                  { `R$ ${p.price.replace(/\./g, ',')}` }
                 </td>
                 <td
                   className="product-subtotal-person"
@@ -64,8 +64,8 @@ function Details({ page }) {
                     `${page}_order_details__element-order-table-sub-total-${index}`
                   }
                 >
-                  { Number(p.price * p.SalesProducts.quantity).toFixed(2)
-                    .replace(/\./g, ',')}
+                  {`R$ ${Number(p.price * p.SalesProducts.quantity).toFixed(2)
+                    .replace(/\./g, ',')}`}
                 </td>
               </tr>
             ))}
