@@ -9,7 +9,10 @@ import OrderDetailsSComponent from '../styles/orderDetails.style';
 function OrderDetail({ page }) {
   const statusDatabase = ordersStore.getState().orderDetail;
   const [orderDetail, setOrderDetail] = useState(statusDatabase);
-  const [inTransit, setInTransit] = useState(true);
+  const [pending, setPending] = useState(false);
+  const [inPreparation, setInPreparation] = useState(false);
+  const [inTransit, setInTransit] = useState(false);
+
   const { token } = getUserLocalStorage();
 
   const handleClick = async (newStatus) => {
@@ -25,12 +28,18 @@ function OrderDetail({ page }) {
   }, []);
 
   useEffect(() => {
-    setOrderDetail(orderDetail);
-    console.log(inTransit);
-    if (orderDetail.status === 'Entregue') {
-      setInTransit(false);
-    } else setInTransit(true);
-  }, [orderDetail, inTransit]);
+    if (orderDetail.status === 'Pendente') {
+      setPending(true);
+    } else setPending(false);
+
+    if (orderDetail.status === 'Preparando') {
+      setInPreparation(true);
+    } else setInPreparation(false);
+
+    if (orderDetail.status === 'Em Trânsito') {
+      setInTransit(true);
+    } else setInTransit(false);
+  }, [orderDetail]);
 
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
   return (
@@ -65,25 +74,27 @@ function OrderDetail({ page }) {
           {`${orderDetail.status}`}
         </p>
       </div>
-      { page === 'seller' && (
+      { page === 'seller' && inPreparation && (
         <div>
           <button
             type="button"
             className="btn-set-status"
             data-testid="seller_order_details__button-preparing-check"
-            disabled={ orderDetail.status !== 'Pendente' }
-            onClick={ () => handleClick('Preparando') }
+            onClick={ () => handleClick('Em Trânsito') }
           >
-            PREPARAR PEDIDO
+            SAIU PARA ENTREGA
           </button>
+        </div>
+      )}
+      { page === 'seller' && pending && (
+        <div>
           <button
             type="button"
             className="btn-set-status"
             data-testid="seller_order_details__button-dispatch-check"
-            disabled={ orderDetail.status !== 'Preparando' }
-            onClick={ () => handleClick('Em Trânsito') }
+            onClick={ () => handleClick('Preparando') }
           >
-            SAIU PARA ENTREGA
+            PREPARAR PEDIDO
           </button>
         </div>
       )}
@@ -93,7 +104,6 @@ function OrderDetail({ page }) {
             type="button"
             className="btn-set-status"
             data-testid="customer_order_details__button-delivery-check"
-            disabled={ orderDetail.status !== 'Em Trânsito' }
             onClick={ () => handleClick('Entregue') }
           >
             MARCAR COMO ENTREGUE
