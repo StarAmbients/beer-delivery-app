@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropType from 'prop-types';
@@ -5,6 +6,7 @@ import ordersStore from '../store/orders.store';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import OrderDetailsSComponent from '../styles/orderDetails.style';
+import OrderStatus from './OrderStatus';
 
 function OrderDetail({ page }) {
   const statusDatabase = ordersStore.getState().orderDetail;
@@ -14,16 +16,16 @@ function OrderDetail({ page }) {
   const handleClick = async () => {
     let newStatus;
     if (page === 'seller') {
-      if (orderDetail.status === 'Pendente') {
-        newStatus = 'Preparando';
-      } else if (orderDetail.status === 'Preparando') {
+      if (orderDetail.status === 'PENDENTE') {
+        newStatus = 'PREPARANDO';
+      } else if (orderDetail.status === 'PREPARANDO') {
         // eslint-disable-next-line sonarjs/no-duplicate-string
-        newStatus = 'Em Trânsito';
+        newStatus = 'EM TRÂNSITO';
       }
     // eslint-disable-next-line sonarjs/no-collapsible-if
     } else if (page === 'customer') {
-      if (orderDetail.status === 'Pendente' || orderDetail.status === 'Em Trânsito') {
-        newStatus = 'Entregue';
+      if (orderDetail.status === 'PENDENTE' || orderDetail.status === 'EM TRÂNSITO') {
+        newStatus = 'ENTREGUE';
       }
     }
     await makeRequest(`sales/${orderDetail.id}`, 'put', { status: newStatus }, token);
@@ -61,32 +63,30 @@ function OrderDetail({ page }) {
         >
           {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
         </p>
-        <p className="status" data-testid={ testId }>
-          {`${orderDetail.status}`}
-        </p>
+        <OrderStatus
+          status={ orderDetail.status }
+          testId={ testId }
+        />
       </div>
       {(page === 'seller' || page === 'customer')
-      && orderDetail.status !== 'Entregue'
-      && ((orderDetail.status !== 'Em Trânsito' && page === 'seller')
-          || (orderDetail.status === 'Em Trânsito' && page === 'customer'))
+      && orderDetail.status !== 'ENTREGUE'
+      && ((orderDetail.status !== 'EM TRÂNSITO' && page === 'seller')
+          || (orderDetail.status === 'EM TRÂNSITO' && page === 'customer'))
       && (
-        <div>
-          <button
-            type="button"
-            className="btn-set-status"
-            data-testid="seller_order_details__button-change-status"
-            onClick={ handleClick }
-          >
-            {
-            // eslint-disable-next-line no-nested-ternary
-              page === 'seller'
-                ? (orderDetail.status === 'Pendente'
-                  ? 'INICIAR PREPARAÇÃO'
-                  : 'SAIU PARA ENTREGA')
-                : 'CONFIRMAR ENTREGA'
-            }
-          </button>
-        </div>
+        <button
+          type="button"
+          className="btn-set-status"
+          data-testid="seller_order_details__button-change-status"
+          onClick={ handleClick }
+        >
+          {
+            page === 'seller'
+              ? (orderDetail.status === 'PENDENTE'
+                ? 'INICIAR PREPARAÇÃO'
+                : 'SAIU PARA ENTREGA')
+              : 'CONFIRMAR ENTREGA'
+          }
+        </button>
       )}
     </OrderDetailsSComponent>
   );
