@@ -10,7 +10,7 @@ module.exports = {
         delivery_address: 'Rua das Flores',
         delivery_number: '123',
         sale_date: new Date(),
-        status: 'Pendente'
+        status: 'PENDENTE'
       },
       {
         user_id: '1',
@@ -19,7 +19,7 @@ module.exports = {
         delivery_address: 'Av Paulista',
         delivery_number: '495',
         sale_date: new Date(),
-        status: 'Entregue'
+        status: 'ENTREGUE'
       },
   ], {});
 
