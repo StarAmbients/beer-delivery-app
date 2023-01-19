@@ -9,13 +9,23 @@ import OrderDetailsSComponent from '../styles/orderDetails.style';
 function OrderDetail({ page }) {
   const statusDatabase = ordersStore.getState().orderDetail;
   const [orderDetail, setOrderDetail] = useState(statusDatabase);
-  const [pending, setPending] = useState(false);
-  const [inPreparation, setInPreparation] = useState(false);
-  const [inTransit, setInTransit] = useState(false);
-
   const { token } = getUserLocalStorage();
 
-  const handleClick = async (newStatus) => {
+  const handleClick = async () => {
+    let newStatus;
+    if (page === 'seller') {
+      if (orderDetail.status === 'Pendente') {
+        newStatus = 'Preparando';
+      } else if (orderDetail.status === 'Preparando') {
+        // eslint-disable-next-line sonarjs/no-duplicate-string
+        newStatus = 'Em Trânsito';
+      }
+    // eslint-disable-next-line sonarjs/no-collapsible-if
+    } else if (page === 'customer') {
+      if (orderDetail.status === 'Pendente' || orderDetail.status === 'Em Trânsito') {
+        newStatus = 'Entregue';
+      }
+    }
     await makeRequest(`sales/${orderDetail.id}`, 'put', { status: newStatus }, token);
     setOrderDetail({ ...orderDetail, status: newStatus });
   };
@@ -27,33 +37,17 @@ function OrderDetail({ page }) {
     return () => unsubscribe();
   }, []);
 
-  useEffect(() => {
-    if (orderDetail.status === 'Pendente') {
-      setPending(true);
-    } else setPending(false);
-
-    if (orderDetail.status === 'Preparando') {
-      setInPreparation(true);
-    } else setInPreparation(false);
-
-    if (orderDetail.status === 'Em Trânsito') {
-      setInTransit(true);
-    } else setInTransit(false);
-  }, [orderDetail]);
-
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
   return (
     <OrderDetailsSComponent>
-      <div
-        className="main-title"
-      >
+      <div className="main-title">
         <p
           className="order-id"
           data-testid={ `${page}_order_details__element-order-details-label-order-id` }
         >
           {`PEDIDO: ${orderDetail.id}`}
         </p>
-        { page === 'customer' && (
+        {page === 'customer' && (
           <p
             className="name"
             data-testid="customer_order_details__element-order-details-label-seller-name"
@@ -67,46 +61,30 @@ function OrderDetail({ page }) {
         >
           {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
         </p>
-        <p
-          className="status"
-          data-testid={ testId }
-        >
+        <p className="status" data-testid={ testId }>
           {`${orderDetail.status}`}
         </p>
       </div>
-      { page === 'seller' && inPreparation && (
+      {(page === 'seller' || page === 'customer')
+      && orderDetail.status !== 'Entregue'
+      && ((orderDetail.status !== 'Em Trânsito' && page === 'seller')
+          || (orderDetail.status === 'Em Trânsito' && page === 'customer'))
+      && (
         <div>
           <button
             type="button"
             className="btn-set-status"
-            data-testid="seller_order_details__button-preparing-check"
-            onClick={ () => handleClick('Em Trânsito') }
+            data-testid="seller_order_details__button-change-status"
+            onClick={ handleClick }
           >
-            SAIU PARA ENTREGA
-          </button>
-        </div>
-      )}
-      { page === 'seller' && pending && (
-        <div>
-          <button
-            type="button"
-            className="btn-set-status"
-            data-testid="seller_order_details__button-dispatch-check"
-            onClick={ () => handleClick('Preparando') }
-          >
-            PREPARAR PEDIDO
-          </button>
-        </div>
-      )}
-      { page === 'customer' && inTransit && (
-        <div>
-          <button
-            type="button"
-            className="btn-set-status"
-            data-testid="customer_order_details__button-delivery-check"
-            onClick={ () => handleClick('Entregue') }
-          >
-            MARCAR COMO ENTREGUE
+            {
+            // eslint-disable-next-line no-nested-ternary
+              page === 'seller'
+                ? (orderDetail.status === 'Pendente'
+                  ? 'INICIAR PREPARAÇÃO'
+                  : 'SAIU PARA ENTREGA')
+                : 'CONFIRMAR ENTREGA'
+            }
           </button>
         </div>
       )}
