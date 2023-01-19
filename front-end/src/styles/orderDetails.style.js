@@ -35,7 +35,6 @@ const OrderDetailsSComponent = styled.section`
     font-size: 28px;
     font-weight: 400;
     line-height: 42px;
-    padding-right: 300 px;
     width: 25vw;
   }
 
@@ -52,6 +51,13 @@ const OrderDetailsSComponent = styled.section`
     text-align: center;
     width: 11vw;
   }
+
+  /* .status-component {
+    width: 5px;
+    height: 5px;
+    border: green;
+    color: red !important; 
+  } */
 
   .status {
     align-items: center;
@@ -76,7 +82,7 @@ const OrderDetailsSComponent = styled.section`
     font-size: 20px;
     font-size: clamp(1rem,1.5vw,2.5rem);
     justify-content: center;
-    width: 20%;
+    /*width: 20%;*/
   }
 
   .btn-set-status {
@@ -86,8 +92,12 @@ const OrderDetailsSComponent = styled.section`
     font-size: 28px;
     font-weight: 400;
     height: 38px;
+    margin-left: 52px;
+    margin-right: 10px;
+    padding-left: 20px;
+    padding: 1.4rem 1.4rem;
     text-align: center;
-    width: 23vw;
+    width: auto;
   }
 
   .btn-set-status:disabled {
