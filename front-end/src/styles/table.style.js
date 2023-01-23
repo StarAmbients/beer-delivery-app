@@ -9,11 +9,15 @@ const TableSComponent = styled.section`
     background-color: whitesmoke;
     flex-direction: row;
     justify-content: center;
-    width: calc(100% - 20px);
+    width: calc(100% - 15px);
   }
 
   .table-finished-order {
     margin: 0;
+    margin-left: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 
   .title-table tr {

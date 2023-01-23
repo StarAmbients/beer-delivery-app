@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 
 const OrderStatusSComponent = styled.p`
-height: 100px;
+height: auto;
+width: auto;
 display: flex;
 align-items: center;
 
 p {
+  justify-content: center;
     align-items: center;
     background: #421981 75%;
     color: #f2fffc;
