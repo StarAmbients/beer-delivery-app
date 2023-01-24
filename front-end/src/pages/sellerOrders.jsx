@@ -1,7 +1,9 @@
+/* eslint-disable no-magic-numbers */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { SmileyXEyes } from 'phosphor-react';
 import NavBar from '../components/NavBar';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
@@ -17,6 +19,7 @@ function SellerOrders() {
     fetchSellerOrders(id, token);
   }, []);
 
+  // eslint-disable-next-line sonarjs/no-redundant-boolean, no-self-compare
   return (
     <>
       <NavBar page="seller" />
@@ -46,7 +49,8 @@ function SellerOrders() {
                   className="superior"
                 >
                   <OrderStatus
-                    style={ { fontSize: '40px', width: '7em', height: '100%' } }
+                    style={ { width: '7em',
+                      height: '7rem' } }
                     status={ o.status }
                   />
 
@@ -75,7 +79,14 @@ function SellerOrders() {
             </Link>
           ))
         ) : (
-          <p>Você não possui nenhum pedido</p>
+          <div
+            className="no-orders"
+          >
+            <SmileyXEyes size={ 72 } />
+            <h1>
+              Você não possui nenhum pedido
+            </h1>
+          </div>
         )}
       </OrderCardSComponent>
     </>

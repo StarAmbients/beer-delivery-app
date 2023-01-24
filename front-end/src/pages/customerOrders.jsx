@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import moment from 'moment';
+import { SmileyXEyes } from 'phosphor-react';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
 import NavBar from '../components/NavBar';
@@ -48,7 +49,7 @@ function CustomerOrders() {
                 </p>
               </div>
               <OrderStatus
-                style={ { fontSize: '40px', width: '7em', height: '100%' } }
+                style={ { fontSize: '2.5rem', width: '7em', height: '100%' } }
                 status={ o.status }
               />
               <div
@@ -68,7 +69,14 @@ function CustomerOrders() {
             </Link>
           ))
         ) : (
-          <p>Você não possui nenhum pedido</p>
+          <div
+            className="no-orders"
+          >
+            <SmileyXEyes size={ 72 } />
+            <h1>
+              Você não possui nenhum pedido
+            </h1>
+          </div>
         )}
       </OrderCardSComponent>
     </>
