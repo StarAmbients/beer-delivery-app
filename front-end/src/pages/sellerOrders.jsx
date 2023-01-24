@@ -6,53 +6,53 @@ import NavBar from '../components/NavBar';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
 import OrderCardSComponent from '../styles/orderCard.style';
+import OrderStatus from '../components/OrderStatus';
 
 function SellerOrders() {
   const { orders, fetchSellerOrders } = ordersStore((state) => state);
   const { id, token } = getUserLocalStorage();
+  const FOUR = 4;
 
   useEffect(() => {
     fetchSellerOrders(id, token);
   }, []);
 
   return (
-    <div>
+    <>
       <NavBar page="seller" />
       <OrderCardSComponent>
         { orders.length > 0 ? (
           orders.map((o) => (
-            <Link to={ `/seller/orders/${o.id}` } key={ o.id }>
+            <Link
+              className="card"
+              to={ `/seller/orders/${o.id}` }
+              key={ o.id }
+            >
               <div
-                className="bg"
+                className="order"
+              >
+                <p>Pedido</p>
+                <p
+                  className="order-number"
+                  data-testid={ `seller_orders__element-order-id-${o.id}` }
+                >
+                  {o.id.toString().padStart(FOUR, '0')}
+                </p>
+              </div>
+              <div
+                className="right"
               >
                 <div
-                  className="bg-id-product, typography-reference-order"
+                  className="superior"
                 >
-                  <p
-                    className="titulo"
-                  >
-                    Pedido
-                  </p>
-                  <p
-                    data-testid={ `seller_orders__element-order-id-${o.id}` }
-                  >
-                    {o.id}
-                  </p>
-                </div>
-                <div
-                  className="base"
-                >
+                  <OrderStatus
+                    style={ { fontSize: '40px', width: '7em', height: '100%' } }
+                    status={ o.status }
+                  />
+
                   <div
-                    className="status, bg"
-                    data-testid={ `seller_orders__element-delivery-status-${o.id}` }
+                    className="order-date-price"
                   >
-                    <p
-                      className="typography, title"
-                    >
-                      {o.status}
-                    </p>
-                  </div>
-                  <div>
                     <p
                       data-testid={ `seller_orders__element-order-date-${o.id}` }
                     >
@@ -64,17 +64,13 @@ function SellerOrders() {
                       {`R$ ${o.totalPrice.replace(/\./g, ',')}`}
                     </p>
                   </div>
-                  <div
-                    className="typography-address"
-                  >
-                    <p
-                      className="label"
-                      data-testid={ `seller_orders__element-card-address-${o.id}` }
-                    >
-                      {`${o.deliveryAddress}, ${o.deliveryNumber}`}
-                    </p>
-                  </div>
                 </div>
+                <span
+                  className="ship-to-address"
+                  data-testid={ `seller_orders__element-card-address-${o.id}` }
+                >
+                  {`${o.deliveryAddress}, ${o.deliveryNumber}`}
+                </span>
               </div>
             </Link>
           ))
@@ -82,7 +78,7 @@ function SellerOrders() {
           <p>Você não possui nenhum pedido</p>
         )}
       </OrderCardSComponent>
-    </div>
+    </>
   );
 }
 
