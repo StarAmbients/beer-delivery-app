@@ -74,7 +74,7 @@ function CustomerOrders() {
           >
             <SmileyXEyes size={ 72 } />
             <h1>
-              Você não possui nenhum pedido
+              Você ainda não possui nenhum pedido
             </h1>
           </div>
         )}
