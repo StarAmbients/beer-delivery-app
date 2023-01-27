@@ -11,11 +11,11 @@ import PersonOrderDetailsSComponent from '../styles/personOrderDetails.style';
 function SellerOrderDetail() {
   const { orderId } = useParams();
   const { token } = getUserLocalStorage();
-  const { orderDetail, fetchOrderDetail } = ordersStore((state) => state);
+  const { fetchOrderDetail } = ordersStore((state) => state);
 
   useEffect(() => {
     fetchOrderDetail(orderId, token);
-  }, [orderDetail]);
+  }, []);
 
   return (
     <PersonOrderDetailsSComponent>
