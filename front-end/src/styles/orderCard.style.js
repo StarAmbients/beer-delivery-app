@@ -96,7 +96,6 @@ const OrderCardSComponent = styled.div`
   .no-orders{
     align-items: center;
     align-self: center;
-    background-color: pink;
     display: flex;
     justify-content: center;
     width: 100%;
