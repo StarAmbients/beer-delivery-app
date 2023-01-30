@@ -46,9 +46,9 @@ function Admin() {
   };
 
   const handleDelete = async (params) => {
-    const deletedUser = await makeRequest('admin', 'delete', {
+    await makeRequest('admin', 'delete', {
       name: params.name, email: params.email }, token);
-    console.log(deletedUser);
+    fetchAllUsers(token); // Atualiza a lista de usuários após a exclusão
   };
 
   const roles = {
