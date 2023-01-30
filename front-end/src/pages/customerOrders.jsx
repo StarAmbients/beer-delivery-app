@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { getUserLocalStorage } from '../helpers/localStorage';
@@ -14,7 +15,6 @@ function CustomerOrders() {
       fetchUserOrders(id, token);
     } catch (error) {
       console.error(error);
-      // eslint-disable-next-line no-alert
       alert(`Ocorreu um erro ao carregar os pedidos.
       Por favor, tente novamente mais tarde.
       `);

@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import NavBar from '../components/NavBar';
@@ -10,10 +11,16 @@ function SellerOrders() {
   const { id, token } = getUserLocalStorage();
 
   useEffect(() => {
-    fetchSellerOrders(id, token);
+    try {
+      fetchSellerOrders(id, token);
+    } catch (error) {
+      console.error(error);
+      alert(`Ocorreu um erro ao carregar os pedidos.
+      Por favor, tente novamente mais tarde.
+      `);
+    }
   }, []);
 
-  // eslint-disable-next-line sonarjs/no-redundant-boolean, no-self-compare
   return (
     <>
       <NavBar page="seller" />
