@@ -50,9 +50,10 @@ const OrderCardSComponent = styled.div`
 
   .superior {
     box-sizing: border-box;
+    border-color: blue;
     display: flex;
     flex-direction: row;
-    height: 75%;
+    height: ${(props) => (props.user === 'seller' ? '75%' : '100%')};
     justify-content: space-evenly;
     width: 100%;
   }
