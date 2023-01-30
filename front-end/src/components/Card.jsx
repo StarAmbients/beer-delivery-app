@@ -7,67 +7,72 @@ import OrderStatus from './OrderStatus';
 
 function Card({ orders, page }) {
   const FOUR = 4;
+  console.log(orders);
 
   return (
-    <OrderCardSComponent>
+    <OrderCardSComponent
+      user={ page }
+    >
       { orders.length > 0 ? (
-        orders.map((o) => (
-          <Link
-            className="card"
-            to={ `/${page}/orders/${o.id}` }
-            key={ o.id }
-          >
-            <div
-              className="order"
-            >
-              <p>Pedido</p>
-              <p
-                className="order-number"
-                data-testid={ `${page}_orders__element-order-id-${o.id}` }
-              >
-                {o.id.toString().padStart(FOUR, '0')}
-              </p>
-            </div>
-            <div
-              className="right"
+        orders
+          .sort((a, b) => new Date(b.saleDate) - new Date(a.saleDate))
+          .map((o) => (
+            <Link
+              className="card"
+              to={ `/${page}/orders/${o.id}` }
+              key={ o.id }
             >
               <div
-                className="superior"
+                className="order"
               >
-                <OrderStatus
-                  style={ { width: '7em',
-                    height: '7rem' } }
-                  status={ o.status }
-                />
-
-                <div
-                  className="order-date-price"
+                <p>Pedido</p>
+                <p
+                  className="order-number"
+                  data-testid={ `${page}_orders__element-order-id-${o.id}` }
                 >
-                  <p
-                    data-testid={ `${page}_orders__element-order-date-${o.id}` }
-                  >
-                    {moment(o.saleDate).format('DD/MM/YYYY')}
-                  </p>
-                  <p
-                    data-testid={ `${page}_orders__element-card-price-${o.id}` }
-                  >
-                    {`R$ ${o.totalPrice.replace(/\./g, ',')}`}
-                  </p>
-                </div>
+                  {o.id.toString().padStart(FOUR, '0')}
+                </p>
               </div>
-              {
-                page === 'seller' && (
-                  <span
-                    className="ship-to-address"
-                    data-testid={ `${page}_orders__element-card-address-${o.id}` }
+              <div
+                className="right"
+              >
+                <div
+                  className="superior"
+                >
+                  <OrderStatus
+                    style={ { width: '7em',
+                      height: '7rem' } }
+                    status={ o.status }
+                  />
+
+                  <div
+                    className="order-date-price"
                   >
-                    {`${o.deliveryAddress}, ${o.deliveryNumber}`}
-                  </span>
-                )
-              }
-            </div>
-          </Link>
-        ))
+                    <p
+                      data-testid={ `${page}_orders__element-order-date-${o.id}` }
+                    >
+                      {moment(o.saleDate).format('DD/MM/YYYY')}
+                    </p>
+                    <p
+                      data-testid={ `${page}_orders__element-card-price-${o.id}` }
+                    >
+                      {`R$ ${o.totalPrice.replace(/\./g, ',')}`}
+                    </p>
+                  </div>
+                </div>
+                {
+                  page === 'seller' && (
+                    <span
+                      className="ship-to-address"
+                      data-testid={ `${page}_orders__element-card-address-${o.id}` }
+                    >
+                      {`${o.deliveryAddress}, ${o.deliveryNumber}`}
+                    </span>
+                  )
+                }
+              </div>
+            </Link>
+          ))
       ) : (
         <div
           className="no-orders"
