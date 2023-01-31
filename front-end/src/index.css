@@ -10,20 +10,10 @@ body {
   --colors-light-grey: #E5E5E5;
   --colors-dark-grey: #828282;
   
-  margin: 0;
-  font-family: 'Roboto', 'Ubuntu', sans-serif;
+  /* font-family: 'Roboto', 'Ubuntu', sans-serif; */
 }
 
 /* * {
   border: 1px solid red;
 } */
 
-root {
-  margin: 0;
-  padding:0;
-  width: 100%;
-}
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-} */
