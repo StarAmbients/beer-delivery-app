@@ -23,7 +23,6 @@ const RegisterSComponent = styled.section`
     h1 {
       color: #350b4b;
       color: white;
-      font-family: "Roboto", "Ubuntu", sans-serif;
       font-size: 1.7rem;
       font-weight: 400;
     }

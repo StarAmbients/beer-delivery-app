@@ -55,8 +55,6 @@ const ContainerCards = styled.div`
   `;
 
 const CustomerProductsSComponent = styled.div`
-  @import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
-
   display: flex;
   flex-direction: row;
   width: 70%;
