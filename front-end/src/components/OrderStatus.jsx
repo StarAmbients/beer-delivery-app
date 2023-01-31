@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import OrderStatusSComponent from '../styles/OrderStatusSComponent';
+import OrderStatusSComponent from '../styles/orderStatusSComponent';
 
 function OrderStatus({ status, testId, style }) {
   return (
