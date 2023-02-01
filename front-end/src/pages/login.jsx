@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import LoginSComponent from '../styles/login.style';
 import { getUserLocalStorage } from '../helpers/localStorage';
-import SocialLogin from '../components/SocialLogin';
+import GoogleLogin from '../components/GoogleLogin';
 
 function Login() {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ function Login() {
 
   return (
     <LoginSComponent>
-      <SocialLogin />
+      <GoogleLogin />
       <UserForm page="login" />
     </LoginSComponent>
   );
