@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import ReactPasswordToggleIcon from 'react-password-toggle-icon';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
 import userStore from '../store/user.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
-import veryD from '../img/veryDeliciuosLogo.png';
-import { Main, Image, Form } from '../styles/userForm.style';
+// import veryD from '../img/veryDeliciuosLogo.png';
+import { Main, Form } from '../styles/userForm.style';
 
 function UserForm({ page }) {
   const {
@@ -22,6 +23,17 @@ function UserForm({ page }) {
   const [dataString, setDataString] = useState(false);
   const [dataCreateString, setDataCreateString] = useState(false);
   const navigate = useNavigate();
+  const inputRef = useRef();
+  const showIcon = () => (<i
+    className="fa fa-eye"
+    style={ { fontSize: '48px', color: 'red' } }
+    aria-hidden="true"
+  />);
+  const hideIcon = () => (<i
+    className="fa fa-eye-slash"
+    style={ { fontSize: '48px', color: 'red' } }
+    aria-hidden="true"
+  />);
 
   const handleRoute = (role) => {
     switch (role) {
@@ -75,7 +87,7 @@ function UserForm({ page }) {
 
   return (
     <Main>
-      <Image src={ veryD } alt="very-deliciuos-logo" />
+      {/* <Image src={ veryD } alt="very-deliciuos-logo" /> */}
       <Form>
         <h1>{ page === 'login' ? 'Área do usuário' : 'Cadastre-se' }</h1>
         {page === 'register' && (
@@ -95,19 +107,33 @@ function UserForm({ page }) {
             type="text"
             name="email"
             onChange={ handleChange }
-            placeholder="Email"
-            autoComplete="email"
-          />
-        </label>
-        <label htmlFor="password">
-          <input
-            data-testid={ `common_${page}__input-password` }
-            type="password"
-            name="password"
-            onChange={ handleChange }
             placeholder="Senha"
             autoComplete={ page === 'login' ? 'current-password' : 'new-password' }
           />
+        </label>
+        <label htmlFor="password">
+          <div className="col fa" style={ { osition: 'relative', display: 'block' } }>
+            <input
+              ref={ inputRef }
+              data-testid={ `common_${page}__input-password` }
+              type="password"
+              style={
+                {
+                  display: 'block',
+                  width: '100%',
+                  border: '0px',
+                  borderBottom: '1px solid orange',
+                  padding: '5px',
+                  fontSize: '20px',
+                  outline: 'none' }
+              }
+            />
+            <ReactPasswordToggleIcon
+              inputRef={ inputRef }
+              showIcon={ showIcon }
+              hideIcon={ hideIcon }
+            />
+          </div>
         </label>
         {dataString ? (
           <div

@@ -10,7 +10,7 @@ body {
   --colors-light-grey: #E5E5E5;
   --colors-dark-grey: #828282;
   
-  /* font-family: 'Roboto', 'Ubuntu', sans-serif; */
+  font-family: 'Roboto', 'Ubuntu', sans-serif;
 }
 
 /* * {
