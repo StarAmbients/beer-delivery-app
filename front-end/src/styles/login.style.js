@@ -6,6 +6,7 @@ const LoginSComponent = styled.section`
   display: flex;
   height: 100vh;
   justify-content: center;
+  zoom: 1; /* Trigger hasLayout */
 `;
 
 export default LoginSComponent;

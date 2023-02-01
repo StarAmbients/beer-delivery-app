@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import UserForm from '../components/UserForm';
 import LoginSComponent from '../styles/login.style';
 import { getUserLocalStorage } from '../helpers/localStorage';
+import SocialLogin from '../components/SocialLogin';
 
 function Login() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Login() {
 
   return (
     <LoginSComponent>
+      <SocialLogin />
       <UserForm page="login" />
     </LoginSComponent>
   );

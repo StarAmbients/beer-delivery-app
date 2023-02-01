@@ -6,7 +6,7 @@ import userStore from '../store/user.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
 import veryD from '../img/veryDeliciuosLogo.png';
-import UserFormSComponent from '../styles/userForm.style';
+import { Main, Image, Form } from '../styles/userForm.style';
 
 function UserForm({ page }) {
   const {
@@ -74,9 +74,9 @@ function UserForm({ page }) {
   };
 
   return (
-    <UserFormSComponent>
-      <img src={ veryD } alt="very-deliciuos-logo" />
-      <form>
+    <Main>
+      <Image src={ veryD } alt="very-deliciuos-logo" />
+      <Form>
         <h1>{ page === 'login' ? 'Área do usuário' : 'Cadastre-se' }</h1>
         {page === 'register' && (
           <label htmlFor="name">
@@ -151,8 +151,8 @@ function UserForm({ page }) {
             </button>
           ) : null}
         </div>
-      </form>
-    </UserFormSComponent>
+      </Form>
+    </Main>
   );
 }
 
