@@ -26,6 +26,8 @@ export const Form = styled.form`
   label {
     border: 1 solid red;
     margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
   }
 
   input {

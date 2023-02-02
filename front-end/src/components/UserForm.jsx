@@ -1,8 +1,10 @@
-import React, { useState, useRef } from 'react';
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable complexity */
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import ReactPasswordToggleIcon from 'react-password-toggle-icon';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
+import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
@@ -22,18 +24,12 @@ function UserForm({ page }) {
   const doze = 12;
   const [dataString, setDataString] = useState(false);
   const [dataCreateString, setDataCreateString] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const inputRef = useRef();
-  const showIcon = () => (<i
-    className="fa fa-eye"
-    style={ { fontSize: '48px', color: 'red' } }
-    aria-hidden="true"
-  />);
-  const hideIcon = () => (<i
-    className="fa fa-eye-slash"
-    style={ { fontSize: '48px', color: 'red' } }
-    aria-hidden="true"
-  />);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleRoute = (role) => {
     switch (role) {
@@ -107,33 +103,30 @@ function UserForm({ page }) {
             type="text"
             name="email"
             onChange={ handleChange }
-            placeholder="Senha"
-            autoComplete={ page === 'login' ? 'current-password' : 'new-password' }
+            placeholder="Email"
+            autoComplete="email"
           />
         </label>
         <label htmlFor="password">
-          <div className="col fa" style={ { osition: 'relative', display: 'block' } }>
-            <input
-              ref={ inputRef }
-              data-testid={ `common_${page}__input-password` }
-              type="password"
-              style={
-                {
-                  display: 'block',
-                  width: '100%',
-                  border: '0px',
-                  borderBottom: '1px solid orange',
-                  padding: '5px',
-                  fontSize: '20px',
-                  outline: 'none' }
-              }
-            />
-            <ReactPasswordToggleIcon
-              inputRef={ inputRef }
-              showIcon={ showIcon }
-              hideIcon={ hideIcon }
-            />
-          </div>
+          <input
+            data-testid={ `common_${page}__input-password` }
+            type={ showPassword ? 'text' : 'password' }
+            name="password"
+            onChange={ handleChange }
+            placeholder="Senha"
+            autoComplete={ page === 'login' ? 'current-password' : 'new-password' }
+          />
+          <button type="button" onClick={ togglePasswordVisibility }>
+            {showPassword ? (
+              <h1>
+                <EyeSlash />
+              </h1>
+            )
+              : (
+                <h1>
+                  <Eye />
+                </h1>)}
+          </button>
         </label>
         {dataString ? (
           <div
