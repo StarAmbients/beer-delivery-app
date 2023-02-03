@@ -2,8 +2,9 @@ import React, { useEffect } from 'react';
 // import makeRequest from '../helpers/axios.integration';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
+import { GoogleLogin } from '../styles/thirdPartySignIns.style';
 
-function GoogleLogin() {
+function ThirdPartySingIns() {
   function handleCallBackResponse(response) {
     // console.log(`Encoded Token: ${response.credential}`);
     const userObject = jwt_decode(response.credential);
@@ -18,16 +19,16 @@ function GoogleLogin() {
     });
 
     google.accounts.id.renderButton(
-      document.getElementById('signInDiv'),
+      document.getElementById('signInGoogleAccount'),
       { theme: 'outline', size: 'large' },
     );
   }, []);
 
   return (
     <div>
-      <div id="signInDiv" />
+      <GoogleLogin id="signInGoogleAccount" />
     </div>
   );
 }
 
-export default GoogleLogin;
+export default ThirdPartySingIns;

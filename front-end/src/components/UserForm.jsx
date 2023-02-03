@@ -8,8 +8,8 @@ import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
-// import veryD from '../img/veryDeliciuosLogo.png';
-import { Main, Form } from '../styles/userForm.style';
+import veryD from '../img/veryDeliciuosLogo.png';
+import { Main, Image, Form } from '../styles/userForm.style';
 
 function UserForm({ page }) {
   const {
@@ -83,7 +83,7 @@ function UserForm({ page }) {
 
   return (
     <Main>
-      {/* <Image src={ veryD } alt="very-deliciuos-logo" /> */}
+      <Image src={ veryD } alt="very-deliciuos-logo" />
       <Form>
         <h1>{ page === 'login' ? 'Área do usuário' : 'Cadastre-se' }</h1>
         {page === 'register' && (
