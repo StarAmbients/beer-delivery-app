@@ -21,6 +21,14 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(255),
       },
+      externalid: {
+        allowNull: true,
+        type: Sequelize.STRING(255),
+      },
+      externaltype: {
+        allowNull: true,
+        type: Sequelize.STRING(255),
+      }, 
       role: {
         allowNull: false,
         type: Sequelize.STRING(255),
