@@ -138,3 +138,6 @@ Aqui estão algumas sugestões de melhorias que consideraremos para o repositór
 6.  Considerar a implementação de uma estratégia de resposta a falhas, para garantir que a aplicação continue funcionando mesmo em caso de falhas ou problemas de rede.
 
 7.  Adicionar suporte para idiomas adicionais, para que a aplicação possa ser utilizada por um público mais amplo.
+
+LOGIN
+Nosso formulário de login/registro para uma aplicação React usa um formulário que é gerenciado pelo estado local (useState) e se comunica com o backend por meio da função makeRequest. Quando o usuário submete o formulário, o evento é gerenciado por handleLogin ou handleRegister, dependendo da página atual. A rota da aplicação é gerenciada pelo useNavigate do react-router-dom. O token retornado da API é armazenado no armazenamento local do navegador (localStorage) e na store do usuário (userStore). O email do usuário é validado com o EmailValidator. Alguns estilos são aplicados ao formulário a partir do arquivo styles/userForm.style. O componente ThirdPartySignIns também é importado.
