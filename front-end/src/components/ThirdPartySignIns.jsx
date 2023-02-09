@@ -3,12 +3,14 @@ import React, { useEffect } from 'react';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { GoogleLogin } from '../styles/thirdPartySignIns.style';
+import useStore from '../store/thirdparty.store';
 
 function ThirdPartySingIns() {
+  const { socialLoginPayload, setSocialLoginPayload } = useStore();
+
   function handleCallBackResponse(response) {
-    // console.log(`Encoded Token: ${response.credential}`);
     const userObject = jwt_decode(response.credential);
-    console.log(userObject);
+    setSocialLoginPayload(userObject);
   }
 
   useEffect(() => {
@@ -22,7 +24,10 @@ function ThirdPartySingIns() {
       document.getElementById('signInGoogleAccount'),
       { theme: 'outline', size: 'large' },
     );
-  }, []);
+    console.log('DENTRO DO GOOGLE...: ', socialLoginPayload);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socialLoginPayload]);
 
   return (
     <div>

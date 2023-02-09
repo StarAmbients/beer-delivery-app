@@ -1,16 +1,19 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable complexity */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
 import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
+import socialLoginStore from '../store/thirdparty.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
 import veryD from '../img/veryDeliciuosLogo.png';
 import { Main, Image, Form } from '../styles/userForm.style';
+import ThirdPartySingIns from './ThirdPartySignIns';
 
+// eslint-disable-next-line react/prop-types
 function UserForm({ page }) {
   const {
     handleChange,
@@ -19,7 +22,13 @@ function UserForm({ page }) {
     name,
     clearPassword,
     setTokenLogin,
-    setTokenRegister } = userStore((state) => state);
+    setTokenRegister,
+  } = userStore((state) => state);
+
+  const {
+    socialLoginPayload,
+  } = socialLoginStore((state) => state);
+
   const seis = 6;
   const doze = 12;
   const [dataString, setDataString] = useState(false);
@@ -49,8 +58,8 @@ function UserForm({ page }) {
     e.preventDefault();
     try {
       const makeRequestRes = await makeRequest('login', 'post', {
-        email,
-        password,
+        email: socialLoginPayload.email ? socialLoginPayload.email : email,
+        password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
       });
       const { role } = makeRequestRes;
       setTokenLogin(makeRequestRes);
@@ -61,14 +70,13 @@ function UserForm({ page }) {
       setDataString(true);
     }
   };
-
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
       const makeRequestRes = await makeRequest('register', 'post', {
-        name,
-        email,
-        password,
+        name: socialLoginPayload.name ? socialLoginPayload.name : name,
+        email: socialLoginPayload.email ? socialLoginPayload.email : email,
+        password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
       });
       const { id, role, token } = makeRequestRes;
       setTokenRegister(id, role, token);
@@ -80,6 +88,10 @@ function UserForm({ page }) {
       setDataString(true);
     }
   };
+  useEffect(() => {
+    console.log('DENTRO DO User Form ...: ', socialLoginPayload);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [socialLoginPayload, ThirdPartySingIns]);
 
   return (
     <Main>
@@ -171,6 +183,10 @@ function UserForm({ page }) {
           ) : null}
         </div>
       </Form>
+      <ThirdPartySingIns
+        onClick={ page === 'login' ? handleLogin : handleRegister }
+      />
+
     </Main>
   );
 }
