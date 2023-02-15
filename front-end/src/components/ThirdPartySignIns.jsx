@@ -5,20 +5,68 @@ import React, { useEffect } from 'react';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { GoogleLogin } from '../styles/thirdPartySignIns.style';
-// import useStore from '../store/thirdparty.store';
-import { socialLoginStore } from '../store/thirdparty.store';
+import userStore from '../store/user.store';
+// import socialLoginStore from '../store/thirdparty.store';
+import makeRequest from '../helpers/axios.integration';
 
-function ThirdPartySingIns(googleRegister) {
-  const { socialLoginPayload, setSocialLoginPayload } = socialLoginStore();
-  // const { setSocialRegister } = socialRegisterGoogle();
-  // const {
-  //   socialRegister,
-  // } = socialRegisterGoogle((state) => state);
+function ThirdPartySingIns() {
+  // const { socialLoginPayload, setSocialLoginPayload } = socialLoginStore();
+  const {
+    // handleChange,
+    email,
+    password,
+    name,
+    clearPassword,
+    // setTokenLogin,
+    setTokenRegister,
+  } = userStore((state) => state);
+
+  // const handleLogin = async (socialLoginPayload) => {
+  //   try {
+  //     const makeRequestRes = await makeRequest('login', 'post', {
+  //       email: socialLoginPayload.email ? socialLoginPayload.email : email,
+  //       password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
+  //     });
+  //     const { role } = makeRequestRes;
+  //     setTokenLogin(makeRequestRes);
+  //     setUserLocalStorage(makeRequestRes);
+  //     handleRoute(role);
+  //     clearPassword();
+  //   } catch (err) {
+  //     setDataString(true);
+  //   }
+  // };
+
+  const handleRegister = async (socialLoginPayload) => {
+    console.log('esto na handle Register do 3rd party component');
+    try {
+      const makeRequestRes = await makeRequest('register', 'post', {
+        name: socialLoginPayload.name ? socialLoginPayload.name : name,
+        email: socialLoginPayload.email ? socialLoginPayload.email : email,
+        password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
+      });
+      const { id, role, token } = makeRequestRes;
+      setTokenRegister(id, role, token);
+      setDataCreateString(true);
+      setUserLocalStorage(makeRequestRes);
+      handleRoute(role);
+      clearPassword();
+      console.log(socialLoginPayload);
+    } catch (err) {
+      console.log(socialLoginPayload);
+      // setDataString(true);
+    }
+  };
+
+  let registerExecuted = false;
 
   function handleCallBackResponse(response) {
     const userObject = jwt_decode(response.credential);
-    setSocialLoginPayload(userObject);
-    googleRegister();
+    console.log(userObject);
+    if (!registerExecuted) {
+      handleRegister(userObject);
+      registerExecuted = true;
+    }
   }
 
   useEffect(() => {
@@ -32,15 +80,15 @@ function ThirdPartySingIns(googleRegister) {
       document.getElementById('signInGoogleAccount'),
       { theme: 'outline', size: 'large' },
     );
-    console.log('DENTRO DO GOOGLE...: ', socialLoginPayload);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socialLoginPayload]);
+  }, []);
 
   return (
     <div>
       <GoogleLogin
         id="signInGoogleAccount"
+        type="submit"
       />
     </div>
   );

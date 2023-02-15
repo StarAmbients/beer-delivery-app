@@ -1,12 +1,12 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable complexity */
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
 import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
-import { socialLoginStore, socialRegisterGoogle } from '../store/thirdparty.store';
+import socialLoginStore from '../store/thirdparty.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
 import veryD from '../img/veryDeliciuosLogo.png';
@@ -29,19 +29,23 @@ function UserForm({ page }) {
     socialLoginPayload,
   } = socialLoginStore((state) => state);
 
+  // Adicionado:
+  // const {
+  //   socialRegister, setSocialRegister,
+  // } = socialRegisterGoogle();
+
   const seis = 6;
   const doze = 12;
   const [dataString, setDataString] = useState(false);
   const [dataCreateString, setDataCreateString] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { socialRegister, setSocialRegister } = socialRegisterGoogle();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleRoute = useCallback((role) => {
+  const handleRoute = (role) => {
     switch (role) {
     case 'administrator':
       navigate('/admin/manage');
@@ -53,7 +57,7 @@ function UserForm({ page }) {
       navigate('/customer/products');
       break;
     }
-  }, [navigate]);
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -72,7 +76,7 @@ function UserForm({ page }) {
     }
   };
 
-  const handleRegister = useCallback(async (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
     try {
       console.log('NAME: ', socialLoginPayload.name);
@@ -90,24 +94,9 @@ function UserForm({ page }) {
     } catch (err) {
       setDataString(true);
     }
-  }, [
-    clearPassword,
-    email,
-    handleRoute,
-    name,
-    password,
-    setTokenRegister,
-    socialLoginPayload.email,
-    socialLoginPayload.name,
-    socialLoginPayload.sub]);
-
-  setSocialRegister(() => {
-    console.log('Social register function called');
-    handleRegister();
-  });
+  };
 
   useEffect(() => {
-    console.log('DENTRO DO User Form ...: ', socialLoginPayload);
   }, [socialLoginPayload]);
 
   return (
@@ -200,11 +189,7 @@ function UserForm({ page }) {
           ) : null}
         </div>
       </Form>
-      <ThirdPartySingIns
-        googleRegister={ socialRegister }
-      />
-      {' '}
-
+      <ThirdPartySingIns />
     </Main>
   );
 }

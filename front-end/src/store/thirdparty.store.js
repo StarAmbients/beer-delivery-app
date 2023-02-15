@@ -7,12 +7,4 @@ const socialLoginStore = create(set => ({
   socialLoginPayload => set(state => ({ ...state, socialLoginPayload })),
 }));
 
-const socialRegisterGoogle = create((set) => ({
-  socialRegister: null,
-  setSocialRegister: (socialRegister) => set((state) => ({
-    ...state,
-    socialRegister,
-  })),
-}));
-
-export { socialLoginStore, socialRegisterGoogle };
+export default socialLoginStore;
