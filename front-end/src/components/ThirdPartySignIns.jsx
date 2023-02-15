@@ -1,16 +1,24 @@
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable react/destructuring-assignment */
 import React, { useEffect } from 'react';
 // import makeRequest from '../helpers/axios.integration';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
 import { GoogleLogin } from '../styles/thirdPartySignIns.style';
-import useStore from '../store/thirdparty.store';
+// import useStore from '../store/thirdparty.store';
+import { socialLoginStore } from '../store/thirdparty.store';
 
-function ThirdPartySingIns() {
-  const { socialLoginPayload, setSocialLoginPayload } = useStore();
+function ThirdPartySingIns(googleRegister) {
+  const { socialLoginPayload, setSocialLoginPayload } = socialLoginStore();
+  // const { setSocialRegister } = socialRegisterGoogle();
+  // const {
+  //   socialRegister,
+  // } = socialRegisterGoogle((state) => state);
 
   function handleCallBackResponse(response) {
     const userObject = jwt_decode(response.credential);
     setSocialLoginPayload(userObject);
+    googleRegister();
   }
 
   useEffect(() => {
@@ -31,7 +39,9 @@ function ThirdPartySingIns() {
 
   return (
     <div>
-      <GoogleLogin id="signInGoogleAccount" />
+      <GoogleLogin
+        id="signInGoogleAccount"
+      />
     </div>
   );
 }

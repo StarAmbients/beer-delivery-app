@@ -1,12 +1,12 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 /* eslint-disable complexity */
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
 import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
-import socialLoginStore from '../store/thirdparty.store';
+import { socialLoginStore, socialRegisterGoogle } from '../store/thirdparty.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
 import veryD from '../img/veryDeliciuosLogo.png';
@@ -35,12 +35,13 @@ function UserForm({ page }) {
   const [dataCreateString, setDataCreateString] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+  const { socialRegister, setSocialRegister } = socialRegisterGoogle();
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
 
-  const handleRoute = (role) => {
+  const handleRoute = useCallback((role) => {
     switch (role) {
     case 'administrator':
       navigate('/admin/manage');
@@ -52,7 +53,7 @@ function UserForm({ page }) {
       navigate('/customer/products');
       break;
     }
-  };
+  }, [navigate]);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -70,9 +71,11 @@ function UserForm({ page }) {
       setDataString(true);
     }
   };
-  const handleRegister = async (e) => {
+
+  const handleRegister = useCallback(async (e) => {
     e.preventDefault();
     try {
+      console.log('NAME: ', socialLoginPayload.name);
       const makeRequestRes = await makeRequest('register', 'post', {
         name: socialLoginPayload.name ? socialLoginPayload.name : name,
         email: socialLoginPayload.email ? socialLoginPayload.email : email,
@@ -87,11 +90,25 @@ function UserForm({ page }) {
     } catch (err) {
       setDataString(true);
     }
-  };
+  }, [
+    clearPassword,
+    email,
+    handleRoute,
+    name,
+    password,
+    setTokenRegister,
+    socialLoginPayload.email,
+    socialLoginPayload.name,
+    socialLoginPayload.sub]);
+
+  setSocialRegister(() => {
+    console.log('Social register function called');
+    handleRegister();
+  });
+
   useEffect(() => {
     console.log('DENTRO DO User Form ...: ', socialLoginPayload);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [socialLoginPayload, ThirdPartySingIns]);
+  }, [socialLoginPayload]);
 
   return (
     <Main>
@@ -184,8 +201,9 @@ function UserForm({ page }) {
         </div>
       </Form>
       <ThirdPartySingIns
-        onClick={ page === 'login' ? handleLogin : handleRegister }
+        googleRegister={ socialRegister }
       />
+      {' '}
 
     </Main>
   );

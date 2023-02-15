@@ -28,7 +28,7 @@ const RegisterSComponent = styled.section`
     }
 
     label {
-      background-color: black;
+      // background-color: black;
       border: 1 solid red;
       display: flex;
       flex-direction: row;
@@ -36,7 +36,7 @@ const RegisterSComponent = styled.section`
     }
 
     input {
-      background-color: black;
+      // background-color: black;
       border-color: gray;
       border-radius: 0.2rem;
       border: 0.05rem solid gray;
