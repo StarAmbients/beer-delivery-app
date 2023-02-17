@@ -29,11 +29,6 @@ function UserForm({ page }) {
     socialLoginPayload,
   } = socialLoginStore((state) => state);
 
-  // Adicionado:
-  // const {
-  //   socialRegister, setSocialRegister,
-  // } = socialRegisterGoogle();
-
   const seis = 6;
   const doze = 12;
   const [dataString, setDataString] = useState(false);
@@ -189,7 +184,7 @@ function UserForm({ page }) {
           ) : null}
         </div>
       </Form>
-      <ThirdPartySingIns />
+      <ThirdPartySingIns page={ page } />
     </Main>
   );
 }
