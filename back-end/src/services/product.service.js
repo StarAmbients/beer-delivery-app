@@ -7,6 +7,22 @@ const getAllProducts = async () => {
   return products;
 };
 
+const postProduct = async ({ name, price, urlImage }) => {
+  const product = await productRepository.getProduct({ name });
+
+  if (product) throw new CustomError(409, 'Conflict');
+
+  const newProduct = await productRepository.postProduct({
+    name,
+    price,
+    urlImage,
+  });
+  const { id } = newProduct.dataValues;
+
+  return { id, name, price, urlImage };
+}
+
 module.exports = {
   getAllProducts,
+  postProduct,
 };

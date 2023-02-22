@@ -17,6 +17,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.use('/customer/products/cadastro', producstRoute);
 app.use('/customer/products', producstRoute);
 app.use('/customer/orders', ordersRoute);
 app.use('/checkout', checkoutRoute);
