@@ -32,6 +32,7 @@ function UserForm({ page }) {
   const seis = 6;
   const doze = 12;
   const [dataString, setDataString] = useState(false);
+  const [cadastrado, setCadastrado] = useState('Dados inválidos');
   const [dataCreateString, setDataCreateString] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
@@ -74,7 +75,6 @@ function UserForm({ page }) {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      console.log('NAME: ', socialLoginPayload.name);
       const makeRequestRes = await makeRequest('register', 'post', {
         name: socialLoginPayload.name ? socialLoginPayload.name : name,
         email: socialLoginPayload.email ? socialLoginPayload.email : email,
@@ -88,6 +88,7 @@ function UserForm({ page }) {
       clearPassword();
     } catch (err) {
       setDataString(true);
+      setCadastrado('Usuário já cadastrado');
     }
   };
 
@@ -120,27 +121,37 @@ function UserForm({ page }) {
             autoComplete="email"
           />
         </label>
-        <label htmlFor="password">
+        <label
+          htmlFor="password"
+          style={ { position: 'relative' } }
+        >
           <input
+            className="segundoInput"
             data-testid={ `common_${page}__input-password` }
             type={ showPassword ? 'text' : 'password' }
             name="password"
             onChange={ handleChange }
             placeholder="Senha"
             autoComplete={ page === 'login' ? 'current-password' : 'new-password' }
+            style={ { paddingRight: '2.5rem' } }
           />
-          <button type="button" onClick={ togglePasswordVisibility }>
+          <button
+            type="button"
+            className="btn-visibility"
+            onClick={ togglePasswordVisibility }
+          >
             {showPassword ? (
               <h1>
                 <EyeSlash />
               </h1>
-            )
-              : (
-                <h1>
-                  <Eye />
-                </h1>)}
+            ) : (
+              <h1>
+                <Eye />
+              </h1>
+            )}
           </button>
         </label>
+
         {dataString ? (
           <div
             data-testid={
@@ -149,7 +160,7 @@ function UserForm({ page }) {
                 : 'common_register__element-invalid_register'
             }
           >
-            <p>{page === 'login' ? 'Usuário não encontrado' : 'Dados inválidos'}</p>
+            <p>{page === 'login' ? 'Usuário não encontrado' : cadastrado}</p>
           </div>
         ) : null}
 
@@ -174,17 +185,29 @@ function UserForm({ page }) {
             { page === 'login' ? 'Login' : 'Cadastrar' }
           </button>
           { page === 'login' ? (
-            <button
-              data-testid="common_login__button-register"
-              type="button"
-              onClick={ () => navigate('/register') }
+            <div
+              className="container-register"
             >
-              Ainda não tenho conta
-            </button>
+              <p> Não tem uma conta? </p>
+              <button
+                data-testid="common_login__button-register"
+                type="button"
+                className="btn-register"
+                onClick={ () => navigate('/register') }
+              >
+                Registre-se
+                {' '}
+              </button>
+            </div>
           ) : null}
+          <div
+            className="container-social"
+          >
+            <div>Ou entre com:</div>
+            {page === 'login' ? <ThirdPartySingIns /> : null}
+          </div>
         </div>
       </Form>
-      <ThirdPartySingIns page={ page } />
     </Main>
   );
 }

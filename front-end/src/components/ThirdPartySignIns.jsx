@@ -2,7 +2,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import PropType from 'prop-types';
 // import makeRequest from '../helpers/axios.integration';
 // eslint-disable-next-line camelcase
 import jwt_decode from 'jwt-decode';
@@ -13,7 +12,7 @@ import { setUserLocalStorage } from '../helpers/localStorage';
 // import socialLoginStore from '../store/thirdparty.store';
 import makeRequest from '../helpers/axios.integration';
 
-function ThirdPartySingIns({ page }) {
+function ThirdPartySingIns() {
   // const { socialLoginPayload, setSocialLoginPayload } = socialLoginStore();
   const {
     email,
@@ -23,8 +22,7 @@ function ThirdPartySingIns({ page }) {
     setTokenLogin,
     setTokenRegister,
   } = userStore((state) => state);
-  const [setDataString] = useState(false);
-  const [setDataCreateString] = useState(false);
+  const [dataString, setDataString] = useState(false);
 
   const navigate = useNavigate();
 
@@ -56,7 +54,6 @@ function ThirdPartySingIns({ page }) {
       handleRoute(role);
       clearPassword();
     } catch (err) {
-      console.log('DSR login: '.concat(err.message));
       setDataString(true);
     }
   };
@@ -75,28 +72,22 @@ function ThirdPartySingIns({ page }) {
       });
       const { id, role, token } = makeRequestRes;
       setTokenRegister(id, role, token);
-      setDataCreateString(true);
       setUserLocalStorage(makeRequestRes);
       handleRoute(role);
       clearPassword();
       console.log(socialLoginPayload);
     } catch (err) {
-      console.log('DSR register: '.concat(err.message));
       setDataString(true);
     }
   };
 
-  let dbAccessExecuted = false;
-
   function handleCallBackResponse(response) {
     const userObject = jwt_decode(response.credential);
     console.log(userObject);
-    if (!dbAccessExecuted) {
-      if (page === 'login') {
-        handleLogin(userObject);
-      } else handleRegister(userObject);
-      dbAccessExecuted = true;
+    if (!dataString) {
+      handleLogin(userObject);
     }
+    handleRegister(userObject);
   }
 
   useEffect(() => {
@@ -123,9 +114,5 @@ function ThirdPartySingIns({ page }) {
     </div>
   );
 }
-
-ThirdPartySingIns.propTypes = {
-  page: PropType.string.isRequired,
-};
 
 export default ThirdPartySingIns;
