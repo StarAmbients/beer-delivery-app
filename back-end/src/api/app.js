@@ -9,6 +9,7 @@ const ordersRoute = require('../routes/orders.routes');
 const checkoutRoute = require('../routes/checkout.routes');
 const adminRoute = require('../routes/admin.routes');
 const globalError = require('../err/globalError');
+const forgottenRouter = require('../routes/forgotten.routes');
 
 const app = express();
 app.use(cors());
@@ -24,6 +25,7 @@ app.use('/checkout', checkoutRoute);
 app.use('/sales', salesRoute);
 app.use('/admin', adminRoute);
 app.use('/images', express.static('public'));
+app.use('/forgotten', forgottenRouter);
 app.use(globalError.handle);
 
 module.exports = app;
