@@ -5,6 +5,7 @@ import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import adminStore from '../store/admin.store';
 import AdminSComponent from '../styles/admin.style';
+import ProductList from './ProductFilter';
 
 function ProductInventory() {
   const { token } = getUserLocalStorage();
@@ -177,7 +178,7 @@ function ProductInventory() {
           CADASTRAR
         </button>
       </div>
-
+      <ProductList />
     </AdminSComponent>
   );
 }

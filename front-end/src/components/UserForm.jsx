@@ -203,7 +203,7 @@ function UserForm({ page }) {
           <div
             className="container-social"
           >
-            <div>Ou entre com:</div>
+            {page === 'login' ? <div>Ou entre com:</div> : null}
             {page === 'login' ? <ThirdPartySingIns /> : null}
           </div>
         </div>
