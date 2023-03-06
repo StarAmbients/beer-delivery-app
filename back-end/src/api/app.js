@@ -18,6 +18,7 @@ app.use(cors());
 app.use(express.json());
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.use('/seller/products', producstRoute);
 app.use('/seller/newproduct', producstRoute);
 app.use('/customer/products', producstRoute);
 app.use('/customer/orders', ordersRoute);

@@ -4,6 +4,7 @@ const tokenValidator = require('../middlewares/token.validator');
 
 const productRouter = express.Router();
 
+productRouter.get('/:id', tokenValidator, (req, res) => productController.getById(req, res));
 productRouter.get('/', tokenValidator, (req, res) => productController.getProduct(req, res));
 productRouter.post('/', tokenValidator, (req, res) => productController.postProduct(req, res));
 

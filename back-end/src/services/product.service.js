@@ -22,7 +22,14 @@ const postProduct = async ({ name, price, urlImage }) => {
   return { id, name, price, urlImage };
 }
 
+const getById = async ( id ) => {
+  const product = await productRepository.getById(id);
+  if (!product) throw new CustomError(404, 'Not found');
+  return product;
+};
+
 module.exports = {
   getAllProducts,
   postProduct,
+  getById,
 };

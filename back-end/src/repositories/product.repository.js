@@ -5,6 +5,11 @@ const getAllProducts = async () => {
   return productsObj;
 };
 
+const getById = async (id) => {
+  const product = await Products.findByPk(id );
+  return product;
+};
+
 const getProduct = async ({ name }) => {
   const productObj = await Products.findOne({ where: { name } });
   return productObj;
@@ -19,4 +24,5 @@ module.exports = {
   getAllProducts,
   getProduct,
   postProduct,
+  getById,
 };
