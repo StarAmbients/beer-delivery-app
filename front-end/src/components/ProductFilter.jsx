@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
 
@@ -6,25 +6,32 @@ const { token } = getUserLocalStorage();
 
 function ProductList() {
   const [products, setProducts] = useState([]);
-
   const [search, setSearch] = useState('');
-  // const [editedProduct, setEditedProduct] = useState({});
 
   const myProducts = async () => {
     const allProducts = await makeRequest('customer/products', 'get', {}, token);
     setProducts(allProducts);
-    console.log(products);
   };
-  myProducts();
+
+  const handleDeleteProduct = async (product) => {
+    await makeRequest('seller/products', 'delete', product, token);
+    myProducts(); // chama novamente a função que busca todos os produtos
+  };
+
+  const handleEditProduct = async (product) => {
+    console.log('PRODUCT : ', product);
+    await makeRequest('seller/products', 'put', product, token);
+    myProducts(); // chama novamente a função que busca todos os produtos
+  };
+
+  useEffect(() => {
+    myProducts();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
   };
-
-  // const handleEditProduct = (product) => {
-  //   setEditing(true);
-  //   setEditedProduct(product);
-  // };
 
   const handleSaveProduct = (event) => {
     event.preventDefault();
@@ -34,13 +41,6 @@ function ProductList() {
     // setEditedProduct({});
     // setEditing(false);
   };
-
-  // const handleDeleteProduct = (product) => {
-  //   const updatedProducts = products.filter(
-  //     (p) => p.id !== product.id,
-  //   );
-  //   setProducts(updatedProducts);
-  // };
 
   const filteredProducts = products
     .filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
@@ -62,18 +62,18 @@ function ProductList() {
             {' '}
             -
             {product.price}
-            {/* <button
+            <button
               type="submit"
               onClick={ () => handleEditProduct(product) }
             >
               Edit
-            </button> */}
-            {/* <button
+            </button>
+            <button
               type="submit"
               onClick={ () => handleDeleteProduct(product) }
             >
               Delete
-            </button> */}
+            </button>
           </li>
         ))}
       </ul>

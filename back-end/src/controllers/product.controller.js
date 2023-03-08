@@ -15,11 +15,22 @@ const getById = async (req, res) => {
   const numberId = Number(id);
   const product = await productService.getById(numberId);
   return res.status(200).json(product);
-};;
+};
 
+const deleteProduct = async (req, res) => {
+  const deletedProduct = await productService.deleteProduct(req.body);
+  return res.status(200).json(deletedProduct);
+};
+
+const editUser = async (req, res) => {
+  const message = await productService.editProduct(req.body);
+  return res.status(201).json(message);
+};
 
 module.exports = {
   getProduct,
   postProduct,
   getById,
+  deleteProduct,
+  editUser,
 };

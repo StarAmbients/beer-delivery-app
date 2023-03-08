@@ -20,9 +20,21 @@ const postProduct = async ({ name, price, urlImage }) => {
   return productObj;
 };
 
+const deleteProduct = async ({ id }) => {
+  const deletedProduct = await Products.destroy({ where: { id } });
+  return deletedProduct;
+};
+
+const editProduct = async ({ id, name, price, urlImage }) => {
+  const updatedProduct = await Products.update({ id, name, price, urlImage }, { where: { id } });
+  return updatedProduct;
+};
+
 module.exports = {
   getAllProducts,
   getProduct,
   postProduct,
   getById,
+  deleteProduct,
+  editProduct,
 };

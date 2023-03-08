@@ -21,9 +21,15 @@ const deleteUser = async ({ name, email }) => {
   return deletedUser;
 };
 
+const editUser = async ({ id, name, email, password, role }) => {
+  const updatedUser = await Users.update({ name, email, password, role }, { where: { id } });
+  return updatedUser;
+};
+
 module.exports = {
   getUser,
   getUsers,
   postUser,
   deleteUser,
+  editUser
 };

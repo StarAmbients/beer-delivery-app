@@ -28,8 +28,27 @@ const getById = async ( id ) => {
   return product;
 };
 
+const deleteProduct = async ({ id }) => {
+  const deletedProduct = await productRepository.deleteProduct({ id });
+  return { message: `${deletedProduct} product deleted successfully` };
+};
+
+const editProduct = async ({ id }) => {
+  const product = await productRepository.getProduct({ id });
+  await productRepository.editUser({
+    id,
+    name: product.name,
+    price: product.price,
+    urlImage: product.urlImage,
+  });
+
+  return { message: 'New product added successfully' };
+};
+
 module.exports = {
   getAllProducts,
   postProduct,
   getById,
+  deleteProduct,
+  editProduct
 };
