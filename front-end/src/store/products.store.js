@@ -7,11 +7,19 @@ const productsStore = create(devtools(
   (set, get) => ({
     products: [],
     cart: [],
+    name: '',
+    volume: '',
+    price: '',
+    image: '',
 
     fetchProducts: async (token) => {
       const response = await makeRequest('customer/products', 'get', {}, token);
       set({ products: await response }, false, 'fetchProducts');
     },
+
+    handleChange: ({ target: { name, value } }) => set(() => (
+      { [name]: value }
+    ), false, 'handleChange'),
 
     removeFromCart: (id) => set(produce((draft) => {
       const newCart = get().cart.filter((item) => item.id !== id);
@@ -35,6 +43,14 @@ const productsStore = create(devtools(
     emptyCart: () => {
       set({ cart: [] }, false, 'emptyCart');
     },
+
+    clearAllState: () => set(() => (
+      {
+        name: '',
+        volume: '',
+        price: '',
+        image: '',
+      }), false, 'clearAllState'),
 
   }),
 ));

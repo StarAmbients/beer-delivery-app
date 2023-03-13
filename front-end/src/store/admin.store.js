@@ -8,9 +8,9 @@ const adminStore = create(devtools(
     email: '',
     password: '',
     role: 'customer',
-    price: '',
-    volume: '',
-    image: '',
+    // price: '',
+    // volume: '',
+    // image: '',
     users: [],
 
     fetchAllUsers: async (token) => {
@@ -28,9 +28,9 @@ const adminStore = create(devtools(
         email: '',
         password: '',
         role: 'customer',
-        price: '',
-        volume: '',
-        image: '',
+        // price: '',
+        // volume: '',
+        // image: '',
       }), false, 'clearAllState'),
   }),
 ));

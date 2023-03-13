@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
-import adminStore from '../store/admin.store';
+import productsStore from '../store/products.store';
 import AdminSComponent from '../styles/admin.style';
 import ProductList from './ProductFilter';
 
@@ -18,16 +18,22 @@ function ProductInventory() {
 
   const {
     name,
-    price,
     volume,
+    price,
     image,
-    fetchAllUsers,
+    fetchProducts,
     handleChange,
     clearAllState,
-  } = adminStore((store) => store);
+  } = productsStore((store) => store);
 
   const tresMil = 3000;
   // const quatro = 4;
+
+  const [shouldUpdate, setShouldUpdate] = useState(false);
+
+  function handleUpdate() {
+    setShouldUpdate(!shouldUpdate);
+  }
 
   const handleClick = async () => {
     try {
@@ -36,6 +42,8 @@ function ProductInventory() {
         name, price, urlImage: image }, token);
       console.log(newProduct);
       clearAllState();
+      // fetchProducts(token);
+      handleUpdate(); // <-- call the handleUpdate function to trigger a re-render of the ProductList component
     } catch (error) {
       console.log(error);
       setDisplay(true);
@@ -47,7 +55,7 @@ function ProductInventory() {
   // const urlRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
 
   useEffect(() => {
-    fetchAllUsers(token);
+    fetchProducts(token);
   }, []);
 
   return (
@@ -178,7 +186,11 @@ function ProductInventory() {
           CADASTRAR
         </button>
       </div>
-      <ProductList />
+      <ProductList
+        shouldUpdate={ shouldUpdate }
+        // eslint-disable-next-line react/jsx-no-bind
+        handleUpdate={ handleUpdate }
+      />
     </AdminSComponent>
   );
 }

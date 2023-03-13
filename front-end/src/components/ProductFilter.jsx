@@ -5,7 +5,8 @@ import ProductFilterSComponent from '../styles/productFilterDetails.style';
 
 const { token } = getUserLocalStorage();
 
-function ProductList() {
+// eslint-disable-next-line react/prop-types
+function ProductList({ shouldUpdate }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
 
@@ -29,6 +30,10 @@ function ProductList() {
     myProducts();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    myProducts();
+  }, [shouldUpdate]);
 
   const handleSearchChange = (event) => {
     setSearch(event.target.value);
