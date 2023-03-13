@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
+import ProductFilterSComponent from '../styles/productFilterDetails.style';
 
 const { token } = getUserLocalStorage();
 
@@ -46,7 +47,7 @@ function ProductList() {
     .filter((product) => product.name.toLowerCase().includes(search.toLowerCase()));
 
   return (
-    <div>
+    <ProductFilterSComponent>
       <h1>Product List</h1>
       <form onSubmit={ handleSaveProduct } />
       <input
@@ -62,22 +63,28 @@ function ProductList() {
             {' '}
             -
             {product.price}
-            <button
-              type="submit"
-              onClick={ () => handleEditProduct(product) }
+            <div
+              className="container"
             >
-              Edit
-            </button>
-            <button
-              type="submit"
-              onClick={ () => handleDeleteProduct(product) }
-            >
-              Delete
-            </button>
+              <button
+                className="btn-set-status"
+                type="submit"
+                onClick={ () => handleEditProduct(product) }
+              >
+                Edit
+              </button>
+              <button
+                className="btn-set-status"
+                type="submit"
+                onClick={ () => handleDeleteProduct(product) }
+              >
+                Delete
+              </button>
+            </div>
           </li>
         ))}
       </ul>
-    </div>
+    </ProductFilterSComponent>
   );
 }
 

@@ -20,9 +20,9 @@ const postProduct = async ({ name, price, urlImage }) => {
   const { id } = newProduct.dataValues;
 
   return { id, name, price, urlImage };
-}
+};
 
-const getById = async ( id ) => {
+const getById = async (id) => {
   const product = await productRepository.getById(id);
   if (!product) throw new CustomError(404, 'Not found');
   return product;
@@ -33,16 +33,19 @@ const deleteProduct = async ({ id }) => {
   return { message: `${deletedProduct} product deleted successfully` };
 };
 
-const editProduct = async ({ id }) => {
-  const product = await productRepository.getProduct({ id });
-  await productRepository.editUser({
-    id,
+const editProduct = async (product) => {
+  const editedProduct = await productRepository.editProduct({
+    id: product.id,
     name: product.name,
     price: product.price,
     urlImage: product.urlImage,
   });
 
-  return { message: 'New product added successfully' };
+  if (editedProduct[0] === 1) {
+    console.log('Updated product....: ', editedProduct); 
+} else { console.log('Nao deu certo'); }
+
+  return { message: `${product.name} product edited successfully` };
 };
 
 module.exports = {
@@ -50,5 +53,5 @@ module.exports = {
   postProduct,
   getById,
   deleteProduct,
-  editProduct
+  editProduct,
 };

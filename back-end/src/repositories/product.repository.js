@@ -6,7 +6,7 @@ const getAllProducts = async () => {
 };
 
 const getById = async (id) => {
-  const product = await Products.findByPk(id );
+  const product = await Products.findByPk(id);
   return product;
 };
 
@@ -26,7 +26,7 @@ const deleteProduct = async ({ id }) => {
 };
 
 const editProduct = async ({ id, name, price, urlImage }) => {
-  const updatedProduct = await Products.update({ id, name, price, urlImage }, { where: { id } });
+  const updatedProduct = await Products.update({ name, price, urlImage }, { where: { id } });  
   return updatedProduct;
 };
 

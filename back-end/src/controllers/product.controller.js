@@ -22,9 +22,9 @@ const deleteProduct = async (req, res) => {
   return res.status(200).json(deletedProduct);
 };
 
-const editUser = async (req, res) => {
-  const message = await productService.editProduct(req.body);
-  return res.status(201).json(message);
+const editProduct = async (req, res) => {
+  const editedProduct = await productService.editProduct(req.body);
+  return res.status(201).json(editedProduct);
 };
 
 module.exports = {
@@ -32,5 +32,5 @@ module.exports = {
   postProduct,
   getById,
   deleteProduct,
-  editUser,
+  editProduct,
 };
