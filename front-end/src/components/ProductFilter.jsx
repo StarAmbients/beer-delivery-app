@@ -53,21 +53,25 @@ function ProductList({ shouldUpdate }) {
 
   return (
     <ProductFilterSComponent>
-      <h1>Product List</h1>
+      <h1>Lista de Produtos</h1>
       <form onSubmit={ handleSaveProduct } />
       <input
         type="text"
         value={ search }
         onChange={ handleSearchChange }
-        placeholder="Search products"
+        placeholder="Buscar produtos"
       />
       <ul>
         {filteredProducts.map((product) => (
           <li key={ product.id }>
-            {product.name}
-            {' '}
-            -
-            {product.price}
+            <div
+              className="product-name"
+            >
+              {product.name}
+              {' '}
+              -
+              {product.price}
+            </div>
             <div
               className="container"
             >
@@ -76,14 +80,14 @@ function ProductList({ shouldUpdate }) {
                 type="submit"
                 onClick={ () => handleEditProduct(product) }
               >
-                Edit
+                EDITAR
               </button>
               <button
                 className="btn-set-status"
                 type="submit"
                 onClick={ () => handleDeleteProduct(product) }
               >
-                Delete
+                REMOVER
               </button>
             </div>
           </li>
