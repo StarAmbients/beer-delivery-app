@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ProductFilterSComponent from '../styles/productFilterDetails.style';
+import productsStore from '../store/products.store';
 
 const { token } = getUserLocalStorage();
 
@@ -9,6 +10,10 @@ const { token } = getUserLocalStorage();
 function ProductList({ shouldUpdate }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
+  const {
+    setMode,
+    modifyAllState,
+  } = productsStore((store) => store);
 
   const myProducts = async () => {
     const allProducts = await makeRequest('customer/products', 'get', {}, token);
@@ -17,12 +22,6 @@ function ProductList({ shouldUpdate }) {
 
   const handleDeleteProduct = async (product) => {
     await makeRequest('seller/products', 'delete', product, token);
-    myProducts(); // chama novamente a função que busca todos os produtos
-  };
-
-  const handleEditProduct = async (product) => {
-    console.log('PRODUCT : ', product);
-    await makeRequest('seller/products', 'put', product, token);
     myProducts(); // chama novamente a função que busca todos os produtos
   };
 
@@ -44,8 +43,6 @@ function ProductList({ shouldUpdate }) {
     const updatedProducts = products
       .map((product) => (product.id === editedProduct.id ? editedProduct : product));
     setProducts(updatedProducts);
-    // setEditedProduct({});
-    // setEditing(false);
   };
 
   const filteredProducts = products
@@ -70,6 +67,7 @@ function ProductList({ shouldUpdate }) {
               {product.name}
               {' '}
               -
+              {' R$ '}
               {product.price}
             </div>
             <div
@@ -78,7 +76,15 @@ function ProductList({ shouldUpdate }) {
               <button
                 className="btn-set-status"
                 type="submit"
-                onClick={ () => handleEditProduct(product) }
+                onClick={ () => {
+                  modifyAllState(
+                    product.id,
+                    product.name,
+                    product.price,
+                    product.urlImage,
+                  );
+                  setMode();
+                } }
               >
                 EDITAR
               </button>

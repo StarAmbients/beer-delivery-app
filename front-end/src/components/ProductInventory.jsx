@@ -17,10 +17,12 @@ function ProductInventory() {
   // const [errorurl, setErrorurl] = useState('');
 
   const {
+    id,
     name,
     volume,
     price,
     image,
+    mode,
     fetchProducts,
     handleChange,
     clearAllState,
@@ -35,15 +37,31 @@ function ProductInventory() {
     setShouldUpdate(!shouldUpdate);
   }
 
+  const handleCreateProduct = async () => {
+    const newProduct = await makeRequest('seller/newproduct', 'post', {
+      name, price, urlImage: image }, token);
+    console.log(newProduct);
+    clearAllState();
+    // fetchProducts(token);
+    handleUpdate(); // <-- call the handleUpdate function to trigger a re-render of the ProductList component
+  };
+
+  const handleEditProduct = async () => {
+    console.log('Info.......: ', name, price, image);
+    await makeRequest('seller/products', 'put', {
+      id, name, price, urlImage: image }, token);
+    setShouldUpdate(false);
+    if (!shouldUpdate) { setShouldUpdate(); }
+    clearAllState();
+  };
+
   const handleClick = async () => {
     try {
-      console.log('Info.......: ', name, price, image);
-      const newProduct = await makeRequest('seller/newproduct', 'post', {
-        name, price, urlImage: image }, token);
-      console.log(newProduct);
-      clearAllState();
-      // fetchProducts(token);
-      handleUpdate(); // <-- call the handleUpdate function to trigger a re-render of the ProductList component
+      if (mode === 'cadastrar') {
+        handleCreateProduct();
+      } else if (mode === 'editar') {
+        handleEditProduct();
+      }
     } catch (error) {
       console.log(error);
       setDisplay(true);
@@ -183,7 +201,7 @@ function ProductInventory() {
           // }
           onClick={ () => handleClick() }
         >
-          CADASTRAR
+          {mode === 'cadastrar' ? 'CADASTRAR' : 'EDITAR'}
         </button>
       </div>
       <ProductList
