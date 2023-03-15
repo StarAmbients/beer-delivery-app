@@ -31,6 +31,20 @@ function NavBar({ page }) {
             </h1>
           </Link>
         )}
+        { page === 'seller' && (
+          <Link
+            className="nav-1"
+            style={ { textDecoration: 'none' } }
+            data-testid="customer_products__element-navbar-link-products"
+            to="/seller/newproduct"
+          >
+            <h1
+              className="products"
+            >
+              PRODUTOS
+            </h1>
+          </Link>
+        )}
         <Link
           className="nav-2"
           style={ { textDecoration: 'none' } }

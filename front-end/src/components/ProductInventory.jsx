@@ -23,11 +23,12 @@ function ProductInventory() {
     price,
     image,
     mode,
+    setMode,
     fetchProducts,
     handleChange,
     clearAllState,
   } = productsStore((store) => store);
-
+  console.log(volume);
   const tresMil = 3000;
   // const quatro = 4;
 
@@ -39,7 +40,7 @@ function ProductInventory() {
 
   const handleCreateProduct = async () => {
     const newProduct = await makeRequest('seller/newproduct', 'post', {
-      name, price, urlImage: image }, token);
+      name: `${name} ${volume}`, price, urlImage: image }, token);
     console.log(newProduct);
     clearAllState();
     // fetchProducts(token);
@@ -49,10 +50,11 @@ function ProductInventory() {
   const handleEditProduct = async () => {
     console.log('Info.......: ', name, price, image);
     await makeRequest('seller/products', 'put', {
-      id, name, price, urlImage: image }, token);
+      id, name: `${name} ${volume}`, price, urlImage: image }, token);
     setShouldUpdate(false);
     if (!shouldUpdate) { setShouldUpdate(); }
     clearAllState();
+    setMode('cadastrar');
   };
 
   const handleClick = async () => {
@@ -78,7 +80,9 @@ function ProductInventory() {
 
   return (
     <AdminSComponent>
-      <h3>Cadastrar novo produto</h3>
+      {mode === 'cadastrar'
+        ? <h3>Cadastrar novo produto</h3>
+        : <h3>Editar produto</h3>}
       { display && (
         <p
           data-testid="seller_manage__element-invalid-register"
@@ -119,7 +123,7 @@ function ProductInventory() {
             <input
               data-testid="seller_manage__input-name"
               name="volume"
-              type="number"
+              type="text"
               value={ volume }
               placeholder="Volume em mililitros"
               onChange={ handleChange }

@@ -5,14 +5,17 @@ import ProductFilterSComponent from '../styles/productFilterDetails.style';
 import productsStore from '../store/products.store';
 
 const { token } = getUserLocalStorage();
+const volumeRegex = /\d+ml/; // Expressão regular para encontrar uma ou mais sequências de dígitos seguida de "ml"
+const nameRegex = /(\d+ml)/g; // Expressão regular para encontrar um ou mais dígitos seguidos de "ml" em toda a string
 
 // eslint-disable-next-line react/prop-types
 function ProductList({ shouldUpdate }) {
   const [products, setProducts] = useState([]);
   const [search, setSearch] = useState('');
   const {
-    setMode,
     modifyAllState,
+    setVolume,
+    setMode,
   } = productsStore((store) => store);
 
   const myProducts = async () => {
@@ -22,7 +25,7 @@ function ProductList({ shouldUpdate }) {
 
   const handleDeleteProduct = async (product) => {
     await makeRequest('seller/products', 'delete', product, token);
-    myProducts(); // chama novamente a função que busca todos os produtos
+    myProducts();
   };
 
   useEffect(() => {
@@ -79,11 +82,12 @@ function ProductList({ shouldUpdate }) {
                 onClick={ () => {
                   modifyAllState(
                     product.id,
-                    product.name,
+                    product.name.replace(nameRegex, ''),
                     product.price,
                     product.urlImage,
                   );
-                  setMode();
+                  setMode('editar');
+                  setVolume(product.name.match(volumeRegex)[0]);
                 } }
               >
                 EDITAR

@@ -54,9 +54,12 @@ const productsStore = create(devtools(
         price,
         image,
       }), false, 'modifyAllState'),
-    setMode: () => set(() => (
-      { mode: 'editar' }
+    setMode: (mode) => set(() => (
+      { mode }
     ), false, 'setMode'),
+    setVolume: (volume) => set(() => (
+      { volume }
+    ), false, 'setVolume'),
   }),
 ));
 
