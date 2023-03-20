@@ -2,7 +2,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 // https://www.npmjs.com/package/react-s-alert/v/1.4.0
 import React, { useEffect } from 'react';
-import Alert from 'react-s-alert';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
 import NavBar from '../components/NavBar';
@@ -17,7 +16,7 @@ function CustomerOrders() {
       fetchUserOrders(id, token);
     } catch (error) {
       console.error(error);
-      Alert.error(`<h1>Ocorreu um erro ao carregar os pedidos.
+      alert(`<h1>Ocorreu um erro ao carregar os pedidos.
       Por favor, tente novamente mais tarde.</h1>
       `, {
         position: 'bottom-right',
