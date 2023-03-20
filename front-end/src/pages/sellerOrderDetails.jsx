@@ -6,23 +6,33 @@ import NavBar from '../components/NavBar';
 import OrderDetail from '../components/OrderDetail';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
+import PersonOrderDetailsSComponent from '../styles/personOrderDetails.style';
 
 function SellerOrderDetail() {
   const { orderId } = useParams();
   const { token } = getUserLocalStorage();
-  const { orderDetail, fetchOrderDetail } = ordersStore((state) => state);
+  const { fetchOrderDetail } = ordersStore((state) => state);
 
   useEffect(() => {
     fetchOrderDetail(orderId, token);
-  }, [orderDetail]);
+  }, []);
 
   return (
-    <div>
+    <PersonOrderDetailsSComponent>
       <NavBar page="seller" />
-      <h2>Detalhes do Pedido</h2>
-      <OrderDetail page="seller" />
-      <Details page="seller" />
-    </div>
+      <div
+        className="title_detalhes_pedido"
+      >
+        <h3>Detalhe do Pedido</h3>
+      </div>
+      {' '}
+      <container>
+        <OrderDetail page="seller" />
+        <table-container>
+          <Details page="seller" />
+        </table-container>
+      </container>
+    </PersonOrderDetailsSComponent>
   );
 }
 

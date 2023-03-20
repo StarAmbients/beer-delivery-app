@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "axios": "^0.27.2",
+    "react-s-alert": "^1.4.1",
     "websocket": "^1.0.34"
   }
 }

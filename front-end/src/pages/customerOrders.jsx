@@ -1,56 +1,37 @@
+/* eslint-disable no-alert */
 /* eslint-disable react-hooks/exhaustive-deps */
+// https://www.npmjs.com/package/react-s-alert/v/1.4.0
 import React, { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import moment from 'moment';
+import Alert from 'react-s-alert';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import ordersStore from '../store/orders.store';
 import NavBar from '../components/NavBar';
+import Card from '../components/Card';
 
 function CustomerOrders() {
   const { orders, fetchUserOrders } = ordersStore((state) => state);
   const { id, token } = getUserLocalStorage();
 
   useEffect(() => {
-    fetchUserOrders(id, token);
+    try {
+      fetchUserOrders(id, token);
+    } catch (error) {
+      console.error(error);
+      Alert.error(`<h1>Ocorreu um erro ao carregar os pedidos.
+      Por favor, tente novamente mais tarde.</h1>
+      `, {
+        position: 'bottom-right',
+        effect: 'slide',
+        html: true,
+      });
+    }
   }, []);
 
   return (
-    <div>
+    <>
       <NavBar page="customer" />
-      { orders.length > 0 ? (
-        orders.map((o) => (
-          <Link to={ `/customer/orders/${o.id}` } key={ o.id }>
-            <div>
-              <p>Pedido</p>
-              <p
-                data-testid={ `customer_orders__element-order-id-${o.id}` }
-              >
-                {o.id}
-              </p>
-            </div>
-            <p
-              data-testid={ `customer_orders__element-delivery-status-${o.id}` }
-            >
-              {o.status}
-            </p>
-            <div>
-              <p
-                data-testid={ `customer_orders__element-order-date-${o.id}` }
-              >
-                {moment(o.saleDate).format('DD/MM/YYYY')}
-              </p>
-              <p
-                data-testid={ `customer_orders__element-card-price-${o.id}` }
-              >
-                {`R$ ${o.totalPrice.replace(/\./g, ',')}`}
-              </p>
-            </div>
-          </Link>
-        ))
-      ) : (
-        <p>Você não possui nenhum pedido</p>
-      )}
-    </div>
+      <Card orders={ orders } page="customer" />
+    </>
   );
 }
 

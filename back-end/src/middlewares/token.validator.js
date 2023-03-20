@@ -1,16 +1,20 @@
 const { validateToken } = require('../helpers/validate.token');
 const CustomError = require('../err/CustomError');
 
-const tokenValidator = (req, _res, next) => {
-  const { authorization } = req.headers;
+const tokenValidator = async (req, _res, next) => {
+  try {
+    const { authorization } = req.headers;
 
-  if (!authorization) {
-    throw new CustomError(400, 'Some data was not reported, please check and try again');
+    if (!authorization) {
+      throw new CustomError(400, 'Some data was not reported, please check and try again');
+    }
+
+    await validateToken(authorization);
+
+    next();
+  } catch (error) {
+    next(error);
   }
-
-  validateToken(authorization);
-
-  next();
 };
 
 module.exports = tokenValidator;

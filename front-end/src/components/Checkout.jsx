@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,11 +7,17 @@ import checkoutStore from '../store/checkout.store';
 import { getUserLocalStorage } from '../helpers/localStorage';
 import makeRequest from '../helpers/axios.integration';
 import Table from './Table';
+import CheckoutSComponent from '../styles/checkout.style';
+import SubmitButton from './SubmitButton';
+import Form from './Form';
 
 function Checkout() {
   const { id, token } = getUserLocalStorage();
   const { cart } = productsStore((state) => state);
   const { sellers, fetchSellers } = checkoutStore((state) => state);
+  const [selectedOption, setSelectedOption] = useState('seller');
+  const [entryAddressData, setEntryAddressData] = useState(false);
+  const [entryNumberData, setEntryNumberData] = useState(false);
   const [sellerId, setSellerId] = useState(0);
   const [deliveryAddress, setDeliveryAddress] = useState('');
   const [deliveryNumber, setDeliveryNumber] = useState('');
@@ -36,70 +43,129 @@ function Checkout() {
     }, tresMil);
   };
 
+  const handleChange = (event) => {
+    console.log(selectedOption);
+    setSelectedOption(event.target.value);
+    setSellerId(Number(event.target.value));
+  };
+
+  useEffect(() => {
+    if (deliveryNumber !== '' && deliveryAddress !== '') {
+      setEntryAddressData(true);
+      setEntryNumberData(true);
+    } else {
+      setEntryAddressData(false);
+      setEntryNumberData(false);
+    }
+  }, [deliveryNumber, deliveryAddress]);
+
   useEffect(async () => {
     fetchSellers(token);
   }, []);
 
+  useEffect(() => {
+    console.log('The component was rendered or updated');
+  }, [selectedOption, entryNumberData]);
+
   return (
-    <div>
+    <CheckoutSComponent>
       {
         display && (
-          <div>
-            <h1>Compra realizada com sucesso!</h1>
-          </div>
+          <>
+          </>
         )
       }
-      <Table page="checkout" />
-      <h2
-        data-testid="customer_checkout__element-order-total-price"
+      <div
+        className="title_finalizar_pedido"
       >
-        {`Total: ${totalPrice.replace(/\./g, ',')}`}
-      </h2>
-      <div>
+        <h3>Finalizar Pedido</h3>
+      </div>
+      <container>
+        <Table page="checkout" />
+        <div
+          className="container-total-a-pagar"
+        >
+          <div
+            className="total-finalizado"
+          >
+            <h2>
+              Total:
+            </h2>
+            <p>
+              R$
+            </p>
+            <h2
+              data-testid="customer_checkout__element-order-total-price"
+            >
+              {`${Math.trunc(totalPrice)}`}
+            </h2>
+            <p
+              className="cents"
+            >
+              {`${Math
+                .trunc((totalPrice - (Math.trunc(totalPrice))) * 100)
+                .toString().padStart(2, '0')}`}
+            </p>
+          </div>
+        </div>
+
+      </container>
+      <div
+        className="title_finalizar_pedido"
+      >
         <h3>Detalhes e Endereço para Entrega</h3>
-        <label htmlFor="seller">
-          P. Vendedora Responsável
-          <select
-            data-testid="customer_checkout__select-seller"
-            name="seller"
-            id="seller"
-            onChange={ ({ target: { value } }) => setSellerId(Number(value)) }
+      </div>
+      <div className="seller-details">
+        <div
+          className="details-shipment"
+        >
+          <Form
+            formClass="form-seller"
+            label="Pessoa Vendedora Responsável:"
+            inputType="select"
+            inputId="seller"
+            inputName="seller"
+            inputPlaceholder="Escolha seu vendedor"
+            inputOnChange={ handleChange }
           >
             <option value="seller">Escolha seu vendedor</option>
-            {
-              sellers.map((seller) => (
-                <option key={ seller.id } value={ seller.id }>{seller.name}</option>
-              ))
-            }
-          </select>
-        </label>
-        <label htmlFor="address">
-          Endereço
-          <input
-            type="text"
-            data-testid="customer_checkout__input-address"
-            placeholder="Digite seu endereço"
-            onChange={ ({ target: { value } }) => setDeliveryAddress(value) }
+            {sellers.map((seller) => (
+              <option key={ seller.id } value={ seller.id }>
+                {seller.name}
+              </option>
+            ))}
+          </Form>
+          <Form
+            formClass="form-address"
+            label="Endereço"
+            labelClass="label-input-text"
+            inputType="text"
+            inputId="address"
+            inputName="address"
+            inputPlaceholder="Digite seu endereço"
+            inputOnChange={ ({ target: { value } }) => setDeliveryAddress(value) }
           />
-        </label>
-        <label htmlFor="number">
-          Número
-          <input
-            type="text"
-            data-testid="customer_checkout__input-address-number"
-            placeholder="Digite seu número"
-            onChange={ ({ target: { value } }) => setDeliveryNumber(value) }
+          <Form
+            formClass="form-number"
+            label="Número/Complemento"
+            labelClass="label-input-text"
+            inputType="text"
+            inputId="number"
+            inputName="number"
+            inputPlaceholder="Exemplo: 56 bloco B"
+            inputOnChange={ ({ target: { value } }) => setDeliveryNumber(value) }
           />
-        </label>
-        <button
-          type="button"
-          data-testid="customer_checkout__button-submit-order"
-          onClick={ () => handleCheckout() }
-        >
-          Finalizar pedido
-        </button>
+        </div>
+        <SubmitButton
+          handleCheckout={ handleCheckout }
+          // eslint-disable-next-line sonarjs/no-redundant-boolean, react/jsx-curly-spacing
+          selectedOption={ selectedOption }
+          entryAddressData={ entryAddressData }
+          entryNumberData={ entryNumberData }
+
+        />
       </div>
-    </div>
+    </CheckoutSComponent>
   );
 }
 

@@ -20,6 +20,14 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       type: DataTypes.STRING
     },
+    externalid: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+    externaltype: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
     role: {
       allowNull: false,
       type: DataTypes.STRING

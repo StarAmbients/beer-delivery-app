@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+/* eslint-disable sonarjs/cognitive-complexity */
+/* eslint-disable complexity */
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import PropType from 'prop-types';
 import EmailValidator from 'email-validator';
+import { Eye, EyeSlash } from 'phosphor-react';
 import userStore from '../store/user.store';
+import socialLoginStore from '../store/thirdparty.store';
 import makeRequest from '../helpers/axios.integration';
 import { setUserLocalStorage } from '../helpers/localStorage';
 import veryD from '../img/veryDeliciuosLogo.png';
+import { Main, Image, Form } from '../styles/userForm.style';
+import ThirdPartySingIns from './ThirdPartySignIns';
 
+// eslint-disable-next-line react/prop-types
 function UserForm({ page }) {
   const {
     handleChange,
@@ -15,12 +22,24 @@ function UserForm({ page }) {
     name,
     clearPassword,
     setTokenLogin,
-    setTokenRegister } = userStore((state) => state);
+    setTokenRegister,
+  } = userStore((state) => state);
+
+  const {
+    socialLoginPayload,
+  } = socialLoginStore((state) => state);
+
   const seis = 6;
   const doze = 12;
   const [dataString, setDataString] = useState(false);
+  const [cadastrado, setCadastrado] = useState('Dados inválidos');
   const [dataCreateString, setDataCreateString] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
 
   const handleRoute = (role) => {
     switch (role) {
@@ -40,8 +59,8 @@ function UserForm({ page }) {
     e.preventDefault();
     try {
       const makeRequestRes = await makeRequest('login', 'post', {
-        email,
-        password,
+        email: socialLoginPayload.email ? socialLoginPayload.email : email,
+        password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
       });
       const { role } = makeRequestRes;
       setTokenLogin(makeRequestRes);
@@ -57,9 +76,9 @@ function UserForm({ page }) {
     e.preventDefault();
     try {
       const makeRequestRes = await makeRequest('register', 'post', {
-        name,
-        email,
-        password,
+        name: socialLoginPayload.name ? socialLoginPayload.name : name,
+        email: socialLoginPayload.email ? socialLoginPayload.email : email,
+        password: socialLoginPayload.sub ? socialLoginPayload.sub : password,
       });
       const { id, role, token } = makeRequestRes;
       setTokenRegister(id, role, token);
@@ -69,13 +88,17 @@ function UserForm({ page }) {
       clearPassword();
     } catch (err) {
       setDataString(true);
+      setCadastrado('Usuário já cadastrado');
     }
   };
 
+  useEffect(() => {
+  }, [socialLoginPayload]);
+
   return (
-    <section>
-      <form>
-        <img src={ veryD } alt="very-deliciuos-logo" />
+    <Main>
+      <Image src={ veryD } alt="very-deliciuos-logo" />
+      <Form>
         <h1>{ page === 'login' ? 'Área do usuário' : 'Cadastre-se' }</h1>
         {page === 'register' && (
           <label htmlFor="name">
@@ -98,16 +121,37 @@ function UserForm({ page }) {
             autoComplete="email"
           />
         </label>
-        <label htmlFor="password">
+        <label
+          htmlFor="password"
+          style={ { position: 'relative' } }
+        >
           <input
+            className="segundoInput"
             data-testid={ `common_${page}__input-password` }
-            type="password"
+            type={ showPassword ? 'text' : 'password' }
             name="password"
             onChange={ handleChange }
             placeholder="Senha"
             autoComplete={ page === 'login' ? 'current-password' : 'new-password' }
+            style={ { paddingRight: '2.5rem' } }
           />
+          <button
+            type="button"
+            className="btn-visibility"
+            onClick={ togglePasswordVisibility }
+          >
+            {showPassword ? (
+              <h1>
+                <EyeSlash />
+              </h1>
+            ) : (
+              <h1>
+                <Eye />
+              </h1>
+            )}
+          </button>
         </label>
+
         {dataString ? (
           <div
             data-testid={
@@ -116,7 +160,7 @@ function UserForm({ page }) {
                 : 'common_register__element-invalid_register'
             }
           >
-            <p>{page === 'login' ? 'Usuário não encontrado' : 'Dados inválidos'}</p>
+            <p>{page === 'login' ? 'Usuário não encontrado' : cadastrado}</p>
           </div>
         ) : null}
 
@@ -141,17 +185,30 @@ function UserForm({ page }) {
             { page === 'login' ? 'Login' : 'Cadastrar' }
           </button>
           { page === 'login' ? (
-            <button
-              data-testid="common_login__button-register"
-              type="button"
-              onClick={ () => navigate('/register') }
+            <div
+              className="container-register"
             >
-              Ainda não tenho conta
-            </button>
+              <p> Não tem uma conta? </p>
+              <button
+                data-testid="common_login__button-register"
+                type="button"
+                className="btn-register"
+                onClick={ () => navigate('/register') }
+              >
+                Registre-se
+                {' '}
+              </button>
+            </div>
           ) : null}
+          <div
+            className="container-social"
+          >
+            {page === 'login' ? <div>Ou entre com:</div> : null}
+            {page === 'login' ? <ThirdPartySingIns /> : null}
+          </div>
         </div>
-      </form>
-    </section>
+      </Form>
+    </Main>
   );
 }
 

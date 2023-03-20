@@ -1,79 +1,94 @@
-import React from 'react';
+/* eslint-disable no-nested-ternary */
+import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import PropType from 'prop-types';
-// import { useNavigate } from 'react-router-dom';
 import ordersStore from '../store/orders.store';
 import makeRequest from '../helpers/axios.integration';
 import { getUserLocalStorage } from '../helpers/localStorage';
+import OrderDetailsSComponent from '../styles/orderDetails.style';
+import OrderStatus from './OrderStatus';
 
 function OrderDetail({ page }) {
-  const { orderDetail } = ordersStore((state) => state);
+  const statusDatabase = ordersStore.getState().orderDetail;
+  const [orderDetail, setOrderDetail] = useState(statusDatabase);
   const { token } = getUserLocalStorage();
-  // const navigate = useNavigate();
 
-  const handleClick = async (newStatus) => {
+  const handleClick = async () => {
+    let newStatus;
+    if (page === 'seller') {
+      if (orderDetail.status === 'PENDENTE') {
+        newStatus = 'PREPARANDO';
+      } else if (orderDetail.status === 'PREPARANDO') {
+        // eslint-disable-next-line sonarjs/no-duplicate-string
+        newStatus = 'EM TRÂNSITO';
+      }
+    // eslint-disable-next-line sonarjs/no-collapsible-if
+    } else if (page === 'customer') {
+      if (orderDetail.status === 'PENDENTE' || orderDetail.status === 'EM TRÂNSITO') {
+        newStatus = 'ENTREGUE';
+      }
+    }
     await makeRequest(`sales/${orderDetail.id}`, 'put', { status: newStatus }, token);
-    // navigate(0);
+    setOrderDetail({ ...orderDetail, status: newStatus });
   };
+
+  useEffect(() => {
+    const unsubscribe = ordersStore.subscribe(() => {
+      setOrderDetail(ordersStore.getState().orderDetail);
+    });
+    return () => unsubscribe();
+  }, []);
 
   const testId = `${page}_order_details__element-order-details-label-delivery-status`;
   return (
-    <div>
-      <p
-        data-testid={ `${page}_order_details__element-order-details-label-order-id` }
-      >
-        {`PEDIDO: ${orderDetail.id};`}
-
-      </p>
-      { page === 'customer' && (
+    <OrderDetailsSComponent>
+      <div className="main-title">
         <p
-          data-testid="customer_order_details__element-order-details-label-seller-name"
+          className="order-id"
+          data-testid={ `${page}_order_details__element-order-details-label-order-id` }
         >
-          {`P. Vend: ${orderDetail.seller?.name}`}
-
+          {`PEDIDO: ${orderDetail.id}`}
         </p>
-      )}
-      <p
-        data-testid={ `${page}_order_details__element-order-details-label-order-date` }
-      >
-        {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
-      </p>
-      <p
-        data-testid={ testId }
-      >
-        {`${orderDetail.status}`}
-      </p>
-      { page === 'seller' && (
-        <div>
-          <button
-            type="button"
-            data-testid="seller_order_details__button-preparing-check"
-            disabled={ orderDetail.status !== 'Pendente' }
-            onClick={ () => handleClick('Preparando') }
+        {page === 'customer' && (
+          <p
+            className="name"
+            data-testid="customer_order_details__element-order-details-label-seller-name"
           >
-            PREPARAR PEDIDO
-          </button>
-          <button
-            type="button"
-            data-testid="seller_order_details__button-dispatch-check"
-            disabled={ orderDetail.status !== 'Preparando' }
-            onClick={ () => handleClick('Em Trânsito') }
-          >
-            SAIU PARA ENTREGA
-          </button>
-        </div>
-      )}
-      { page === 'customer' && (
+            {`P. Vend: ${orderDetail.seller?.name}`}
+          </p>
+        )}
+        <p
+          className="saleDate"
+          data-testid={ `${page}_order_details__element-order-details-label-order-date` }
+        >
+          {`${moment(orderDetail.saleDate).format('DD/MM/YYYY')}`}
+        </p>
+        <OrderStatus
+          status={ orderDetail.status }
+          testId={ testId }
+        />
+      </div>
+      {(page === 'seller' || page === 'customer')
+      && orderDetail.status !== 'ENTREGUE'
+      && ((orderDetail.status !== 'EM TRÂNSITO' && page === 'seller')
+          || (orderDetail.status === 'EM TRÂNSITO' && page === 'customer'))
+      && (
         <button
           type="button"
-          data-testid="customer_order_details__button-delivery-check"
-          disabled={ orderDetail.status !== 'Em Trânsito' }
-          onClick={ () => handleClick('Entregue') }
+          className="btn-set-status"
+          data-testid="seller_order_details__button-change-status"
+          onClick={ handleClick }
         >
-          Marcar como entregue
+          {
+            page === 'seller'
+              ? (orderDetail.status === 'PENDENTE'
+                ? 'INICIAR PREPARAÇÃO'
+                : 'SAIU PARA ENTREGA')
+              : 'CONFIRMAR ENTREGA'
+          }
         </button>
       )}
-    </div>
+    </OrderDetailsSComponent>
   );
 }
 

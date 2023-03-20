@@ -1,10 +1,19 @@
 body {
-  margin: 0;
-  box-sizing: border-box;
+  /* Colors */
+  --colors-light-text: #F2FFFC;
+  --colors-dark-text: #001813;
+  --colors-primary: #036B52;
+  --colors-secondary: #2FC18C;
+  --colors-tertiary: #421981;
+  --colors-quaternary: #056CF9;
+  --colors-quinary: #7B61FF;
+  --colors-light-grey: #E5E5E5;
+  --colors-dark-grey: #828282;
+  
   font-family: 'Roboto', 'Ubuntu', sans-serif;
 }
 
-/* code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+/* * {
+  border: 1px solid red;
 } */
+

@@ -10,7 +10,8 @@ function Login() {
   const user = getUserLocalStorage();
 
   useEffect(() => {
-    if (user) {
+    if (user
+      && typeof user === 'object' && Object.keys(user).length > 0) {
       navigate('/customer/products');
     }
   }, []);

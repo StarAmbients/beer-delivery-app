@@ -9,6 +9,8 @@ import CustomerOrders from '../pages/customerOrders';
 import SellerOrders from '../pages/sellerOrders';
 import SellerOrderDetails from '../pages/sellerOrderDetails';
 import AdminManage from '../pages/adminManage';
+import SellerProducts from '../pages/sellerProducts';
+import Forgotten from '../pages/forgotten';
 
 function IndexRouter() {
   return (
@@ -21,8 +23,10 @@ function IndexRouter() {
       <Route path="/customer/orders" element={ <CustomerOrders /> } />
       <Route path="/customer/orders/:orderId" element={ <CustomerOrderDetails /> } />
       <Route path="/seller/orders" element={ <SellerOrders /> } />
+      <Route path="/seller/newproduct" element={ <SellerProducts /> } />
       <Route path="/seller/orders/:orderId" element={ <SellerOrderDetails /> } />
       <Route path="/admin/manage" element={ <AdminManage /> } />
+      <Route path="/forgotten" element={ <Forgotten /> } />
       {/* <Route path="*" element={<NotFound />} /> */}
     </Routes>
   );

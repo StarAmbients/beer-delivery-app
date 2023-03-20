@@ -9,19 +9,24 @@ const ordersRoute = require('../routes/orders.routes');
 const checkoutRoute = require('../routes/checkout.routes');
 const adminRoute = require('../routes/admin.routes');
 const globalError = require('../err/globalError');
+const forgottenRouter = require('../routes/forgotten.routes');
 
 const app = express();
+app.use(cors());
+
 
 app.use(express.json());
-app.use(cors());
 app.use('/login', loginRoute);
 app.use('/register', registerRoute);
+app.use('/seller/products', producstRoute);
+app.use('/seller/newproduct', producstRoute);
 app.use('/customer/products', producstRoute);
 app.use('/customer/orders', ordersRoute);
 app.use('/checkout', checkoutRoute);
 app.use('/sales', salesRoute);
 app.use('/admin', adminRoute);
 app.use('/images', express.static('public'));
+app.use('/forgotten', forgottenRouter);
 app.use(globalError.handle);
 
 module.exports = app;
